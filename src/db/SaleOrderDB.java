@@ -35,6 +35,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 		
 	}
 	
+	
 	private List<SaleOrder> buildObjects(ResultSet rs, boolean fullAssociation) throws DataAccessException{
 		List<SaleOrder> res = new ArrayList<>();
 		SaleOrder o = buildObject(rs, fullAssociation);
