@@ -12,7 +12,7 @@ import model.Employee;
 // Tjek at FIND ALL Q, FIND BY ID Q osv. er sat op på samme måde som tabellerne i databasen
 public class EmployeeDB implements EmployeeDAO {
 	private static final String FIND_ALL_Q = "select firstName, lastName, email, phoneNo, employeeNo from Person";
-	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where phoneNo = ?";
+	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where email = ?";
 	private static final String INSERT_Q = "INSERT INTO Employee (firstName, lastName, email, phoneNo, employeeNo) VALUES (?, ?, ?, ?, ?)";
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByIDPS;
@@ -75,7 +75,8 @@ public class EmployeeDB implements EmployeeDAO {
 		final String lastName = e.getLastName();
 		final String email = e.getEmail();
 		final String phoneNo = e.getPhoneNo();
-		final int employeeNo = e.getEmployeeNo();
+		final int employeeNo = e.getEmployeeNo(); //fix
+
 
 		try {
 			insert.setString(1, firstName);
