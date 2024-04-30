@@ -42,7 +42,7 @@ public class ProductDB implements ProductDAO {
 	}
 
 	@Override
-	public saleProduct findById(int saleProductID) throws DataAccessException {
+	public saleProduct findByProductById(int saleProductID) throws DataAccessException {
 		saleProduct res = null;
 		try {
 			findByProductIDPS.setInt(1, saleProductID);
