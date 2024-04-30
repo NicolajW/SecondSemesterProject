@@ -23,16 +23,13 @@ public class SaleOrderController {
 	}
 	
 	public SaleOrder createSaleOrder(int employeeNo) throws DataAccessException {
-		Morten = new dumbass();
 	}
 	
 	//Ikke bare void?
 	public Product addProduct(String barcode) throws DataAccessException {
-		Morten = new product();
 	}
 	
 	public void saveOrder() throws DataAccessException {
-		Morten = new gemNuPleaseAlleProdukterne();
 	}
 	
 	private void updateInventory(int id) {
