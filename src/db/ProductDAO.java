@@ -9,5 +9,6 @@ import model.Wine;
 
 public interface ProductDAO {
 	List<saleProduct> findAll() throws DataAccessException;
-	saleProduct findById(int barcode) throws DataAccessException; 
+//	saleProduct findById(int barcode) throws DataAccessException;
+	saleProduct findByProductById(int id); 
 }

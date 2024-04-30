@@ -1,6 +1,6 @@
 package model;
 
-public abstract class  saleProduct {
+public abstract class saleProduct {
 	private String barcode;
 	public String name;
 	public Double price;
