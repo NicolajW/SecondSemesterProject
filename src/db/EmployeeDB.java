@@ -11,9 +11,9 @@ import model.Employee;
 
 // Tjek at FIND ALL Q, FIND BY ID Q osv. er sat op på samme måde som tabellerne i databasen
 public class EmployeeDB implements EmployeeDAO {
-	private static final String FIND_ALL_Q = "select firstName, lastName, email, phoneNo, employeeNo, adminNo from Person";
+	private static final String FIND_ALL_Q = "select firstName, lastName, email, phoneNo, employeeNo from Person";
 	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where email = ?";
-	private static final String INSERT_Q = "INSERT INTO Employee (firstName, lastName, email, phoneNo, employeeNo, adminNo) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_Q = "INSERT INTO Employee (firstName, lastName, email, phoneNo, employeeNo) VALUES (?, ?, ?, ?, ?)";
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByIDPS;
 	private PreparedStatement insert;
@@ -54,7 +54,7 @@ public class EmployeeDB implements EmployeeDAO {
 		Employee res = null;
 		if (rs.next()) {
 			res = new Employee(rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"),
-					rs.getString("phoneNo"), rs.getInt("employeeNo"), rs.getInt("adminNo"));
+					rs.getString("phoneNo"), rs.getInt("employeeNo"));
 		}
 		return res;
 	}
@@ -76,7 +76,6 @@ public class EmployeeDB implements EmployeeDAO {
 		final String email = e.getEmail();
 		final String phoneNo = e.getPhoneNo();
 		final int employeeNo = e.getEmployeeNo(); //fix
-		final int adminNo = e.getAdminNo(); //fix
 
 
 		try {
@@ -85,7 +84,6 @@ public class EmployeeDB implements EmployeeDAO {
 			insert.setString(3, email);
 			insert.setString(4, phoneNo);
 			insert.setInt(5, employeeNo);
-			insert.setInt(6, adminNo);
 
 			insert.executeUpdate();
 
