@@ -12,19 +12,29 @@ import model.Food;
 import model.Wine;
 
 public class ProductDB implements ProductDAO {
-	private static final String FIND_ALL_Q =
-			"select saleProductID, name, price, description, type from saleProduct";
-	private static final String FIND_BY_Q =
-			FIND_ALL_Q + "where saleProductID = ?";
+
+	private Wine w;
+	private Food f;
+
+	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
+	private static final String FIND_BY_Q = FIND_ALL_Q + "where saleProductID = ?";
+	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
+	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region, amountLeft) values (?, ?, ?, ?, ?);";
+	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";
+
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByProductIDPS;
-			
-	
+	private PreparedStatement insertInSP, insertInW, insertInF;
+
 	public ProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			 findAllPSS = con.prepareStatement(FIND_ALL_Q);
-	         findByProductIDPS = con.prepareStatement(FIND_BY_Q);
+			findAllPSS = con.prepareStatement(FIND_ALL_Q);
+			findByProductIDPS = con.prepareStatement(FIND_BY_Q);
+			insertInSP = con.prepareStatement(INSERT_INTO_SALEPRODUCT_Q);
+			insertInW = con.prepareStatement(INSERT_INTO_WINE_Q);
+			insertInF = con.prepareStatement(INSERT_INTO_FOOD_Q);
+
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not prepare queries", e);
 		}
@@ -47,7 +57,7 @@ public class ProductDB implements ProductDAO {
 		try {
 			findByProductIDPS.setInt(1, saleProductID);
 			ResultSet rs = findByProductIDPS.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				res = buildObject(rs);
 			}
 		} catch (SQLException e) {
@@ -56,39 +66,67 @@ public class ProductDB implements ProductDAO {
 		return res;
 	}
 
-	private saleProduct buildObject(ResultSet rs ) throws SQLException {
+	private saleProduct buildObject(ResultSet rs) throws SQLException {
 		saleProduct sp = null;
 		String type = rs.getString("type");
-		if(type.equals("wine")) {
-			sp = new Wine(
-				rs.getString("name"),
-				rs.getDouble("price"),
-				rs.getString("description"),
-				rs.getString("type"),
-				rs.getString("grapeType"),
-				rs.getString("year"),
-				rs.getString("wineHouse"),
-				rs.getString("region"),
-				rs.getInt("amountLeft")
-				);
-		} else if(type.equals("food")) {
-			sp = new Food(
-				rs.getString("name"),
-				rs.getDouble("price"),
-				rs.getString("description"),
-				rs.getString("type"),
-				rs.getString("menuName")
-				);
+		if (type.equals("wine")) {
+			sp = new Wine(rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
+					rs.getString("type"), rs.getString("grapeType"), rs.getString("yearProduced"),
+					rs.getString("wineHouse"), rs.getString("region"), rs.getInt("amountLeft"));
+		} else if (type.equals("food")) {
+			sp = new Food(rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
+					rs.getString("type"), rs.getString("menuName"));
 		}
 		return sp;
-		}
-	
-	public List<saleProduct> buildObjects(ResultSet rs) throws SQLException{
+	}
+
+	public List<saleProduct> buildObjects(ResultSet rs) throws SQLException {
 		List<saleProduct> res = new ArrayList<>();
-		while(rs.next()) {
+		while (rs.next()) {
 			res.add(buildObject(rs));
 		}
 		return res;
 	}
 
+	public void saveSaleProduct(saleProduct sp) throws DataAccessException {
+		ResultSet rs = null;
+		final String name = sp.getName();
+		final Double price = sp.getPrice();
+		final String description = sp.getDescription();
+		final String type = sp.getType();
+		final String grapeType = w.getGrapeType();
+		final String yearProduced = w.getYearProduced();
+		final String wineHouse = w.getWineHouse();
+		final String region = w.getRegion();
+		final int amountLeft = w.getAmountLeft();
+		final String menuName = f.getMenuName();
+		try {
+			insertInSP.setString(1, name);
+			insertInSP.setDouble(2, price);
+			insertInSP.setString(3, description);
+			insertInSP.setString(4, type);
+			insertInSP.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not save product", e);
+		}
+		if (type.equals("Wine")) {
+			try {
+				insertInW.setString(1, grapeType);
+				insertInW.setString(2, yearProduced);
+				insertInW.setString(3, wineHouse);
+				insertInW.setString(4, region);
+				insertInW.setInt(5, amountLeft);
+			} catch (SQLException e) {
+				throw new DataAccessException("Could not build Wine", e);
+			}
+
+		} else if (type.equals("Food")) {
+			try {
+				insertInF.setString(1, menuName);
+			} catch (SQLException e) {
+				throw new DataAccessException("Could not build Food", e);
+			}
+		}
+	}
 }
