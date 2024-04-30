@@ -9,13 +9,22 @@ public class Table {
 		this.tableNo = tableNo;
 	}
 
+
+
+
 	public boolean isTableStatus() {
 		return tableStatus;
 	}
 
+
+
+
 	public void setTableStatus(boolean tableStatus) {
 		this.tableStatus = tableStatus;
 	}
+
+
+
 
 	public int getTableNo() {
 		return tableNo;
