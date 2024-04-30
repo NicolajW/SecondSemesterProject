@@ -18,7 +18,7 @@ public class DBConnection {
 	private static DBConnection dbConnection;
 
 	private static final String driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String dbName = "DMA-CSD-S232_10503125";
+	private static final String dbName = "DMA-CSD-S232_10503088";
 	private static final String serverAddress = "hildur.ucn.dk";
 	//private static final String serverAddress = "127.0.0.1";
 	private static final int serverPort = 1433;
