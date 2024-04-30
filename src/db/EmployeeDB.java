@@ -47,7 +47,10 @@ public class EmployeeDB implements EmployeeDAO {
 
 	@Override
 	public Employee findByEmployeeNo(int employeeNo) throws DataAccessException {
-		
+		Employee res = null;
+		try {
+			findByIDPS = con.pre
+		}
 		return null;
 	}
 
