@@ -1,30 +1,21 @@
 package model;
 
 public class Wine extends saleProduct {
-	public String type;
 	public String grapeType;
-	public String year;
+	public String yearProduced;
 	public String wineHouse;
 	public String region;
 	public int amountLeft;
 	
-	public Wine(String barcode, String name, Double price, String description, String type, String grapeType, String year, String wineHouse, String region, int amountLeft) {
-		super(barcode, name, price, description);
-		this.type = type;
+	public Wine(String name, Double price, String description, String type, String grapeType, String yearProduced, String wineHouse, String region, int amountLeft) {
+		super(name, price, description, type);
 		this.grapeType = grapeType;
-		this.year = year;
+		this.yearProduced = yearProduced;
 		this.wineHouse = wineHouse;
 		this.region = region;
 		this.amountLeft = amountLeft;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public String getGrapeType() {
 		return grapeType;
@@ -34,12 +25,12 @@ public class Wine extends saleProduct {
 		this.grapeType = grapeType;
 	}
 
-	public String getYear() {
-		return year;
+	public String getYearProduced() {
+		return yearProduced;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setYear(String yearProduced) {
+		this.yearProduced = yearProduced;
 	}
 
 	public String getWineHouse() {

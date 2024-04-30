@@ -1,28 +1,18 @@
 package model;
 
 public abstract class  saleProduct {
-	private String barcode;
 	public String name;
 	public Double price;
 	public String description;
+	public String type;
 	
 	
-	public saleProduct(String barcode, String name, Double price, String description) {
+	public saleProduct(String name, Double price, String description, String type) {
 		super();
-		this.barcode = barcode;
 		this.name = name;
 		this.price = price;
 		this.description = description;
-	}
-
-
-	public String getBarcode() {
-		return barcode;
-	}
-
-
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
+		this.type = type;
 	}
 
 
@@ -53,6 +43,16 @@ public abstract class  saleProduct {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	
