@@ -6,7 +6,7 @@ import model.SaleOrder;
 import model.saleProduct;
 
 public class SaleOrderController {
-	private EmployeeController ectrl;
+	private PersonController ectrl;
 	private ProductController pctrl;
 	private SaleOrder saleOrder;
 	private SaleOrderDB sodb;
@@ -14,7 +14,7 @@ public class SaleOrderController {
 	public SaleOrderController(){
 		try {
 			sodb = new SaleOrderDB();
-			ectrl = new EmployeeController();
+			ectrl = new PersonController();
 			pctrl = new ProductController();
 			saleOrder = this.saleOrder;
 		} catch (DataAccessException e) {

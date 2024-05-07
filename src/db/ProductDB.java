@@ -47,7 +47,7 @@ public class ProductDB implements ProductDAO {
 			List<saleProduct> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
-			throw new DataAccessException("Cloud not find all", e);
+			throw new DataAccessException("Could not find all saleProducts", e);
 		}
 	}
 
