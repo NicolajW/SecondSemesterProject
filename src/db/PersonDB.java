@@ -11,9 +11,9 @@ import model.Person;
 
 // Tjek at FIND ALL Q, FIND BY ID Q osv. er sat op på samme måde som tabellerne i databasen
 public class PersonDB implements PersonDAO {
-	private static final String FIND_ALL_Q = "select firstName, lastName, email, phoneNo, employeeNo, adminNo from Person";
+	private static final String FIND_ALL_Q = "select email, firstName, lastName, phoneNo, adminNo, employeeNo from Person";
 	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where email = ?";
-	private static final String INSERT_Q = "INSERT INTO Employee (firstName, lastName, email, phoneNo, employeeNo, adminNo) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_Q = "INSERT INTO Employee (email, firstName, lastName, phoneNo, adminNo, employeeNo) VALUES (?, ?, ?, ?, ?, ?)";
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByIDPS;
 	private PreparedStatement insert;
@@ -45,10 +45,10 @@ public class PersonDB implements PersonDAO {
 
 	
 	@Override
-	public Person findByEmployeeNo(int employeeNo) throws DataAccessException {
+	public Person findByEmployeeNo(String email) throws DataAccessException {
 		Person res = null;
 		try {
-			findByIDPS.setInt(1, employeeNo);
+			findByIDPS.setString(1, email);
 			ResultSet rs = findByIDPS.executeQuery();
 			res = buildObject(rs);
 		} catch (SQLException e) {
@@ -78,21 +78,23 @@ public class PersonDB implements PersonDAO {
 	}
 
 	public void saveCustomer(Person p) throws DataAccessException {
+		final String email = p.getEmail();
 		final String firstName = p.getFirstName();
 		final String lastName = p.getLastName();
-		final String email = p.getEmail();
 		final String phoneNo = p.getPhoneNo();
-		final int employeeNo = p.getEmployeeNo(); 
 		final int adminNo = p.getAdminNo();
+		final int employeeNo = p.getEmployeeNo(); 
+		
 
 
 		try {
-			insert.setString(1, firstName);
-			insert.setString(2, lastName);
-			insert.setString(3, email);
+			insert.setString(1, email);
+			insert.setString(2, firstName);
+			insert.setString(3, lastName);
 			insert.setString(4, phoneNo);
-			insert.setInt(5, employeeNo);
-			insert.setInt(6, adminNo);
+			insert.setInt(5, adminNo);
+			insert.setInt(6, employeeNo);
+			
 
 			insert.executeUpdate();
 
