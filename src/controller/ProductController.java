@@ -2,7 +2,7 @@ package controller;
 
 import db.DataAccessException;
 import db.ProductDAO;
-import model.saleProduct;
+import model.SaleProduct;
 import db.ProductDB;
 
 
@@ -13,7 +13,7 @@ public class ProductController {
 	public ProductController() throws DataAccessException {
 		pDao = new ProductDB();
 	}
-	public saleProduct findByProductById(int id) throws DataAccessException {
+	public SaleProduct findByProductById(int id) throws DataAccessException {
 		return pDao.findByProductById(id);
 	}
 	public void updateInventory(int id) throws DataAccessException {
