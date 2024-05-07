@@ -6,7 +6,7 @@ public class SaleOrder {
 	private double totalPrice;
 	private int orderNo;
 	private Employee employee;
-	private List<Orderline> ol;
+	private List<OrderLine> ol;
 	
 
 	public SaleOrder(int orderNo, double totalPrice, Employee employee, int tableNo) {
@@ -46,13 +46,17 @@ public class SaleOrder {
 	}
 
 
-	public List<Orderline> getOl() {
+	public List<OrderLine> getOl() {
 		return ol;
 	}
 
 
-	public void setOl(List<Orderline> ol) {
+	public void setOl(List<OrderLine> ol) {
 		this.ol = ol;
+	}
+
+	public List<SaleOrder> findByOrderNo(int quantity) {
+		return null;
 	}
 	
 	

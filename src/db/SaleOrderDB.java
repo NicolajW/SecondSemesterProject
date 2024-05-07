@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Employee;
-import model.Orderline;
+import model.OrderLine;
 import model.SaleOrder;
 import model.Table;
 
@@ -21,7 +21,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 	private PreparedStatement findAllPS;
 	private PreparedStatement findByOrderNoPS;
 	private PreparedStatement insert;
-	private Orderline ol;
+	private OrderLine ol;
 	
 	public SaleOrderDB() throws DataAccessException{
 		Connection con = DBConnection.getInstance().getConnection();
@@ -59,8 +59,8 @@ public class SaleOrderDB implements SaleOrderDAO{
 						);
 				if(fullAssociation) {
 					//En db klasse til OrderLine, så vi kan fremsøge den?
-					//List<Orderline> orderline = ol.findById(res.getOrderNo());
-					//res.setOl(orderline);
+					List<OrderLine> orderline = ol.findById(res.getOrderNo());
+					res.setOl(orderline);
 				}
 			}
 		} catch (SQLException e) {
@@ -73,8 +73,6 @@ public class SaleOrderDB implements SaleOrderDAO{
 	
 	@Override
 	public void saveOrder(SaleOrder order) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -85,11 +83,9 @@ public class SaleOrderDB implements SaleOrderDAO{
 			ResultSet rs = findByOrderNoPS.executeQuery();
 			res = buildObject(rs, fullAssociation);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new DataAccessException("Could not find by OrderNo", e);
 		}
 		return res;
 	}
-	
-	
 }
+
