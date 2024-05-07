@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Employee;
-import model.Orderline;
+import model.OrderLine;
+import model.Person;
 import model.SaleOrder;
 import model.Table;
 
@@ -21,7 +21,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 	private PreparedStatement findAllPS;
 	private PreparedStatement findByOrderNoPS;
 	private PreparedStatement insert;
-	private Orderline ol;
+	private OrderLine ol;
 	
 	public SaleOrderDB() throws DataAccessException{
 		Connection con = DBConnection.getInstance().getConnection();
@@ -54,7 +54,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 				res = new SaleOrder(
 						rs.getInt("orderNo"),
 						rs.getDouble("totalPrice"), 
-						new Employee(null, null, rs.getString("email_FK"), null, 0),
+						new Person(null, null, rs.getString("email_FK"), null, 0, 0),
 						rs.getInt("tableNo_FK")
 						);
 				if(fullAssociation) {

@@ -1,16 +1,17 @@
 package controller;
 
 import db.DataAccessException;
+import db.PersonDB;
 import db.SaleOrderDB;
-import model.Employee;
+import model.Person;
 import model.SaleOrder;
 import model.Table;
 import model.saleProduct;
 import db.TableDB;
 
 public class SaleOrderController {
-	private PersonController ectrl;
-	private ProductController pctrl;
+	private PersonController perctrl;
+	private ProductController proctrl;
 	private SaleOrder saleOrder;
 	private SaleOrderDB sodb;
 	private TableDB tadb;
@@ -18,8 +19,8 @@ public class SaleOrderController {
 	public SaleOrderController(){ 
 		try {
 			sodb = new SaleOrderDB();
-			ectrl = new PersonController();
-			pctrl = new ProductController();
+			perctrl = new PersonController();
+			proctrl = new ProductController();
 			saleOrder = this.saleOrder;
 			
 		} catch (DataAccessException e) {
@@ -29,8 +30,9 @@ public class SaleOrderController {
 	}
 	
 	public SaleOrder createSaleOrder(int employeeNo, int tableNo) throws DataAccessException {
+		PersonDB persdb = new PersonDB();
+		Person employee = perctrl.findByEmployeeNo(employeeNo);
 		checkTable(tableNo);
-		Employee employee = ectrl.findByEmployeeNo(employeeNo);
 		saleOrder = new SaleOrder(0, 0d, employee, tableNo);
 		return saleOrder;
 	}
@@ -49,6 +51,7 @@ public class SaleOrderController {
 	}
 	
 	private void checkTable(int tableNo) throws DataAccessException {
+		TableDB tadb = new TableDB();
 		Table table = tadb.findByTableNo(tableNo);
 	    if (table.isTableStatus() != true) {
 	        table.setTableStatus(true);
