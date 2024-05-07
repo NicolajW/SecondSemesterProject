@@ -10,6 +10,8 @@ import java.util.List;
 
 import model.Employee;
 import model.OrderLine;
+import model.OrderLine;
+import model.Person;
 import model.SaleOrder;
 import model.Table;
 
@@ -54,7 +56,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 				res = new SaleOrder(
 						rs.getInt("orderNo"),
 						rs.getDouble("totalPrice"), 
-						new Employee(null, null, rs.getString("email_FK"), null, 0),
+						new Person(null, null, rs.getString("email_FK"), null, 0, 0),
 						rs.getInt("tableNo_FK")
 						);
 				if(fullAssociation) {

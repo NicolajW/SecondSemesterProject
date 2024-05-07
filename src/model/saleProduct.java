@@ -1,13 +1,13 @@
 package model;
 
-public abstract class  saleProduct {
+public abstract class  SaleProduct {
 	public String name;
 	public Double price;
 	public String description;
 	public String type;
 	
 	
-	public saleProduct(String name, Double price, String description, String type) {
+	public SaleProduct(String name, Double price, String description, String type) {
 		super();
 		this.name = name;
 		this.price = price;

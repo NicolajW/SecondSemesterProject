@@ -5,14 +5,15 @@ import java.util.List;
 public class SaleOrder {
 	private double totalPrice;
 	private int orderNo;
-	private Employee employee;
+	private Employee employee1;
+	private Person employee;
 	private List<OrderLine> ol;
 	
 
-	public SaleOrder(int orderNo, double totalPrice, Employee employee, int tableNo) {
+	public SaleOrder(int orderNo, double totalPrice, Person employee, int tableNo) {
 		this.totalPrice = totalPrice;
 		this.orderNo = orderNo;
-		this.employee = employee;
+		this.employee1 = employee;
 		this.ol = ol;
 	}
 
@@ -36,13 +37,13 @@ public class SaleOrder {
 	}
 
 
-	public Employee getEmployee() {
-		return employee;
+	public Person getEmployee() {
+		return employee1;
 	}
 
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setEmployee(Person employee) {
+		this.employee1 = employee;
 	}
 
 

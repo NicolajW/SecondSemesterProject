@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.saleProduct;
+import model.SaleProduct;
 import model.Food;
 import model.Wine;
 
@@ -41,19 +41,19 @@ public class ProductDB implements ProductDAO {
 	}
 
 	@Override
-	public List<saleProduct> findAll() throws DataAccessException {
+	public List<SaleProduct> findAll() throws DataAccessException {
 		try {
 			ResultSet rs = findAllPSS.executeQuery();
-			List<saleProduct> res = buildObjects(rs);
+			List<SaleProduct> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
-			throw new DataAccessException("Cloud not find all", e);
+			throw new DataAccessException("Could not find all saleProducts", e);
 		}
 	}
 
 	@Override
-	public saleProduct findByProductById(int saleProductID) throws DataAccessException {
-		saleProduct res = null;
+	public SaleProduct findByProductById(int saleProductID) throws DataAccessException {
+		SaleProduct res = null;
 		try {
 			findByProductIDPS.setInt(1, saleProductID);
 			ResultSet rs = findByProductIDPS.executeQuery();
@@ -66,8 +66,8 @@ public class ProductDB implements ProductDAO {
 		return res;
 	}
 
-	private saleProduct buildObject(ResultSet rs) throws SQLException {
-		saleProduct sp = null;
+	private SaleProduct buildObject(ResultSet rs) throws SQLException {
+		SaleProduct sp = null;
 		String type = rs.getString("type");
 		if (type.equals("wine")) {
 			sp = new Wine(rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
@@ -80,15 +80,15 @@ public class ProductDB implements ProductDAO {
 		return sp;
 	}
 
-	public List<saleProduct> buildObjects(ResultSet rs) throws SQLException {
-		List<saleProduct> res = new ArrayList<>();
+	public List<SaleProduct> buildObjects(ResultSet rs) throws SQLException {
+		List<SaleProduct> res = new ArrayList<>();
 		while (rs.next()) {
 			res.add(buildObject(rs));
 		}
 		return res;
 	}
 
-	public void saveSaleProduct(saleProduct sp) throws DataAccessException {
+	public void saveSaleProduct(SaleProduct sp) throws DataAccessException {
 		ResultSet rs = null;
 		final String name = sp.getName();
 		final Double price = sp.getPrice();
