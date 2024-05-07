@@ -70,11 +70,11 @@ public class ProductDB implements ProductDAO {
 		SaleProduct sp = null;
 		String type = rs.getString("type");
 		if (type.equals("wine")) {
-			sp = new Wine(rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
+			sp = new Wine(rs.getInt("saleProductID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
 					rs.getString("type"), rs.getString("grapeType"), rs.getString("yearProduced"),
 					rs.getString("wineHouse"), rs.getString("region"), rs.getInt("amountLeft"));
 		} else if (type.equals("food")) {
-			sp = new Food(rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
+			sp = new Food(rs.getInt("saleProductID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
 					rs.getString("type"), rs.getString("menuName"));
 		}
 		return sp;

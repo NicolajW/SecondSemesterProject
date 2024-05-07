@@ -4,16 +4,29 @@ import java.util.List;
 
 public class OrderLine {
 	private int quantity;
-	private List<SaleOrder> so;
-
+	private SaleProduct saleProduct;
+	private SaleOrder saleOrder;
+	
 	public OrderLine(int quantity) {
 		this.quantity = quantity;
-		this.so = so;
 	}
 
-	public OrderLine(int id, int quantity, SaleOrder orderNo, int saleProductID) {
-		
+	public SaleProduct getSaleProduct() {
+		return saleProduct;
 	}
+
+	public void setSaleProduct(SaleProduct saleProduct) {
+		this.saleProduct = saleProduct;
+	}
+
+	public SaleOrder getSaleOrder() {
+		return saleOrder;
+	}
+
+	public void setSaleOrder(SaleOrder saleOrder) {
+		this.saleOrder = saleOrder;
+	}
+
 
 	public int getQuantity() {
 		return quantity;
@@ -21,10 +34,6 @@ public class OrderLine {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public List<OrderLine> findById(int orderNo) {
-		return null;
 	}
 	
 }

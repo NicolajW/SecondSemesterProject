@@ -15,7 +15,7 @@ public class OrderLineDB implements OrderLineDAO{
 	private static final String FIND_ALL_Q = "Select id, quantity, orderNo_FK, saleProductID_FK from OrderLine";
 	private static final String FIND_BY_ID_Q = 
 			FIND_ALL_Q + "where id = ?";
-	private static final String INSERT_Q = "INSERT INTO OrderLine (id, quantity, orderNo_FK, saleProductID_FK) Values (?, ?, ?, ?)";
+	private static final String INSERT_Q = "INSERT INTO OrderLine (quantity, orderNo_FK, saleProductID_FK) Values (?, ?, ?)";
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByOrderNoPS;
 	private PreparedStatement insert;
@@ -36,12 +36,7 @@ public class OrderLineDB implements OrderLineDAO{
 		OrderLine res = null;
 		try {
 		if(rs.next()) {
-			res = new OrderLine(
-					rs.getInt("id"),
-					rs.getInt("quantity"),
-					new SaleOrder(rs.getInt("orderNo_FK"), 0, null, 0),
-					rs.getInt("saleProductID_FK")
-					);
+			res = new OrderLine(rs.getInt("quantity"));
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not build object", e);
@@ -77,7 +72,19 @@ public class OrderLineDB implements OrderLineDAO{
 			}
 		return res;
 	}
-	public void saveOrderLine(SaleOrder saleOrder) {
+	public void saveOrderLine(OrderLine orderLine) throws DataAccessException {
+		final int quantity = orderLine.getQuantity();
+		final int saleOrderNo_FK = orderLine.getSaleOrder().getOrderNo();
+		final int saleProductID_FK = orderLine.getSaleProduct().getSaleProductID();
+		try {
+			insert.setInt(1, quantity);
+			insert.setInt(2, saleOrderNo_FK);
+			insert.setInt(3, saleProductID_FK);	
+			
+			insert.executeUpdate();
+		}	catch (SQLException e) {
+			throw new DataAccessException("Could not save OrderLine", e);
+		}
 		
 	}
 }
