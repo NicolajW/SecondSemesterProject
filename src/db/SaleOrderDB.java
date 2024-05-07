@@ -11,6 +11,7 @@ import java.util.List;
 import model.Employee;
 import model.Orderline;
 import model.SaleOrder;
+import model.Table;
 
 public class SaleOrderDB implements SaleOrderDAO{
 	private static final String FIND_ALL_Q = "select orderNo, totalPrice, email_FK, tableNo_FK from SaleOrder";
@@ -52,14 +53,14 @@ public class SaleOrderDB implements SaleOrderDAO{
 			if(rs.next()) {
 				res = new SaleOrder(
 						rs.getInt("orderNo"),
-						rs.getInt("totalPrice"), 
+						rs.getDouble("totalPrice"), 
 						new Employee(null, null, rs.getString("email_FK"), null, 0),
-						new Table( rs.getInt(tableNo_FK))
+						rs.getInt("tableNo_FK")
 						);
 				if(fullAssociation) {
 					//En db klasse til OrderLine, så vi kan fremsøge den?
-					List<Orderline> orderline = ol.findById(res.getOrderNo());
-					res.setOl(orderline);
+					//List<Orderline> orderline = ol.findById(res.getOrderNo());
+					//res.setOl(orderline);
 				}
 			}
 		} catch (SQLException e) {

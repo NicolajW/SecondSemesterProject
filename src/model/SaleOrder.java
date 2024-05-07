@@ -9,13 +9,12 @@ public class SaleOrder {
 	private List<Orderline> ol;
 	
 
-	public SaleOrder(double totalPrice, int orderNo, Employee employee, List<Orderline> ol) {
+	public SaleOrder(int orderNo, double totalPrice, Employee employee, int tableNo) {
 		this.totalPrice = totalPrice;
 		this.orderNo = orderNo;
 		this.employee = employee;
 		this.ol = ol;
 	}
-
 
 	public double getTotalPrice() {
 		return totalPrice;
