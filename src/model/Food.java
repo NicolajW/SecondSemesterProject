@@ -1,6 +1,6 @@
 package model;
 
-public class Food extends saleProduct {
+public class Food extends SaleProduct {
 	public String menuName;
 
 	public Food(String name, Double price, String description, String type, String menuName) {

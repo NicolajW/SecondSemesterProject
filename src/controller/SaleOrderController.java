@@ -3,10 +3,10 @@ package controller;
 import db.DataAccessException;
 import db.SaleOrderDB;
 import model.SaleOrder;
-import model.saleProduct;
+import model.SaleProduct;
 
 public class SaleOrderController {
-	private PersonController ectrl;
+	private EmployeeController ectrl;
 	private ProductController pctrl;
 	private SaleOrder saleOrder;
 	private SaleOrderDB sodb;
@@ -14,7 +14,7 @@ public class SaleOrderController {
 	public SaleOrderController(){
 		try {
 			sodb = new SaleOrderDB();
-			ectrl = new PersonController();
+			ectrl = new EmployeeController();
 			pctrl = new ProductController();
 			saleOrder = this.saleOrder;
 		} catch (DataAccessException e) {
@@ -28,7 +28,7 @@ public class SaleOrderController {
 	}
 	
 	//Ikke bare void?
-	public saleProduct addProduct(String barcode) throws DataAccessException {
+	public SaleProduct addProduct(String barcode) throws DataAccessException {
 		return null;
 	}
 	
