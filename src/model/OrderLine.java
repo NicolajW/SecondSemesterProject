@@ -1,10 +1,11 @@
 package model;
 
-public class Orderline {
+public class OrderLine {
 	private int quantity;
 
-	public Orderline(int quantity) {
+	public OrderLine(int quantity) {
 		this.quantity = quantity;
+		
 	}
 
 	public int getQuantity() {
@@ -14,6 +15,5 @@ public class Orderline {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
 	
 }
