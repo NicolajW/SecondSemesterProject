@@ -1,18 +1,30 @@
 package model;
 
 public abstract class  SaleProduct {
-	public String name;
-	public Double price;
-	public String description;
-	public String type;
+	private int SaleProductID;
+	private String name;
+	private Double price;
+	private String description;
+	private String type;
 	
 	
-	public SaleProduct(String name, Double price, String description, String type) {
+	public SaleProduct(int SaleProductID, String name, Double price, String description, String type) {
 		super();
+		this.SaleProductID = SaleProductID;
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.type = type;
+	}
+
+
+	public int getSaleProductID() {
+		return SaleProductID;
+	}
+
+
+	public void setSaleProductID(int saleProductID) {
+		SaleProductID = saleProductID;
 	}
 
 

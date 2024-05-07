@@ -7,8 +7,8 @@ public class Wine extends SaleProduct {
 	public String region;
 	public int amountLeft;
 	
-	public Wine(String name, Double price, String description, String type, String grapeType, String yearProduced, String wineHouse, String region, int amountLeft) {
-		super(name, price, description, type);
+	public Wine(int saleProductID, String name, Double price, String description, String type, String grapeType, String yearProduced, String wineHouse, String region, int amountLeft) {
+		super(saleProductID, name, price, description, type);
 		this.grapeType = grapeType;
 		this.yearProduced = yearProduced;
 		this.wineHouse = wineHouse;
