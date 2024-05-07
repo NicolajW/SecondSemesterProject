@@ -1,6 +1,6 @@
 package model;
 
-public class Wine extends saleProduct {
+public class Wine extends SaleProduct {
 	public String grapeType;
 	public String yearProduced;
 	public String wineHouse;
