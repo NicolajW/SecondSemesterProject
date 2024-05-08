@@ -17,7 +17,7 @@ public class ProductDB implements ProductDAO {
 	private Food f;
 
 	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
-	private static final String FIND_BY_Q = FIND_ALL_Q + "where saleProductID = ?";
+	private static final String FIND_BY_Q = FIND_ALL_Q + " where saleProductID = ?";
 	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region, amountLeft) values (?, ?, ?, ?, ?);";
 	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";

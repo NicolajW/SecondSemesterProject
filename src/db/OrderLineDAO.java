@@ -6,5 +6,5 @@ import model.OrderLine;
 
 public interface OrderLineDAO {
 	List<OrderLine> findAll() throws DataAccessException;
-	OrderLine findBySaleOrder(int orderNo) throws DataAccessException;
+	List<OrderLine> findById(int orderNo) throws DataAccessException;
 }

@@ -56,4 +56,13 @@ public class Wine extends SaleProduct {
 	public void setAmountLeft(int amountLeft) {
 		this.amountLeft = amountLeft;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Wine [grapeType=" + grapeType + ", yearProduced=" + yearProduced + ", wineHouse=" + wineHouse
+				+ ", region=" + region + ", amountLeft=" + amountLeft + "]";
+	}
+	
+	
 }

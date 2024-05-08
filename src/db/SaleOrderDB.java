@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Employee;
 import model.OrderLine;
 import model.OrderLine;
 import model.Person;
@@ -23,7 +22,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 	private PreparedStatement findAllPS;
 	private PreparedStatement findByOrderNoPS;
 	private PreparedStatement insert;
-	private OrderLine ol;
+	private OrderLineDB oldb = new OrderLineDB();
 	
 	public SaleOrderDB() throws DataAccessException{
 		Connection con = DBConnection.getInstance().getConnection();
@@ -61,7 +60,7 @@ public class SaleOrderDB implements SaleOrderDAO{
 						);
 				if(fullAssociation) {
 					//En db klasse til OrderLine, så vi kan fremsøge den?
-					List<OrderLine> orderline = ol.findById(res.getOrderNo());
+					List<OrderLine> orderline = oldb.findById(res.getOrderNo());
 					res.setOl(orderline);
 				}
 			}

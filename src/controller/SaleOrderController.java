@@ -1,23 +1,27 @@
 package controller;
 
 import db.DataAccessException;
+import db.OrderLineDB;
 import db.PersonDB;
 import db.SaleOrderDB;
+import model.OrderLine;
 import model.Person;
 import model.SaleOrder;
 import model.Table;
-import model.saleProduct;
+import model.SaleProduct;
 import db.TableDB;
 
 public class SaleOrderController {
 	private PersonController perctrl;
 	private ProductController proctrl;
-	private SaleOrder saleOrder;
 	private SaleOrderDB sodb;
 	private TableDB tadb;
+	private SaleOrder saleOrder;
+	private OrderLineDB oldb;
 
 	public SaleOrderController(){ 
 		try {
+			oldb = new OrderLineDB();
 			sodb = new SaleOrderDB();
 			perctrl = new PersonController();
 			proctrl = new ProductController();
@@ -29,16 +33,19 @@ public class SaleOrderController {
 		}
 	}
 	
-	public SaleOrder createSaleOrder(int employeeNo, int tableNo) throws DataAccessException {
+	public SaleOrder createSaleOrder(String email, int tableNo) throws DataAccessException {
 		PersonDB persdb = new PersonDB();
-		Person employee = perctrl.findByEmployeeNo(employeeNo);
+		Person employee = perctrl.findByEmployeeNo(email);
 		checkTable(tableNo);
 		saleOrder = new SaleOrder(0, 0d, employee, tableNo);
 		return saleOrder;
 	}
 	
-	public void addProduct(String barcode) throws DataAccessException {
-		
+	public void addProduct(int productId) throws DataAccessException {
+		OrderLine ol = new OrderLine(0);
+		ol.setSaleOrder(saleOrder);
+		ol.setSaleProduct(proctrl.findByProductById(productId));
+		oldb.saveOrderLine(ol);
 		
 	}
 	

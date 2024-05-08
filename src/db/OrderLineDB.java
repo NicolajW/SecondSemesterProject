@@ -61,12 +61,12 @@ public class OrderLineDB implements OrderLineDAO{
 	}
 
 	@Override
-	public OrderLine findBySaleOrder(int orderNo) throws DataAccessException {
-		OrderLine res = null;
+	public List<OrderLine> findById(int orderNo) throws DataAccessException {
+		List <OrderLine> res = null;
 			try {
 				findByOrderNoPS.setInt(1, orderNo);
 				ResultSet rs = findByOrderNoPS.executeQuery();
-				res = buildObject(rs);
+				res = buildObjects(rs);
 			} catch (SQLException e) {
 				throw new DataAccessException("could not find by OrderNo", e);
 			}

@@ -1,6 +1,8 @@
 package model;
 
 public abstract class  SaleProduct {
+
+
 	private int SaleProductID;
 	private String name;
 	private Double price;
@@ -68,4 +70,9 @@ public abstract class  SaleProduct {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "SaleProduct [SaleProductID=" + SaleProductID + ", name=" + name + ", price=" + price + ", description="
+				+ description + ", type=" + type + "]";
+	}
 }
