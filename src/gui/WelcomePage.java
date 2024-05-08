@@ -85,6 +85,7 @@ public class WelcomePage extends JFrame {
 		JButton btnNewButton = new JButton("Log In ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				logInClicked();
 			}
 		});
 		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 12));
@@ -165,5 +166,10 @@ public class WelcomePage extends JFrame {
 					.addContainerGap(66, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	private void logInClicked() {
+		Menu menu = new Menu();
+		menu.setVisible(true);
 	}
 }
