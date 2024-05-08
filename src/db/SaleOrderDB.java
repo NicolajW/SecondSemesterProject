@@ -70,10 +70,12 @@ public class SaleOrderDB implements SaleOrderDAO{
 		return res;
 	}
 	
-	
+
 	
 	@Override
 	public void saveOrder(SaleOrder order) throws DataAccessException {
+		 int orderNo = generateOrderNumber();
+		 order.setOrderNo(orderNo);
 	}
 
 	@Override
@@ -88,5 +90,24 @@ public class SaleOrderDB implements SaleOrderDAO{
 		}
 		return res;
 	}
+	
+	
+	public int generateOrderNumber() throws DataAccessException {
+		int orderNumber = 0;
+		try {
+			Connection con = DBConnection.getInstance().getConnection();
+			String query = "SELECT MAX(orderNo) AS maxOrderNo FROM SaleOrder";
+			Statement statement = con.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			if (resultSet.next()) {
+				orderNumber = resultSet.getInt("maxOrderNo");
+			}
+			orderNumber++;
+		} catch (SQLException e) {
+			throw new DataAccessException("Error generating order number", e);
+		}
+		return orderNumber;
+	}
+	
 }
 

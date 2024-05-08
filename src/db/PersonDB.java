@@ -60,8 +60,13 @@ public class PersonDB implements PersonDAO {
 	private Person buildObject(ResultSet rs) throws SQLException {
 		Person res = null;
 		if (rs.next()) {
-			res = new Person(rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"),
-					rs.getString("phoneNo"), rs.getInt("employeeNo"), rs.getInt("adminNo"));
+			res = new Person(
+					rs.getString("firstName"), 
+					rs.getString("lastName"), 
+					rs.getString("email"),
+					rs.getString("phoneNo"),
+					rs.getInt("employeeNo"), 
+					rs.getInt("adminNo"));
 		}
 		return res;
 	}
