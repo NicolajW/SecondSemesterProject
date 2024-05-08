@@ -17,9 +17,12 @@ public class ProductDB implements ProductDAO {
 	private Food f;
 
 	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
-	private static final String FIND_BY_Q = FIND_ALL_Q + " where saleProductID = ?";
+    private static final String JOIN_ALL_Q = "SELECT * FROM saleProduct"
+    		+ " FULL OUTER JOIN wine ON saleProductId = wine_id"
+    		+ " FULL OUTER JOIN food ON saleProductId = food_id";
+	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductId = ?"; 
 	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
-	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region, amountLeft) values (?, ?, ?, ?, ?);";
+	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";
 
 	private PreparedStatement findAllPSS;
@@ -58,7 +61,7 @@ public class ProductDB implements ProductDAO {
 			findByProductIDPS.setInt(1, saleProductID);
 			ResultSet rs = findByProductIDPS.executeQuery();
 			if (rs.next()) {
-				res = buildObject(rs);
+					res = buildObject(rs);
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find by id =" + saleProductID, e);
@@ -70,12 +73,25 @@ public class ProductDB implements ProductDAO {
 		SaleProduct sp = null;
 		String type = rs.getString("type");
 		if (type.equals("wine")) {
-			sp = new Wine(rs.getInt("saleProductID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
-					rs.getString("type"), rs.getString("grapeType"), rs.getString("yearProduced"),
-					rs.getString("wineHouse"), rs.getString("region"), rs.getInt("amountLeft"));
+			sp = new Wine(
+					rs.getInt("saleProductID"), 
+					rs.getString("name"), 
+					rs.getDouble("price"), 
+					rs.getString("description"),
+					rs.getString("type"), 
+					rs.getString("grapeType"), 
+					rs.getString("yearProduced"),
+					rs.getString("wineHouse"), 
+					rs.getString("region")
+					);
 		} else if (type.equals("food")) {
-			sp = new Food(rs.getInt("saleProductID"), rs.getString("name"), rs.getDouble("price"), rs.getString("description"),
-					rs.getString("type"), rs.getString("menuName"));
+			sp = new Food(
+					rs.getInt("saleProductID"), 
+					rs.getString("name"), 
+					rs.getDouble("price"), 
+					rs.getString("description"),
+					rs.getString("type"), 
+					rs.getString("menuName"));
 		}
 		return sp;
 	}
@@ -98,7 +114,6 @@ public class ProductDB implements ProductDAO {
 		final String yearProduced = w.getYearProduced();
 		final String wineHouse = w.getWineHouse();
 		final String region = w.getRegion();
-		final int amountLeft = w.getAmountLeft();
 		final String menuName = f.getMenuName();
 		try {
 			insertInSP.setString(1, name);
@@ -116,7 +131,6 @@ public class ProductDB implements ProductDAO {
 				insertInW.setString(2, yearProduced);
 				insertInW.setString(3, wineHouse);
 				insertInW.setString(4, region);
-				insertInW.setInt(5, amountLeft);
 			} catch (SQLException e) {
 				throw new DataAccessException("Could not build Wine", e);
 			}

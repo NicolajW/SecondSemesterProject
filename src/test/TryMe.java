@@ -17,23 +17,23 @@ public class TryMe {
 		Table t = new Table(false, 1);
 		tbd.saveTableStatus(t);
 		tbd.findAll();
-		for(int i = 0; i < tbd.findAll().size(); i++) {
-			System.out.println(tbd.findAll().get(i).isTableStatus());
-		}
+//		for(int i = 0; i < tbd.findAll().size(); i++) {
+//			System.out.println(tbd.findAll().get(i).isTableStatus());
+//		}
 		
 		
 		PersonDB pdb = new PersonDB();
 		Person p = pdb.findByEmployeeNo("uggabugga@email.com");
-		System.out.println(p.toString());
+//		System.out.println(p.toString());
 		
 		ProductController pctrl = new ProductController();
-		SaleProduct sp = pctrl.findByProductById(1);
+		SaleProduct sp = pctrl.findByProductById(4);
 		
-		System.out.println(sp);
+		System.out.println(sp.toString());
 		
 		SaleOrderController octrl = new SaleOrderController();
-//		octrl.createSaleOrder("WillyLover@email.com", 1);
-//		octrl.addProduct(2);
+		octrl.createSaleOrder("WillyLover@email.com", 1);
+		octrl.addProduct(4);
 		
 		
 	}

@@ -7,13 +7,12 @@ public class Wine extends SaleProduct {
 	public String region;
 	public int amountLeft;
 	
-	public Wine(int saleProductID, String name, Double price, String description, String type, String grapeType, String yearProduced, String wineHouse, String region, int amountLeft) {
+	public Wine(int saleProductID, String name, Double price, String description, String type, String grapeType, String yearProduced, String wineHouse, String region) {
 		super(saleProductID, name, price, description, type);
 		this.grapeType = grapeType;
 		this.yearProduced = yearProduced;
 		this.wineHouse = wineHouse;
 		this.region = region;
-		this.amountLeft = amountLeft;
 	}
 
 
@@ -49,20 +48,7 @@ public class Wine extends SaleProduct {
 		this.region = region;
 	}
 
-	public int getAmountLeft() {
-		return amountLeft;
-	}
 
-	public void setAmountLeft(int amountLeft) {
-		this.amountLeft = amountLeft;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Wine [grapeType=" + grapeType + ", yearProduced=" + yearProduced + ", wineHouse=" + wineHouse
-				+ ", region=" + region + ", amountLeft=" + amountLeft + "]";
-	}
 	
 	
 }
