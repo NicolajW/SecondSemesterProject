@@ -73,7 +73,7 @@ public class InventoryDB implements InventoryDAO {
 			
 			update.executeUpdate();
 		} catch (SQLException e) {
-			throw new DataAccessException("Could not save Object", e);
+			throw new DataAccessException("Could not update inventory", e);
 		}
 	}
 
