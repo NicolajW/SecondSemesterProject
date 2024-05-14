@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Map;
+
 import db.DataAccessException;
 import db.InventoryDAO;
 import db.InventoryDB;
@@ -23,5 +25,13 @@ public class ProductController {
 	}
 	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
 		iDao.updateProductQuantity(inventory);
+	}
+	
+	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException{
+		return pDao.getAllProductsAsMap();
+	}
+	
+	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
+		return pDao.findByMapProductID(saleProductID);
 	}
 }

@@ -58,7 +58,18 @@ public class SaleOrder {
         if (ol == null) {
             ol = new ArrayList<>();
         }
+        
         ol.add(orderLine);
+        
+//        for(int i = 0; i < ol.size(); i++) {
+//        	if(ol.get(i).getSaleProduct() == orderLine.getSaleProduct()) {
+//        		double quantity = ol.get(i).getQuantity();
+//        		ol.get(i).setQuantity(quantity + 1);
+//        	}else if(ol.get(i).getSaleProduct() != orderLine.getSaleProduct()) {	
+//        		ol.add(orderLine);
+//        	}
+//        }
+        
     }
 
 	public void setEmployee(Person employee) {

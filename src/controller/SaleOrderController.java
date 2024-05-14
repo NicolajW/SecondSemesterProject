@@ -45,10 +45,18 @@ public class SaleOrderController {
 		//tom orderline 
 		OrderLine ol = new OrderLine(0.0, null, null);
 		ol.setSaleOrder(saleOrder);
-		ol.setSaleProduct(proctrl.findByProductById(productId));
+		ol.setSaleProduct(findMapProduct(productId));
 		ol.setQuantity(quantity);
 		saleOrder.addOrderLine(ol);
 		
+	}
+	
+	public void mapAllProducts() throws DataAccessException {
+		proctrl.getAllProductsAsMap();
+	}
+	
+	public SaleProduct findMapProduct(int saleProductID) throws DataAccessException {
+		return proctrl.findByMapProductID(saleProductID);
 	}
 	
 	public void saveOrder() throws DataAccessException {

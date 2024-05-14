@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.SaleProduct;
 import model.Food;
@@ -52,6 +54,29 @@ public class ProductDB implements ProductDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find all saleProducts", e);
 		}
+	}
+	
+	@Override
+	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException {
+        Map<Integer, SaleProduct> productMap = new HashMap<>();
+
+        try {
+            List<SaleProduct> productList = findAll();
+
+            for (SaleProduct product : productList) {
+                productMap.put(product.getSaleProductID(), product);
+            }
+        } catch (DataAccessException e) {
+            e.printStackTrace(); 
+        }
+
+        return productMap;
+    }
+	
+	@Override
+	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
+		 Map<Integer, SaleProduct> productMap = getAllProductsAsMap();
+		 return productMap.get(productMap);
 	}
 
 	@Override
