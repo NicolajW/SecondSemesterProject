@@ -150,9 +150,8 @@ public class WelcomePage extends JFrame {
 
 	
 	private void logInClicked() {
-		WelcomePage frame = new WelcomePage();
-		frame.setVisible(false);
-		frame.dispose();
+		setVisible(false);
+		dispose();
 		Menu menu = new Menu();
 		menu.setVisible(true);
 	}
