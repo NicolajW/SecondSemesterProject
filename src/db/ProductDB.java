@@ -18,9 +18,9 @@ public class ProductDB implements ProductDAO {
 
 	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
     private static final String JOIN_ALL_Q = "SELECT * FROM saleProduct"
-    		+ " FULL OUTER JOIN wine ON saleProductId = wine_id"
-    		+ " FULL OUTER JOIN food ON saleProductId = food_id";
-	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductId = ?"; 
+    		+ " FULL OUTER JOIN wine ON saleProductID = saleProductID_PKFK"
+    		+ " FULL OUTER JOIN food ON saleProductID = food_id";
+	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductID= ?"; 
 	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";
@@ -64,7 +64,7 @@ public class ProductDB implements ProductDAO {
 					res = buildObject(rs);
 			}
 		} catch (SQLException e) {
-			throw new DataAccessException("Could not find by id =" + saleProductID, e);
+			throw new DataAccessException("Could not find by id = " + saleProductID, e);
 		}
 		return res;
 	}

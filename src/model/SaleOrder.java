@@ -1,10 +1,12 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleOrder {
 	private double totalPrice;
 	private int orderNo;
+	private int tableNo;
 	private Person person;
 	private List<OrderLine> ol;
 	
@@ -13,8 +15,20 @@ public class SaleOrder {
 		this.totalPrice = totalPrice;
 		this.orderNo = orderNo;
 		this.person = employee;
+		this.tableNo = tableNo;
 		this.ol = ol;
 	}
+
+	
+	public int getTableNo() {
+		return tableNo;
+	}
+
+
+	public void setTableNo(int tableNo) {
+		this.tableNo = tableNo;
+	}
+
 
 	public double getTotalPrice() {
 		return totalPrice;
@@ -39,7 +53,13 @@ public class SaleOrder {
 	public Person getEmployee() {
 		return person;
 	}
-
+	
+	public void addOrderLine(OrderLine orderLine) {
+        if (ol == null) {
+            ol = new ArrayList<>();
+        }
+        ol.add(orderLine);
+    }
 
 	public void setEmployee(Person employee) {
 		this.person = employee;

@@ -3,12 +3,14 @@ package model;
 import java.util.List;
 
 public class OrderLine {
-	private int quantity;
+	private double quantity;
 	private SaleProduct saleProduct;
 	private SaleOrder saleOrder;
 	
-	public OrderLine(int quantity) {
+	public OrderLine(double quantity, SaleProduct saleProduct, SaleOrder saleOrder) {
 		this.quantity = quantity;
+		this.saleProduct = saleProduct;
+		this.saleOrder = saleOrder;
 	}
 
 	public SaleProduct getSaleProduct() {
@@ -28,11 +30,11 @@ public class OrderLine {
 	}
 
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 	
