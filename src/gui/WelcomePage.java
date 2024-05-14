@@ -54,7 +54,7 @@ public class WelcomePage extends JFrame {
 	public WelcomePage() {
 		setTitle("Duoro Application ");
 		setBackground(new Color(0, 0, 102));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1100, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(105, 105, 105));
@@ -169,6 +169,9 @@ public class WelcomePage extends JFrame {
 	}
 
 	private void logInClicked() {
+		WelcomePage frame = new WelcomePage();
+		frame.setVisible(false);
+		frame.dispose();
 		Menu menu = new Menu();
 		menu.setVisible(true);
 	}
