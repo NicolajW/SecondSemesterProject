@@ -41,16 +41,19 @@ public class SaleOrderController {
 		return saleOrder;
 	}
 	
-	public void addProduct(int productId) throws DataAccessException {
-		OrderLine ol = new OrderLine(0);
+	public void addProduct(double quantity, int productId) throws DataAccessException {
+		//tom orderline 
+		OrderLine ol = new OrderLine(0.0, null, null);
 		ol.setSaleOrder(saleOrder);
 		ol.setSaleProduct(proctrl.findByProductById(productId));
-		oldb.saveOrderLine(ol);
+		ol.setQuantity(quantity);
+		saleOrder.addOrderLine(ol);
 		
 	}
 	
 	public void saveOrder() throws DataAccessException {
-		
+		sodb.saveOrder(saleOrder);
+		//updateInventory(saleOrder.getOrderNo());
 	}
 	
 	private void updateInventory(int id) {

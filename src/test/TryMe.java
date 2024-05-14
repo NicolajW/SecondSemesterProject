@@ -27,13 +27,16 @@ public class TryMe {
 //		System.out.println(p.toString());
 		
 		ProductController pctrl = new ProductController();
-		SaleProduct sp = pctrl.findByProductById(4);
+//		SaleProduct sp = pctrl.findByProductById(4);
 		
-		System.out.println(sp.toString());
+//		System.out.println(sp.toString());
 		
 		SaleOrderController octrl = new SaleOrderController();
-		octrl.createSaleOrder("WillyLover@email.com", 1);
-		octrl.addProduct(4);
+		octrl.createSaleOrder("uggabugga@hotmail.com", 1);
+		octrl.addProduct(1, 2);
+		octrl.addProduct(1, 2);
+		octrl.saveOrder();
+	
 		
 		
 	}
