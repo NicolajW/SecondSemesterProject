@@ -13,7 +13,7 @@ import model.SaleProduct;
 import model.Food;
 import model.Wine;
 
-public class ProductDB implements ProductDAO {
+public class SaleProductDB implements SaleProductDAO {
 
 	private Wine w;
 	private Food f;
@@ -31,7 +31,7 @@ public class ProductDB implements ProductDAO {
 	private PreparedStatement findByProductIDPS;
 	private PreparedStatement insertInSP, insertInW, insertInF;
 
-	public ProductDB() throws DataAccessException {
+	public SaleProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
 			findAllPSS = con.prepareStatement(FIND_ALL_Q);

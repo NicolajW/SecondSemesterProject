@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SaleOrder {
 	private double totalPrice;
@@ -53,7 +55,8 @@ public class SaleOrder {
 
 		boolean found = false;
 		for (OrderLine existingOrderLine : ol) {
-			if (existingOrderLine.getSaleProduct().getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
+			if (existingOrderLine.getSaleProduct()
+					.getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
 				existingOrderLine.setQuantity(existingOrderLine.getQuantity() + orderLine.getQuantity());
 				found = true;
 				break;
@@ -61,6 +64,29 @@ public class SaleOrder {
 				ol.add(orderLine);
 			}
 		}
+	}
+
+	public Map saleOrderLinesHashMap(OrderLine orderLine) {
+		int i = 0;
+		HashMap<Integer, List<OrderLine>> map = new HashMap<Integer, List<OrderLine>>();
+//		if(map.get(i).get(i).getSaleProduct().getSaleProductID() == orderLine.getSaleProduct().getSaleProductID()) {
+//			map.get(i).get(i).setQuantity(map.get(i).get(i).getQuantity() + orderLine.getQuantity());
+//		}else {
+//			map.put(i, ol);
+//		}
+
+		if (map.containsKey(orderLine.getSaleProduct().getSaleProductID())) {
+			
+			orderLine.setQuantity(orderLine.getQuantity() + map.get());
+			map.put(orderLine.getSaleProduct().getSaleProductID(), ol);
+		} else {
+			ol.add(orderLine);
+			map.put(orderLine.getSaleProduct().getSaleProductID(), ol);
+			
+		}
+		
+
+		return map;
 	}
 
 	public void setEmployee(Person employee) {

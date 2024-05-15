@@ -8,7 +8,7 @@ import model.Food;
 import model.Wine;
 
 
-public interface ProductDAO {
+public interface SaleProductDAO {
 	List<SaleProduct> findAll() throws DataAccessException;
 //	saleProduct findById(int barcode) throws DataAccessException;
 	SaleProduct findByProductById(int id) throws DataAccessException;

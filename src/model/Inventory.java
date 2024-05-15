@@ -1,7 +1,7 @@
 package model;
 
 import db.DataAccessException;
-import db.ProductDB;
+import db.SaleProductDB;
 
 public class Inventory {
 	private int quantity;
