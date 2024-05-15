@@ -42,12 +42,10 @@ public class SaleOrderController {
 	}
 	
 	public void addProduct(double quantity, int productId) throws DataAccessException {
-		//tom orderline 
-		OrderLine ol = new OrderLine(0.0, null, null);
-		ol.setSaleOrder(saleOrder);
-		ol.setSaleProduct(proctrl.findByProductById(productId));
-		ol.setQuantity(quantity);
-		saleOrder.addOrderLine(ol);
+	    SaleProduct product = proctrl.findByProductById(productId);
+	    OrderLine orderLine = new OrderLine(quantity, product, saleOrder);
+	    // Instead of directly adding the order line to the sale order, call the saleOrderLinesHashMap() method
+	    saleOrder.saleOrderLinesHashMap(orderLine);
 		
 	}
 	

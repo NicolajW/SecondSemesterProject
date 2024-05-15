@@ -73,11 +73,11 @@ public class OrderLineDB implements OrderLineDAO{
 		return res;
 	}
 	public void saveOrderLine(OrderLine orderLine) throws DataAccessException {
-		final int quantity = orderLine.getQuantity();
+		final double quantity = orderLine.getQuantity();
 		final int saleOrderNo_FK = orderLine.getSaleOrder().getOrderNo();
 		final int saleProductID_FK = orderLine.getSaleProduct().getSaleProductID();
 		try {
-			insert.setInt(1, quantity);
+			insert.setDouble(1, quantity);
 			insert.setInt(2, saleOrderNo_FK);
 			insert.setInt(3, saleProductID_FK);	
 			

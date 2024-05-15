@@ -11,6 +11,7 @@ public class SaleOrder {
 	private int tableNo;
 	private Person person;
 	private List<OrderLine> ol;
+	private Map<Integer, List<OrderLine>> orderLinesMap;
 
 	public SaleOrder(int orderNo, double totalPrice, Person employee, int tableNo) {
 		this.totalPrice = totalPrice;
@@ -18,6 +19,7 @@ public class SaleOrder {
 		this.person = employee;
 		this.tableNo = tableNo;
 		this.ol = new ArrayList<>();
+		this.orderLinesMap = new HashMap<>();
 	}
 
 	public int getTableNo() {
@@ -66,28 +68,27 @@ public class SaleOrder {
 		}
 	}
 
-	public Map saleOrderLinesHashMap(OrderLine orderLine) {
-		int i = 0;
-		HashMap<Integer, List<OrderLine>> map = new HashMap<Integer, List<OrderLine>>();
-//		if(map.get(i).get(i).getSaleProduct().getSaleProductID() == orderLine.getSaleProduct().getSaleProductID()) {
-//			map.get(i).get(i).setQuantity(map.get(i).get(i).getQuantity() + orderLine.getQuantity());
-//		}else {
-//			map.put(i, ol);
-//		}
+	public Map<Integer, List<OrderLine>> saleOrderLinesHashMap(OrderLine orderLine) {
+        int saleProductId = orderLine.getSaleProduct().getSaleProductID();
 
-		if (map.containsKey(orderLine.getSaleProduct().getSaleProductID())) {
-			
-			orderLine.setQuantity(orderLine.getQuantity() + map.get());
-			map.put(orderLine.getSaleProduct().getSaleProductID(), ol);
-		} else {
-			ol.add(orderLine);
-			map.put(orderLine.getSaleProduct().getSaleProductID(), ol);
-			
-		}
-		
-
-		return map;
-	}
+        if (orderLinesMap.containsKey(saleProductId)) {
+            List<OrderLine> existingOrderLines = orderLinesMap.get(saleProductId);
+            for (OrderLine ol : existingOrderLines) {
+                if (ol.getSaleProduct().getSaleProductID() == saleProductId) {
+                    ol.setQuantity(ol.getQuantity() + orderLine.getQuantity());
+                    return orderLinesMap; // Assuming each sale product ID is unique
+                }
+            }
+            // If no matching order line found, add new one
+            existingOrderLines.add(orderLine);
+            orderLinesMap.put(saleProductId, existingOrderLines);
+        } else {
+            List<OrderLine> newOrderLines = new ArrayList<>();
+            newOrderLines.add(orderLine);
+            orderLinesMap.put(saleProductId, newOrderLines);
+        }
+        return orderLinesMap;
+    }
 
 	public void setEmployee(Person employee) {
 		this.person = employee;
