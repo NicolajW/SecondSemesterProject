@@ -54,18 +54,20 @@ public class SaleOrder {
 		if (ol == null) {
 			ol = new ArrayList<>();
 		}
+		
+		ol.add(orderLine);
 
-		boolean found = false;
-		for (OrderLine existingOrderLine : ol) {
-			if (existingOrderLine.getSaleProduct()
-					.getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
-				existingOrderLine.setQuantity(existingOrderLine.getQuantity() + orderLine.getQuantity());
-				found = true;
-				break;
-			} else if (!found) {
-				ol.add(orderLine);
-			}
-		}
+//		boolean found = false;
+//		for (OrderLine existingOrderLine : ol) {
+//			if (existingOrderLine.getSaleProduct()
+//					.getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
+//				existingOrderLine.setQuantity(existingOrderLine.getQuantity() + orderLine.getQuantity());
+//				found = true;
+//				break;
+//			} else if (!found) {
+//				ol.add(orderLine);
+//			}
+//		}
 	}
 
 	public Map<Integer, List<OrderLine>> saleOrderLinesHashMap(OrderLine orderLine) {
@@ -76,16 +78,14 @@ public class SaleOrder {
             for (OrderLine ol : existingOrderLines) {
                 if (ol.getSaleProduct().getSaleProductID() == saleProductId) {
                     ol.setQuantity(ol.getQuantity() + orderLine.getQuantity());
-                    return orderLinesMap; // Assuming each sale product ID is unique
+                    return orderLinesMap; 
                 }
             }
-            // If no matching order line found, add new one
             existingOrderLines.add(orderLine);
             orderLinesMap.put(saleProductId, existingOrderLines);
         } else {
-            List<OrderLine> newOrderLines = new ArrayList<>();
-            newOrderLines.add(orderLine);
-            orderLinesMap.put(saleProductId, newOrderLines);
+            ol.add(orderLine);
+            orderLinesMap.put(saleProductId, ol);
         }
         return orderLinesMap;
     }

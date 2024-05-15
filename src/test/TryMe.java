@@ -31,7 +31,7 @@ public class TryMe {
 		
 		SaleOrderController octrl = new SaleOrderController();
 		SaleOrder so = octrl.createSaleOrder("uggabugga@hotmail.com", 1);
-		octrl.addProduct(1, 1);
+		octrl.addProduct(1, 2);
 		octrl.addProduct(1, 2);
 		octrl.saveOrder();
 		//System.out.println(so.getOl().get(0).getSaleProduct());
