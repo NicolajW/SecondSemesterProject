@@ -36,7 +36,7 @@ public class OrderLineDB implements OrderLineDAO{
 		OrderLine res = null;
 		try {
 		if(rs.next()) {
-			res = new OrderLine(rs.getInt("quantity"));
+			res = new OrderLine(rs.getFloat("quantity"), null, so);
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not build object", e);

@@ -7,6 +7,7 @@ import db.DataAccessException;
 import db.PersonDB;
 import db.TableDB;
 import model.Person;
+import model.SaleOrder;
 import model.SaleProduct;
 import model.Table;
 
@@ -23,19 +24,21 @@ public class TryMe {
 		
 		
 		PersonDB pdb = new PersonDB();
-		Person p = pdb.findByEmployeeNo("uggabugga@email.com");
+		Person p = pdb.findByEmployeeNo("uggabugga@hotmail.com");
 //		System.out.println(p.toString());
 		
 		ProductController pctrl = new ProductController();
-//		SaleProduct sp = pctrl.findByProductById(4);
-		
-//		System.out.println(sp.toString());
 		
 		SaleOrderController octrl = new SaleOrderController();
-		octrl.createSaleOrder("uggabugga@hotmail.com", 1);
+		SaleOrder so = octrl.createSaleOrder("uggabugga@hotmail.com", 1);
 		octrl.addProduct(1, 2);
 		octrl.addProduct(1, 2);
 		octrl.saveOrder();
+		System.out.println(so.getOl().get(0).getSaleProduct());
+		System.out.println(so.getOl().get(0).getQuantity());
+
+		
+//		octrl.saveOrder();
 	
 		
 		

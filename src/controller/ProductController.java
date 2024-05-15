@@ -27,11 +27,11 @@ public class ProductController {
 		iDao.updateProductQuantity(inventory);
 	}
 	
-	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException{
-		return pDao.getAllProductsAsMap();
-	}
+//	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException{
+//		return pDao.getAllProductsAsMap();
+//	}
 	
-	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
-		return pDao.findByMapProductID(saleProductID);
-	}
+//	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
+//		return pDao.findByMapProductID(saleProductID);
+//	}
 }

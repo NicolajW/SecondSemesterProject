@@ -12,6 +12,6 @@ public interface ProductDAO {
 	List<SaleProduct> findAll() throws DataAccessException;
 //	saleProduct findById(int barcode) throws DataAccessException;
 	SaleProduct findByProductById(int id) throws DataAccessException;
-	Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException;
-	SaleProduct findByMapProductID(int saleProductID) throws DataAccessException; 
+//	Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException;
+//	SaleProduct findByMapProductID(int saleProductID) throws DataAccessException; 
 }
