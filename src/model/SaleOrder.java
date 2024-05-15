@@ -47,20 +47,20 @@ public class SaleOrder {
 	}
 
 	public void addOrderLine(OrderLine orderLine) {
-	    if (ol == null) {
-	        ol = new ArrayList<>();
-	    }
+		if (ol == null) {
+			ol = new ArrayList<>();
+		}
 
-	    boolean found = false;
-	    for (OrderLine existingOrderLine : ol) {
-	        if (existingOrderLine.getSaleProduct().getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
-	            existingOrderLine.setQuantity(existingOrderLine.getQuantity() + orderLine.getQuantity());
-	            found = true;
-	            break;
-	        } else if (!found) {
-		        ol.add(orderLine);
-	    }
-	    }
+		boolean found = false;
+		for (OrderLine existingOrderLine : ol) {
+			if (existingOrderLine.getSaleProduct().getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
+				existingOrderLine.setQuantity(existingOrderLine.getQuantity() + orderLine.getQuantity());
+				found = true;
+				break;
+			} else if (!found) {
+				ol.add(orderLine);
+			}
+		}
 	}
 
 	public void setEmployee(Person employee) {
@@ -83,7 +83,5 @@ public class SaleOrder {
 	public String toString() {
 		return "SaleOrder [ol=" + ol + "]";
 	}
-	
-	
 
 }
