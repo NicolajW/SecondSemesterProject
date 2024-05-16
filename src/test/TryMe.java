@@ -34,8 +34,8 @@ public class TryMe {
 		octrl.addProduct(1, 2);
 		octrl.addProduct(1, 2);
 		octrl.saveOrder();
-		System.out.println(so.getOl().get(0).getSaleProduct());
-		System.out.println(so.getOl().get(0).getQuantity());
+		//System.out.println(so.getOl().get(0).getSaleProduct());
+		//System.out.println(so.getOl().get(0).getQuantity());
 
 		
 //		octrl.saveOrder();
