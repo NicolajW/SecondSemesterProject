@@ -5,19 +5,19 @@ import java.util.Map;
 import db.DataAccessException;
 import db.InventoryDAO;
 import db.InventoryDB;
-import db.ProductDAO;
+import db.SaleProductDAO;
 import model.Inventory;
 import model.SaleProduct;
-import db.ProductDB;
+import db.SaleProductDB;
 
 
 
 public class ProductController {
-	private ProductDAO pDao;
+	private SaleProductDAO pDao;
 	private InventoryDAO iDao;
 	
 	public ProductController() throws DataAccessException {
-		pDao = new ProductDB();
+		pDao = new SaleProductDB();
 		iDao = new InventoryDB();
 	}
 	public SaleProduct findByProductById(int id) throws DataAccessException {
@@ -27,11 +27,11 @@ public class ProductController {
 		iDao.updateProductQuantity(inventory);
 	}
 	
-	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException{
-		return pDao.getAllProductsAsMap();
-	}
+//	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException{
+//		return pDao.getAllProductsAsMap();
+//	}
 	
-	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
-		return pDao.findByMapProductID(saleProductID);
-	}
+//	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
+//		return pDao.findByMapProductID(saleProductID);
+//	}
 }

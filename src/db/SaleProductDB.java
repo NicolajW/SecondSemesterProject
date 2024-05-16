@@ -13,7 +13,7 @@ import model.SaleProduct;
 import model.Food;
 import model.Wine;
 
-public class ProductDB implements ProductDAO {
+public class SaleProductDB implements SaleProductDAO {
 
 	private Wine w;
 	private Food f;
@@ -31,13 +31,13 @@ public class ProductDB implements ProductDAO {
 	private PreparedStatement findByProductIDPS;
 	private PreparedStatement insertInSP, insertInW, insertInF;
 
-	public ProductDB() throws DataAccessException {
+	public SaleProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
 			findAllPSS = con.prepareStatement(FIND_ALL_Q);
 			findByProductIDPS = con.prepareStatement(FIND_BY_Q);
 			insertInSP = con.prepareStatement(INSERT_INTO_SALEPRODUCT_Q);
-			insertInW = con.prepareStatement(INSERT_INTO_WINE_Q);
+			insertInW = con.prepareStatement(INSERT_INTO_WINE_Q); 
 			insertInF = con.prepareStatement(INSERT_INTO_FOOD_Q);
 
 		} catch (SQLException e) {
@@ -56,28 +56,28 @@ public class ProductDB implements ProductDAO {
 		}
 	}
 	
-	@Override
-	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException {
-        Map<Integer, SaleProduct> productMap = new HashMap<>();
-
-        try {
-            List<SaleProduct> productList = findAll();
-
-            for (SaleProduct product : productList) {
-                productMap.put(product.getSaleProductID(), product);
-            }
-        } catch (DataAccessException e) {
-            e.printStackTrace(); 
-        }
-
-        return productMap;
-    }
+//	@Override
+//	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException {
+//        Map<Integer, SaleProduct> productMap = new HashMap<>();
+//
+//        try {
+//            List<SaleProduct> productList = findAll();
+//
+//            for (SaleProduct product : productList) {
+//                productMap.put(product.getSaleProductID(), product);
+//            }
+//        } catch (DataAccessException e) {
+//            e.printStackTrace(); 
+//        }
+//
+//        return productMap;
+//    }
 	
-	@Override
-	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
-		 Map<Integer, SaleProduct> productMap = getAllProductsAsMap();
-		 return productMap.get(productMap);
-	}
+//	@Override
+//	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
+//		 Map<Integer, SaleProduct> productMap = getAllProductsAsMap();
+//		 return productMap.get(saleProductID);
+//	}
 
 	@Override
 	public SaleProduct findByProductById(int saleProductID) throws DataAccessException {
