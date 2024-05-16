@@ -102,6 +102,8 @@ public class CreateOrder extends JFrame {
 		JButton btnNewButton_12 = new JButton("Kurv");
 		btnNewButton_12.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_1.add(btnNewButton_12);
+		btnNewButton_12.addActionListener(e -> goToBasket());
+		panel_1.add(btnNewButton_12);
 		
 		JButton btnNewButton_13 = new JButton("Annuller");
 		btnNewButton_13.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -158,6 +160,11 @@ public class CreateOrder extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Tilføj til Kurv");
 		secondWine.add(btnNewButton_1, BorderLayout.SOUTH);
+		btnNewButton_1.addActionListener(e -> {
+            AddToBasketPopUp2 dialog = new AddToBasketPopUp2();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+		});
 		
 		JPanel thirdWine = new JPanel();
 		thirdWine.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -366,13 +373,19 @@ public class CreateOrder extends JFrame {
 	}
 	
 	private void goBackToMenu() {
-        System.out.println("Tilbage til menu");
-        
         Menu menuFrame = new Menu();
         menuFrame.setVisible(true);
         
         this.dispose();
     }
+	
+	private void goToBasket() {
+		Basket basketFrame = new Basket();
+		basketFrame.setVisible(true);
+		
+		
+	}
+		
 	
 }
 

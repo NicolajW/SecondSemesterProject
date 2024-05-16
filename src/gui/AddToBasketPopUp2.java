@@ -46,7 +46,7 @@ public class AddToBasketPopUp2 extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddToBasketPopUp2() {
-		setTitle("\"Duoro > LogIn > Menu > Kassesystem > TilføjTilKurv\"");
+		setTitle("Duoro > LogIn > Menu > Kassesystem > TilføjTilKurv");
 		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, 467, 389);
 		getContentPane().setLayout(new BorderLayout());
