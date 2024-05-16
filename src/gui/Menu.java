@@ -140,11 +140,11 @@ public class Menu extends JFrame {
 	}
 	
 	private void orderClicked() {
-		setVisible(false);
-		dispose();
-		CreateOrder co = new CreateOrder();
-		co.setVisible(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    CreateOrder co = new CreateOrder();
+	    co.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    co.setVisible(true);
+	    setVisible(false);
+	    dispose();
 	}
 
 	private void storageClicked() {
