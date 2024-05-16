@@ -17,10 +17,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 
 import controller.SaleOrderController;
+import db.DataAccessException;
+import db.SaleProductDB;
 
 import javax.swing.border.BevelBorder;
 
@@ -96,23 +99,13 @@ public class Storage extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Navn", "Produkt Nr.", "Placering", "P\u00E5 Lager", "Optalt", "Difference"
+				"Placering", "P\u00E5 Lager", "Optalt", "Difference"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(67);
-		table.getColumnModel().getColumn(0).setMinWidth(10);
+		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(70);
 		table.getColumnModel().getColumn(1).setPreferredWidth(70);
 		table.getColumnModel().getColumn(2).setPreferredWidth(70);
 		table.getColumnModel().getColumn(3).setPreferredWidth(70);
-		table.getColumnModel().getColumn(4).setPreferredWidth(70);
-		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		scrollPane.setViewportView(table);
 		
 		JButton btnBack = new JButton("Tilbage");
@@ -127,14 +120,18 @@ public class Storage extends JFrame {
 		JButton btnNewButton = new JButton("Vælg");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				vælgClicked();
+				try {
+					vælgClicked();
+				} catch (DataAccessException e1) {
+				} catch (SQLException e1) {
+				}
 			}
 		});
 		btnNewButton.setBounds(238, 229, 89, 23);
 		contentPane.add(btnNewButton);
 	}
 
-	private void vælgClicked() {
+	private void vælgClicked() throws DataAccessException, SQLException {
 		
 	}
 	
