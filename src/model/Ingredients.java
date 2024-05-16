@@ -2,13 +2,29 @@ package model;
 
 public class Ingredients extends Product {
 	private String name;
-	private String type;
+	private String typeOfFood;
+	private int quantity;
 	
-	public Ingredients(String name, String type, String barcode) {
-		super(barcode);
+	public Ingredients(String name, String typeOfFood, String barcode, int quantity, String type) {
+		super(barcode, type);
 		this.name = name;
-		this.type = type;
+		this.typeOfFood = typeOfFood;
+		this.quantity = quantity;
 	}
+	
+	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
 
 	public String getName() {
 		return name;
@@ -18,12 +34,12 @@ public class Ingredients extends Product {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
+	public String getTypeOfFood() {
+		return typeOfFood;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeOfFood(String typeOfFood) {
+		this.typeOfFood = typeOfFood;
 	}
 	
 	
