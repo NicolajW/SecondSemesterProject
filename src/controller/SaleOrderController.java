@@ -1,7 +1,8 @@
 package controller;
 
 import db.DataAccessException;
-import db.OrderLineDB;
+
+
 import db.PersonDB;
 import db.SaleOrderDB;
 import model.OrderLine;
@@ -17,11 +18,11 @@ public class SaleOrderController {
 	private SaleOrderDB sodb;
 	private TableDB tadb;
 	private SaleOrder saleOrder;
-	private OrderLineDB oldb;
+	
 
 	public SaleOrderController(){ 
 		try {
-			oldb = new OrderLineDB();
+		
 			sodb = new SaleOrderDB();
 			perctrl = new PersonController();
 			proctrl = new ProductController();
@@ -42,27 +43,12 @@ public class SaleOrderController {
 	}
 	
 	public void addProduct(double quantity, int productId) throws DataAccessException {
-		
-//		OrderLine ol = new OrderLine(0.0, null, null);
-//		ol.setSaleOrder(saleOrder);
-//		ol.setSaleProduct(proctrl.findByProductById(productId));
-//		ol.setQuantity(quantity);
-//		saleOrder.addOrderLine(ol);
-		
 	    SaleProduct product = proctrl.findByProductById(productId);
 	    OrderLine orderLine = new OrderLine(quantity, product, saleOrder);
 	    saleOrder.saleOrderLinesHashMap(orderLine);
 	    System.out.println(saleOrder);
 		
 	}
-	
-//	public void mapAllProducts() throws DataAccessException {
-//		proctrl.getAllProductsAsMap();
-//	}
-//	
-//	public SaleProduct findMapProduct(int saleProductID) throws DataAccessException {
-//		return proctrl.findByMapProductID(saleProductID);
-//	}
 	
 	public void saveOrder() throws DataAccessException {
 		sodb.saveOrder(saleOrder);

@@ -22,7 +22,6 @@ public class SaleOrderDB implements SaleOrderDAO {
 	private PreparedStatement findByOrderNoPS;
 	private PreparedStatement insertSaleOrder;
 	private PreparedStatement insertOrderLine;
-	private OrderLineDB oldb = new OrderLineDB();
 	private DBConnection dbconnection;
 
 	public SaleOrderDB() throws DataAccessException {
@@ -59,11 +58,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 						rs.getDouble("totalPrice"),
 						new Person(null, null, rs.getString("email_FK"), null, 0, 0), 
 						rs.getInt("tableNo_FK"));
-				if (fullAssociation) {
-					// En db klasse til OrderLine, så vi kan fremsøge den?
-					List<OrderLine> orderline = oldb.findById(res.getOrderNo());
-					res.setOl(orderline);
-				}
+		
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not build object", e);

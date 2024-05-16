@@ -54,41 +54,28 @@ public class SaleOrder {
 		if (ol == null) {
 			ol = new ArrayList<>();
 		}
-		
 		ol.add(orderLine);
-
-//		boolean found = false;
-//		for (OrderLine existingOrderLine : ol) {
-//			if (existingOrderLine.getSaleProduct()
-//					.getSaleProductID() == (orderLine.getSaleProduct().getSaleProductID())) {
-//				existingOrderLine.setQuantity(existingOrderLine.getQuantity() + orderLine.getQuantity());
-//				found = true;
-//				break;
-//			} else if (!found) {
-//				ol.add(orderLine);
-//			}
-//		}
 	}
 
 	public Map<Integer, List<OrderLine>> saleOrderLinesHashMap(OrderLine orderLine) {
-        int saleProductId = orderLine.getSaleProduct().getSaleProductID();
+		int saleProductId = orderLine.getSaleProduct().getSaleProductID();
 
-        if (orderLinesMap.containsKey(saleProductId)) {
-            List<OrderLine> existingOrderLines = orderLinesMap.get(saleProductId);
-            for (OrderLine ol : existingOrderLines) {
-                if (ol.getSaleProduct().getSaleProductID() == saleProductId) {
-                    ol.setQuantity(ol.getQuantity() + orderLine.getQuantity());
-                    return orderLinesMap; 
-                }
-            }
-            existingOrderLines.add(orderLine);
-            orderLinesMap.put(saleProductId, existingOrderLines);
-        } else {
-            ol.add(orderLine);
-            orderLinesMap.put(saleProductId, ol);
-        }
-        return orderLinesMap;
-    }
+		if (orderLinesMap.containsKey(saleProductId)) {
+			List<OrderLine> existingOrderLines = orderLinesMap.get(saleProductId);
+			for (OrderLine ol : existingOrderLines) {
+				if (ol.getSaleProduct().getSaleProductID() == saleProductId) {
+					ol.setQuantity(ol.getQuantity() + orderLine.getQuantity());
+					return orderLinesMap;
+				}
+			}
+			existingOrderLines.add(orderLine);
+			orderLinesMap.put(saleProductId, existingOrderLines);
+		} else {
+			addOrderLine(orderLine);
+			orderLinesMap.put(saleProductId, ol);
+		}
+		return orderLinesMap;
+	}
 
 	public void setEmployee(Person employee) {
 		this.person = employee;
