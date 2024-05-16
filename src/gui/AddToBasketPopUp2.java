@@ -22,7 +22,7 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Font;
 import javax.swing.JTextPane;
 
-public class AddToBasketPopUp extends JDialog {
+public class AddToBasketPopUp2 extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -34,7 +34,7 @@ public class AddToBasketPopUp extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			AddToBasketPopUp dialog = new AddToBasketPopUp();
+			AddToBasketPopUp2 dialog = new AddToBasketPopUp2();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -45,10 +45,10 @@ public class AddToBasketPopUp extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AddToBasketPopUp() {
+	public AddToBasketPopUp2() {
 		setTitle("\"Duoro > LogIn > Menu > Kassesystem > TilføjTilKurv\"");
 		getContentPane().setBackground(Color.WHITE);
-		setBounds(100, 100, 498, 389);
+		setBounds(100, 100, 467, 389);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,8 +57,8 @@ public class AddToBasketPopUp extends JDialog {
 		{
 			JLabel lblNewLabel = new JLabel("");
 			contentPanel.add(lblNewLabel, BorderLayout.CENTER);
-			ImageIcon img = new ImageIcon(this.getClass().getResource("/SaoLourencoHvid.jpg"));
-			lblNewLabel.setIcon(img);
+			ImageIcon img2 = new ImageIcon(this.getClass().getResource("/CarqueijalRose.jpg"));
+			lblNewLabel.setIcon(img2);
 		}
 		{
 			JPanel panel = new JPanel();
@@ -66,7 +66,7 @@ public class AddToBasketPopUp extends JDialog {
 			contentPanel.add(panel, BorderLayout.EAST);
 			panel.setLayout(new MigLayout("", "[29px,grow]", "[11px][][grow][][][][][][]"));
 			{
-				JLabel lblNewLabel_1 = new JLabel("Sao Lourenco Hvid");
+				JLabel lblNewLabel_1 = new JLabel("Carqueijal Rose");
 				lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
 				panel.add(lblNewLabel_1, "cell 0 0,alignx left,aligny top");
 			}
@@ -74,11 +74,11 @@ public class AddToBasketPopUp extends JDialog {
 				JTextPane txtpnSoLourenoHvidvin = new JTextPane();
 				txtpnSoLourenoHvidvin.setEditable(false);
 				txtpnSoLourenoHvidvin.setText(
-						"São Lourenço hvidvin af Quinta Colinas de São Lourenço produceret af Chardonnay, Sauvignon Blanc og Arinto druer sorter i regionen Bairrada");
+						"Rose of Quinta do Carqueijal er en frugtagtig og intens vin fra Douro Region, Portugal.Produceret af Sociedade Agrícola Quinta Seara d'Ordens, Lda.");
 				panel.add(txtpnSoLourenoHvidvin, "cell 0 1,grow");
 			}
 			{
-				JLabel lblNewLabel_2 = new JLabel("Pris pr. flaske = 300,-");
+				JLabel lblNewLabel_2 = new JLabel("Pris pr. flaske = 150,-");
 				panel.add(lblNewLabel_2, "cell 0 3,alignx left,aligny center");
 			}
 			{
@@ -91,7 +91,7 @@ public class AddToBasketPopUp extends JDialog {
 				panel.add(lblNewLabel_5, "cell 0 5");
 			}
 			{
-				JLabel lblNewLabel_4 = new JLabel("Pris pr. glas = 60,-");
+				JLabel lblNewLabel_4 = new JLabel("Pris pr. glas = 35,-");
 				panel.add(lblNewLabel_4, "cell 0 6");
 			}
 			{
@@ -108,7 +108,6 @@ public class AddToBasketPopUp extends JDialog {
 			JButton tilføjButton = new JButton("Tilføj");
 			buttonPane.add(tilføjButton);
 			tilføjButton.addActionListener(e -> {
-				tilføjClicked();
 			    dispose();
 			    
 			    });
@@ -123,11 +122,6 @@ public class AddToBasketPopUp extends JDialog {
 				cancelButton.addActionListener(e -> goToCreateOrder());
 			}
 		}
-	}
-
-	private void tilføjClicked() {
-		CreateOrder order = new CreateOrder();
-		order.setVisible(true);
 	}
 
 	private void goToCreateOrder() {
