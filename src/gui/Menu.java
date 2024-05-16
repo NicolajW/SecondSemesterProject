@@ -144,6 +144,7 @@ public class Menu extends JFrame {
 		dispose();
 		CreateOrder co = new CreateOrder();
 		co.setVisible(true);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 	private void storageClicked() {

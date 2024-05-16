@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Color;
@@ -32,11 +33,13 @@ import java.awt.Label;
 import javax.swing.border.LineBorder;
 import java.awt.List;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextField;
 
 public class CreateOrder extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -86,8 +89,25 @@ public class CreateOrder extends JFrame {
 		panel_1.setBackground(Color.WHITE);
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		Button button = new Button("Kurv");
-		panel_1.add(button);
+		JLabel lblNewLabel_24 = new JLabel("I alt:");
+		lblNewLabel_24.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_24);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField.setEditable(false);
+		panel_1.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton_12 = new JButton("Kurv");
+		btnNewButton_12.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		panel_1.add(btnNewButton_12);
+		
+		JButton btnNewButton_13 = new JButton("Annuller");
+		btnNewButton_13.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		panel_1.add(btnNewButton_13);
+		btnNewButton_13.addActionListener(e -> goBackToMenu());
+        panel_1.add(btnNewButton_13);
 		
 		JPanel productPanel = new JPanel();
 		productPanel.setBackground(Color.WHITE);
@@ -106,6 +126,11 @@ public class CreateOrder extends JFrame {
 		JLabel lblRose = new JLabel("<html>Sao Lourenco Hvid<br>Pris: 300,-<br>Pris pr glas 60,-</html>");
 		lblRose.setHorizontalAlignment(SwingConstants.CENTER);
 		firstWine.add(lblRose, BorderLayout.CENTER);
+		btnNewButton.addActionListener(e -> {
+            AddToBasketPopUp dialog = new AddToBasketPopUp();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        });
 		
 		
 		JLabel lblNewLabel_2 = new JLabel("");
@@ -121,7 +146,7 @@ public class CreateOrder extends JFrame {
 		productPanel.add(secondWine);
 		secondWine.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("<html>Carqueijal Rose<br>Pris pr flaske: 150,-<br>Pris pr glas 35,-</html>");
+		JLabel lblNewLabel_1 = new JLabel("<html>Carqueijal Rose<br>Pris 150,-<br>Pris pr glas 35,-</html>");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		secondWine.add(lblNewLabel_1, BorderLayout.CENTER);
 		
@@ -186,16 +211,15 @@ public class CreateOrder extends JFrame {
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel_8, BorderLayout.NORTH);
-		ImageIcon img8 = new ImageIcon(this.getClass().getResource("/ValladoHvid.jpg"));
+		ImageIcon img8 = new ImageIcon(this.getClass().getResource("/SearaDordensVintage2009.jpg"));
 		lblNewLabel_8.setIcon(img8);
-		
-		JLabel lblNewLabel_15 = new JLabel("<html>Vallado Hvidvin<br>Pris: 200,-<br>Pris pr glas 45,-</html>");
-		lblNewLabel_15.setForeground(Color.WHITE);
-		lblNewLabel_15.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_15, BorderLayout.CENTER);
 		
 		JButton btnNewButton_4 = new JButton("Tilføj til Kurv");
 		panel_2.add(btnNewButton_4, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel_15 = new JLabel("<html>Vallado Hvidvin<br>Pris: 200,-<br>Pris pr glas 45,-</html>");
+		lblNewLabel_15.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNewLabel_15, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
@@ -206,10 +230,15 @@ public class CreateOrder extends JFrame {
 		JLabel lblNewLabel_9 = new JLabel("");
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNewLabel_9, BorderLayout.NORTH);
+		ImageIcon img9 = new ImageIcon(this.getClass().getResource("/SearaDordensFineWhite.jpg"));
+		lblNewLabel_9.setIcon(img9);
 		
-		JLabel lblNewLabel_14 = new JLabel("");
+		JLabel lblNewLabel_14 = new JLabel("<html>Seara d'Ordens Fine Wine<br>Pris: 350,-<br>Pris pr glas 40,-</html>");
 		lblNewLabel_14.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblNewLabel_14, BorderLayout.CENTER);
+		
+		JButton btnNewButton_5 = new JButton("Tilføj til Kurv");
+		panel_3.add(btnNewButton_5, BorderLayout.SOUTH);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
@@ -220,12 +249,16 @@ public class CreateOrder extends JFrame {
 		JLabel lblNewLabel_10 = new JLabel("");
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_4.add(lblNewLabel_10, BorderLayout.NORTH);
-		ImageIcon img9 = new ImageIcon(this.getClass().getResource("/ValladoHvid.jpg"));
-		lblNewLabel_9.setIcon(img9);
+		ImageIcon img10 = new ImageIcon(this.getClass().getResource("/SearaDordensVintage2014.jpg"));
+		lblNewLabel_10.setIcon(img10);
 		
-		JLabel lblNewLabel_13 = new JLabel("");
+		
+		JLabel lblNewLabel_13 = new JLabel("<html>Seara d'Ordens Vintage 2014<br>Pris: 400,-<br>Pris pr glas 60,-</html>");
 		lblNewLabel_13.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_4.add(lblNewLabel_13, BorderLayout.CENTER);
+		
+		JButton btnNewButton_6 = new JButton("Tilføj til Kurv");
+		panel_4.add(btnNewButton_6, BorderLayout.SOUTH);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(Color.WHITE);
@@ -236,45 +269,110 @@ public class CreateOrder extends JFrame {
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_5.add(lblNewLabel_11, BorderLayout.NORTH);
+		ImageIcon img11 = new ImageIcon(this.getClass().getResource("/SearaDordensDryWhite.jpg"));
+		lblNewLabel_11.setIcon(img11);
 		
-		JLabel lblNewLabel_12 = new JLabel("");
+		JLabel lblNewLabel_12 = new JLabel("<html>Seara d'Ordens Dry Whitee<br>Pris: 150,-<br>Pris pr glas 40,-</html>");
 		lblNewLabel_12.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_5.add(lblNewLabel_12, BorderLayout.CENTER);
 		
+		JButton btnNewButton_7 = new JButton("Tilføj til Kurv");
+		panel_5.add(btnNewButton_7, BorderLayout.SOUTH);
+		
 		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(new Color(255, 255, 255));
 		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
 		productPanel.add(panel_6);
 		panel_6.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_16 = new JLabel("New label");
+		JLabel lblNewLabel_16 = new JLabel("");
+		lblNewLabel_16.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_6.add(lblNewLabel_16, BorderLayout.NORTH);
+		ImageIcon img16 = new ImageIcon(this.getClass().getResource("/SearaDordensVintage2014.jpg"));
+		lblNewLabel_16.setIcon(img16);
+		
+		JButton btnNewButton_8 = new JButton("Tilføj til Kurv");
+		panel_6.add(btnNewButton_8, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel_19 = new JLabel("<html>Vallado Hvidvin<br>Pris: 200,-<br>Pris pr glas 45,-</html>");
+		lblNewLabel_19.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_6.add(lblNewLabel_19, BorderLayout.CENTER);
 		
 		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(Color.WHITE);
 		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
 		productPanel.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_17 = new JLabel("New label");
+		JLabel lblNewLabel_17 = new JLabel("");
+		lblNewLabel_17.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblNewLabel_17, BorderLayout.NORTH);
+		ImageIcon img17 = new ImageIcon(this.getClass().getResource("/CarqueijalRose.jpg"));
+		lblNewLabel_17.setIcon(img17);
+		
+		JButton btnNewButton_9 = new JButton("Tilføj til Kurv");
+		panel_7.add(btnNewButton_9, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel_18 = new JLabel("<html>Sao Lourenco Hvid<br>Pris: 300,-<br>Pris pr glas 60,-</html>");
+		lblNewLabel_18.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(lblNewLabel_18, BorderLayout.CENTER);
 		
 		JPanel panel_8 = new JPanel();
+		panel_8.setBackground(Color.WHITE);
 		panel_8.setBorder(new LineBorder(new Color(0, 0, 0)));
 		productPanel.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
-		JLabel label = new JLabel("New label");
-		panel_8.add(label, BorderLayout.NORTH);
+		
+		
+		JButton btnNewButton_10 = new JButton("Tilføj til Kurv");
+		panel_8.add(btnNewButton_10, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel_20 = new JLabel("<html>Seara d'ORDENS 10<br>Pris: 400,-<br>Pris pr glas 70,-</html>");
+		lblNewLabel_20.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_8.add(lblNewLabel_20, BorderLayout.CENTER);
+		
+		JLabel lblNewLabel_23 = new JLabel("");
+		lblNewLabel_23.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_8.add(lblNewLabel_23, BorderLayout.NORTH);
+		ImageIcon img23 = new ImageIcon(this.getClass().getResource("/SearaDordensVintage2009.jpg"));
+		lblNewLabel_23.setIcon(img23);
 		
 		JPanel panel_9 = new JPanel();
+		panel_9.setBackground(Color.WHITE);
 		panel_9.setBorder(new LineBorder(new Color(0, 0, 0)));
 		productPanel.add(panel_9);
 		panel_9.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnNewButton_11 = new JButton("Tilføj til Kurv");
+		panel_9.add(btnNewButton_11, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel_21 = new JLabel("<html>Seara d'Ordens Vintage<br>Pris: 500,-<br>Pris pr glas 85,-</html>");
+		lblNewLabel_21.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_9.add(lblNewLabel_21, BorderLayout.CENTER);
+		
+		JLabel lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_9.add(lblNewLabel_22, BorderLayout.NORTH);
+		ImageIcon img22 = new ImageIcon(this.getClass().getResource("/SearaDordensVintage2014.jpg"));
+		lblNewLabel_22.setIcon(img22);
+		
+	
 		
 		JScrollPane scrollPane = new JScrollPane(productPanel);
         contentPane.add(scrollPane, BorderLayout.CENTER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         scrollPane.getVerticalScrollBar().setBlockIncrement(100);
 	}
+	
+	private void goBackToMenu() {
+        System.out.println("Tilbage til menu");
+        
+        Menu menuFrame = new Menu();
+        menuFrame.setVisible(true);
+        
+        this.dispose();
+    }
 	
 }
 
