@@ -120,19 +120,18 @@ public class Storage extends JFrame {
 		JButton btnNewButton = new JButton("Vælg");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					vælgClicked();
-				} catch (DataAccessException e1) {
-				} catch (SQLException e1) {
-				}
+				vælgClicked();
 			}
 		});
 		btnNewButton.setBounds(238, 229, 89, 23);
 		contentPane.add(btnNewButton);
 	}
 
-	private void vælgClicked() throws DataAccessException, SQLException {
-		
+	private void vælgClicked() {
+		setVisible(false);
+		dispose();
+		Storage stor = new Storage(null);
+		setVisible(true);
 	}
 	
 	

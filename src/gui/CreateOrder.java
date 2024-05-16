@@ -31,6 +31,10 @@ import java.awt.GridLayout;
 import javax.swing.JProgressBar;
 import java.awt.Label;
 import javax.swing.border.LineBorder;
+
+import controller.ProductController;
+import db.DataAccessException;
+
 import java.awt.List;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
@@ -38,6 +42,7 @@ import javax.swing.JTextField;
 public class CreateOrder extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private ProductController pc;
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -100,6 +105,15 @@ public class CreateOrder extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnNewButton_12 = new JButton("Kurv");
+		btnNewButton_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					kurvClicked();
+				} catch (DataAccessException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_12.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_1.add(btnNewButton_12);
 		btnNewButton_12.addActionListener(e -> goToBasket());
@@ -370,8 +384,30 @@ public class CreateOrder extends JFrame {
         contentPane.add(scrollPane, BorderLayout.CENTER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
         scrollPane.getVerticalScrollBar().setBlockIncrement(100);
+        
+        
+        
+        
+        
+        init(pc);
 	}
 	
+	private void init(ProductController pctrl) {
+		
+	}
+
+	private void kurvClicked() throws DataAccessException {
+		pc.updateProductQuantity(null);
+		AddToBasketPopUp basket = new AddToBasketPopUp();
+		basket.setVisible(true);
+		updateTable();
+		
+	}
+
+	private void updateTable() {
+		
+	}
+
 	private void goBackToMenu() {
         Menu menuFrame = new Menu();
         menuFrame.setVisible(true);
