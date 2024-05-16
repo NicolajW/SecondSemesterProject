@@ -29,8 +29,8 @@ public class WelcomePage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField textID;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -84,21 +84,21 @@ public class WelcomePage extends JFrame {
 		panel_1_1.setBackground(Color.WHITE);
 		panel_1.add(panel_1_1);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Times New Roman", Font.PLAIN, 10));
-		textField.setColumns(10);
+		textID = new JTextField();
+		textID.setFont(new Font("Times New Roman", Font.PLAIN, 10));
+		textID.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Medarbejder ID:");
 		lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
-		passwordField = new JPasswordField();
-		passwordField.setBackground(Color.WHITE);
+		txtPassword = 
+				new JPasswordField();
+		txtPassword.setBackground(Color.WHITE);
 		
 		JLabel lblNewLabel_4 = new JLabel("Adgangskode:");
 		lblNewLabel_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		JButton btnNewButton = new JButton("Log In ");
-		
 		btnNewButton.addActionListener(e -> logInClicked());
 		
 		btnNewButton.setForeground(Color.BLACK);
@@ -115,7 +115,7 @@ public class WelcomePage extends JFrame {
 					.addGap(41)
 					.addGroup(gl_panel_1_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1_1.createSequentialGroup()
-							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(gl_panel_1_1.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_panel_1_1.createSequentialGroup()
@@ -126,7 +126,7 @@ public class WelcomePage extends JFrame {
 									.addComponent(lblNewLabel_3)
 									.addContainerGap())
 								.addGroup(gl_panel_1_1.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textID, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 									.addContainerGap(49, Short.MAX_VALUE))))))
 		);
 		gl_panel_1_1.setVerticalGroup(
@@ -135,11 +135,11 @@ public class WelcomePage extends JFrame {
 					.addGap(24)
 					.addComponent(lblNewLabel_3)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textID, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtPassword, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 					.addGap(30)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(77, Short.MAX_VALUE))
@@ -150,6 +150,8 @@ public class WelcomePage extends JFrame {
 
 	
 	private void logInClicked() {
+		int id = Integer.parseInt(textID.getText());
+		String txtPassword = "pass";
 		setVisible(false);
 		dispose();
 		Menu menu = new Menu();

@@ -107,6 +107,7 @@ public class AddToBasketPopUp extends JDialog {
 			JButton tilføjButton = new JButton("Tilføj");
 			buttonPane.add(tilføjButton);
 			tilføjButton.addActionListener(e -> {
+				tilføjClicked();
 			    dispose();
 			    
 			    });
@@ -121,6 +122,12 @@ public class AddToBasketPopUp extends JDialog {
 				cancelButton.addActionListener(e -> goToCreateOrder());
 			}
 		}
+	}
+
+	private void tilføjClicked() {
+		CreateOrder order = new CreateOrder();
+		
+		order.setVisible(true);
 	}
 
 	private void goToCreateOrder() {
