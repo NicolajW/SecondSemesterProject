@@ -55,29 +55,6 @@ public class SaleProductDB implements SaleProductDAO {
 			throw new DataAccessException("Could not find all saleProducts", e);
 		}
 	}
-	
-//	@Override
-//	public Map<Integer, SaleProduct> getAllProductsAsMap() throws DataAccessException {
-//        Map<Integer, SaleProduct> productMap = new HashMap<>();
-//
-//        try {
-//            List<SaleProduct> productList = findAll();
-//
-//            for (SaleProduct product : productList) {
-//                productMap.put(product.getSaleProductID(), product);
-//            }
-//        } catch (DataAccessException e) {
-//            e.printStackTrace(); 
-//        }
-//
-//        return productMap;
-//    }
-	
-//	@Override
-//	public SaleProduct findByMapProductID(int saleProductID) throws DataAccessException {
-//		 Map<Integer, SaleProduct> productMap = getAllProductsAsMap();
-//		 return productMap.get(saleProductID);
-//	}
 
 	@Override
 	public SaleProduct findByProductById(int saleProductID) throws DataAccessException {
