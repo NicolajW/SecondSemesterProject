@@ -83,6 +83,7 @@ public class Basket extends JDialog {
 				btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
 				btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 17));
 				panel.add(btnNewButton_1, "cell 0 3,alignx center");
+				
 			}
 			{
 				JLabel lblNewLabel_2 = new JLabel(".");
