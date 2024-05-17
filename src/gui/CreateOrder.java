@@ -32,7 +32,7 @@ import javax.swing.JProgressBar;
 import java.awt.Label;
 import javax.swing.border.LineBorder;
 
-import controller.ProductController;
+import controller.SaleProductController;
 import db.DataAccessException;
 
 import java.awt.List;
@@ -42,7 +42,7 @@ import javax.swing.JTextField;
 public class CreateOrder extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ProductController pc;
+	private SaleProductController pc;
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -392,7 +392,7 @@ public class CreateOrder extends JFrame {
         init(pc);
 	}
 	
-	private void init(ProductController pctrl) {
+	private void init(SaleProductController pctrl) {
 		
 	}
 
