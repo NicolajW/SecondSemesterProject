@@ -42,7 +42,7 @@ public class Basket extends JDialog {
 	 */
 	public Basket() {
 		setTitle("\"Duoro > LogIn > Menu > Kassesystem > Indkøbskurv\"");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 462, 359);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,6 +83,7 @@ public class Basket extends JDialog {
 				btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
 				btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 17));
 				panel.add(btnNewButton_1, "cell 0 3,alignx center");
+				
 				
 			}
 			{
