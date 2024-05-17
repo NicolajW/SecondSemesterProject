@@ -5,6 +5,8 @@ import controller.ProductController;
 import controller.SaleOrderController;
 import db.DataAccessException;
 import db.PersonDB;
+import db.ProductDB;
+import db.SaleOrderDB;
 import db.TableDB;
 import model.Person;
 import model.SaleOrder;
@@ -28,15 +30,16 @@ public class TryMe {
 //		System.out.println(p.toString());
 		
 		ProductController pctrl = new ProductController();
-		
+		SaleOrderDB sodb = new SaleOrderDB();
 		SaleOrderController octrl = new SaleOrderController();
 		SaleOrder so = octrl.createSaleOrder("uggabugga@hotmail.com", 1);
 		octrl.addProduct(1, 2);
 		octrl.addProduct(1, 2);
-		octrl.saveOrder();
+//		octrl.saveOrder();
 		//System.out.println(so.getOl().get(0).getSaleProduct());
 		//System.out.println(so.getOl().get(0).getQuantity());
-
+		ProductDB prdb = new ProductDB();
+		System.out.println(prdb.findAll());
 		
 //		octrl.saveOrder();
 	

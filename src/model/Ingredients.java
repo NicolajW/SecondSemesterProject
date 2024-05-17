@@ -5,7 +5,7 @@ public class Ingredients extends Product {
 	private String typeOfFood;
 	private int quantity;
 	
-	public Ingredients(String name, String typeOfFood, String barcode, int quantity, String type) {
+	public Ingredients(String name, String typeOfFood, Food food, String barcode, String type) {
 		super(barcode, type);
 		this.name = name;
 		this.typeOfFood = typeOfFood;
