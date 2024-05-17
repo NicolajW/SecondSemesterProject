@@ -29,7 +29,6 @@ public class SaleOrderController {
 			saleOrder = this.saleOrder;
 			
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
