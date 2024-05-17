@@ -6,5 +6,5 @@ import model.Product;
 
 public interface ProductDAO {
 	List<Product> findAll() throws DataAccessException;
-	Product findByEmployeeNo(String email) throws DataAccessException; 
+	Product findByProductID(int productID) throws DataAccessException; 
 }

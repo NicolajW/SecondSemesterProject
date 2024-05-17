@@ -4,21 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Batch;
 import model.Food;
 import model.Ingredients;
 import model.Product;
+import model.SaleOrder;
 import model.SaleProduct;
 import model.Wine;
 
 
-public class ProductDB {
+public class ProductDB implements ProductDAO {
 	private Batch b;
 	private Ingredients i;
 
-	private static final String FIND_ALL_Q = "select barcode from Product";
+	private static final String FIND_ALL_Q = "select productID, barcode, type from Product";
     private static final String JOIN_ALL_Q = "SELECT * FROM Product"
     		+ " FULL OUTER JOIN Batch ON productID = productID_PKFK"
     		+ " FULL OUTER JOIN Ingredients ON productID = productID_PKFK";
@@ -56,39 +58,49 @@ public class ProductDB {
 					rs.getString("type")
 					);
 		} else if (type.equals("ingredients")) {
-			p = new Ingredients(
-					rs.getString("name"), 
-					rs.getString("typeOfFood"), 
-					rs.getString("barcode"), 
-					rs.getInt("quantity"),
-					rs.getString("type")
-					);
+	        p = new Ingredients(
+	                rs.getString("typeOfFood"), 
+	                rs.getString("name"), 
+	                rs.getString("barcode"), 
+	                rs.getInt("quantity"),
+	                rs.getString("type")
+	            );
 		}
 		return p;
 	}
 	
+	private List<Product> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
+		List<Product> res = new ArrayList<>();
+		//Product p = buildObject(rs);
+		while (rs.next()) {
+			Product p = buildObject(rs);
+			res.add(p);
+		}
+		return res;
+	}
+	
 	@Override
-	public List<SaleProduct> findAll() throws DataAccessException {
+	public List<Product> findAll() throws DataAccessException {
 		try {
 			ResultSet rs = findAllPSS.executeQuery();
-			List<SaleProduct> res = buildObjects(rs);
+			List<Product> res = buildObjects(rs);
 			return res;
 		} catch (SQLException e) {
-			throw new DataAccessException("Could not find all saleProducts", e);
+			throw new DataAccessException("Could not find all Products", e);
 		}
 	}
 	
 	@Override
-	public SaleProduct findByProductById(int saleProductID) throws DataAccessException {
-		SaleProduct res = null;
+	public Product findByProductID(int productID) throws DataAccessException {
+		Product res = null;
 		try {
-			findByProductIDPS.setInt(1, saleProductID);
+			findByProductIDPS.setInt(1, productID);
 			ResultSet rs = findByProductIDPS.executeQuery();
 			if (rs.next()) {
 					res = buildObject(rs);
 			}
 		} catch (SQLException e) {
-			throw new DataAccessException("Could not find by id = " + saleProductID, e);
+			throw new DataAccessException("Could not find by id = " + productID, e);
 		}
 		return res;
 	}
