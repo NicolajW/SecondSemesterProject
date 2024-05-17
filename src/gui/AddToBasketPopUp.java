@@ -127,7 +127,7 @@ public class AddToBasketPopUp extends JDialog {
 
 	private void tilføjClicked() {
 		CreateOrder order = new CreateOrder();
-		order.setVisible(true);
+		order.setVisible(false);
 	}
 
 	private void goToCreateOrder() {
