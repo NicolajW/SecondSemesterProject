@@ -74,7 +74,7 @@ public class TableDB implements TableDAO{
 	}
 
 	@Override
-	public void saveTableStatus(Table table) throws DataAccessException {
+	public void updateTableStatus(Table table) throws DataAccessException {
 		final boolean tableStatus = table.isTableStatus();
 		final int tableNo = table.getTableNo();
 		try {

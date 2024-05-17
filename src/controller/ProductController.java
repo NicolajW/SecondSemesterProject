@@ -1,29 +1,24 @@
 package controller;
 
-import java.util.Map;
-
 import db.DataAccessException;
-import db.InventoryDAO;
-import db.InventoryDB;
-import db.SaleProductDAO;
-import model.Inventory;
-import model.SaleProduct;
-import db.SaleProductDB;
-
-
+import db.ProductDAO;
+import db.ProductDB;
 
 public class ProductController {
-	private SaleProductDAO pDao;
-	private InventoryDAO iDao;
-	
+
+	private ProductDAO pDao;
+
+
 	public ProductController() throws DataAccessException {
-		pDao = new SaleProductDB();
-		iDao = new InventoryDB();
+		pDao = new ProductDB();
 	}
-	public SaleProduct findByProductById(int id) throws DataAccessException {
-		return pDao.findByProductById(id);
+
+	public void findAll() throws DataAccessException {
+		pDao.findAll();
 	}
-	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
-		iDao.updateProductQuantity(inventory);
+
+	public void findByProductID(int productID) throws DataAccessException {
+		pDao.findByProductID(productID);
 	}
+
 }

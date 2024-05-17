@@ -2,7 +2,6 @@ package controller;
 
 import db.DataAccessException;
 
-
 import db.PersonDB;
 import db.SaleOrderDB;
 import model.OrderLine;
@@ -10,66 +9,66 @@ import model.Person;
 import model.SaleOrder;
 import model.Table;
 import model.SaleProduct;
-import db.TableDB;
 
 public class SaleOrderController {
 	private PersonController perctrl;
-	private ProductController proctrl;
+	private SaleProductController spctrl;
+	private ProductController pctrl;
 	private SaleOrderDB sodb;
-	private TableDB tadb;
 	private SaleOrder saleOrder;
-	
+	private TableController tc;
+	private InventoryController ictrl;
 
-	public SaleOrderController(){ 
+	public SaleOrderController() {
 		try {
-		
+
 			sodb = new SaleOrderDB();
 			perctrl = new PersonController();
-			proctrl = new ProductController();
+			spctrl = new SaleProductController();
 			saleOrder = this.saleOrder;
-			
+			tc = new TableController();
+			ictrl = new InventoryController();
+
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public SaleOrder createSaleOrder(String email, int tableNo) throws DataAccessException {
 		PersonDB persdb = new PersonDB();
 		Person employee = perctrl.findByEmployeeNo(email);
 		checkTable(tableNo);
 		saleOrder = new SaleOrder(0, 0d, employee, tableNo);
 		return saleOrder;
+
 	}
-	
+
 	public void addProduct(double quantity, int productId) throws DataAccessException {
-	    SaleProduct product = proctrl.findByProductById(productId);
-	    OrderLine orderLine = new OrderLine(quantity, product, saleOrder);
-	    saleOrder.saleOrderLinesHashMap(orderLine);
-	    System.out.println(saleOrder);
-		
+		SaleProduct product = spctrl.findByProductById(productId);
+		OrderLine orderLine = new OrderLine(quantity, product, saleOrder);
+		saleOrder.saleOrderLinesHashMap(orderLine);
+		System.out.println(saleOrder);
+
 	}
-	
+
 	public void saveOrder() throws DataAccessException {
 		sodb.saveOrder(saleOrder);
-		//updateInventory(saleOrder.getOrderNo());
+		// updateInventory(saleOrder.getOrderNo());
+		updateTableStatus();
 	}
-	
-	private void updateInventory(int id) {
+
+	public void updateTableStatus() throws DataAccessException {
+		Table t = new Table(false, saleOrder.getTableNo());
+		tc.updateTableStatus(t);
+	}
+
+	public void updateInventory(int id) throws DataAccessException {
+		pctrl.findByProductID(id);
 		
 	}
-	
-	private void checkTable(int tableNo) throws DataAccessException {
-		TableDB tadb = new TableDB();
-		Table table = tadb.findByTableNo(tableNo);
-	    if (table.isTableStatus() != true) {
-	        table.setTableStatus(true);
-	        tadb.saveTableStatus(table);
-	        
-	    } else {
-	        throw new DataAccessException("Table:" + tableNo + " not available: ", null);
-	    }
-		
-		
+
+	public void checkTable(int tableNo) throws DataAccessException {
+		tc.checkTable(tableNo);
 	}
-	
+
 }
