@@ -1,5 +1,7 @@
 package test;
 
+import java.util.List;
+
 import controller.PersonController;
 import controller.ProductController;
 import controller.SaleProductController;
@@ -10,6 +12,7 @@ import db.PersonDB;
 import db.ProductDB;
 import db.SaleOrderDB;
 import db.TableDB;
+import model.Ingredients;
 import model.Person;
 import model.SaleOrder;
 import model.SaleProduct;
@@ -44,15 +47,18 @@ public class TryMe {
 		
 
 		
-		SaleOrderController octrl = new SaleOrderController();
-		SaleOrder so = octrl.createSaleOrder("bobby@hotmail.com", 1);
-		octrl.addProduct(1, 1);
+//		SaleOrderController octrl = new SaleOrderController();
+//		SaleOrder so = octrl.createSaleOrder("bobby@hotmail.com", 1);
+//		octrl.addProduct(1, 1);
+//		octrl.addProduct(1, 2);
 		
-		octrl.saveOrder();
-		octrl.updateInventory();
+		//octrl.saveOrder();
+		//octrl.updateInventory();
 		//System.out.println(so.getOl().get(0).getSaleProduct());
 		//System.out.println(so.getOl().get(0).getQuantity());
-//		ProductDB prdb = new ProductDB();
+		ProductDB prdb = new ProductDB();
+		prdb.findIngredientsOnID(2);
+		System.out.println(prdb.findIngredientsOnID(2));
 //		System.out.println(prdb.findAll());
 		
 //		octrl.saveOrder();
