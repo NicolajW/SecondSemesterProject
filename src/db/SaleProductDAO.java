@@ -16,4 +16,5 @@ public interface SaleProductDAO {
 //	SaleProduct findByMapProductID(int saleProductID) throws DataAccessException; 
 	int findProductIDOnWine(int saleProductID) throws DataAccessException;
 	Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException;
+	Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException;
 }

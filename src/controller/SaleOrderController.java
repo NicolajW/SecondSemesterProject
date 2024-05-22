@@ -6,6 +6,8 @@ import db.DataAccessException;
 
 import db.PersonDB;
 import db.SaleOrderDB;
+import model.Food;
+import model.Ingredients;
 import model.Inventory;
 import model.OrderLine;
 import model.Person;
@@ -54,13 +56,17 @@ public class SaleOrderController {
 		OrderLine orderLine = new OrderLine(quantity, saleProduct, saleOrder);
 		saleOrder.saleOrderLinesHashMap(orderLine);
 		
-		Product product = pctrl.findByProductID(saleProductID);
 		
 		Wine wine = spctrl.findWineOnSaleProductID(saleProductID);
-		saleProduct.setWine(wine);
+		Food food = spctrl.findFoodOnSaleProductID(saleProductID);
+		if(wine != null) {
+			saleProduct.setWine(wine);			
+		}else {
+			saleProduct.setFood(food);
+			
+		}
 		System.out.println(saleProduct.getWine());
-		
-		System.out.println(saleOrder);
+		System.out.println(saleProduct.getFood());
 
 	}
 
@@ -90,7 +96,7 @@ public class SaleOrderController {
 		//FIND FUCKING PRODUCT ID ON WINE/FOOD
 
 		for(int i = 0; i < saleOrder.getOl().size(); i++) {
-			//if(saleOrder.getOl().get(i).getSaleProduct().getType() == "wine") {
+			if(saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
 				Wine wine = saleOrder.getOl().get(i).getSaleProduct().getWine();
 				
 				int productID = spctrl.findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
@@ -100,7 +106,9 @@ public class SaleOrderController {
 				Inventory inventory = ictrl.findByInventoryNo(inventoryID);
 				inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
 				ictrl.updateProductQuantity(inventory);
-			//}
+			}else {
+				
+			}
 				
 				
 				

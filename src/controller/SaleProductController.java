@@ -6,6 +6,7 @@ import db.DataAccessException;
 import db.InventoryDAO;
 import db.InventoryDB;
 import db.SaleProductDAO;
+import model.Food;
 import model.Inventory;
 import model.SaleProduct;
 import model.Wine;
@@ -28,11 +29,15 @@ public class SaleProductController {
 		iDao.updateProductQuantity(inventory);
 	}
 	
-	int findProductIDOnWine(int saleProductID) throws DataAccessException{
+	public int findProductIDOnWine(int saleProductID) throws DataAccessException{
 		return pDao.findProductIDOnWine(saleProductID);
 	}
 	
-	Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException {
+	public Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException {
 		return pDao.findWineOnSaleProductID(saleProductID);
+	}
+	
+	public Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException{
+		return pDao.findFoodOnSaleProductID(saleProductID);
 	}
 }

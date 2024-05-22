@@ -2,6 +2,7 @@ package db;
 
 import java.util.List;
 
+import model.Ingredients;
 import model.Product;
 
 public interface ProductDAO {
@@ -9,5 +10,6 @@ public interface ProductDAO {
 	Product findByProductID(int productID) throws DataAccessException;
 	Product findInventoryById(int inventoryID) throws DataAccessException;
 	Product findProductByBarcode(String barcode) throws DataAccessException;
-	int findInventoryIDByBarcode(String barcode) throws DataAccessException; 
+	int findInventoryIDByBarcode(String barcode) throws DataAccessException;
+	List<Ingredients> findIngredientsOnID(int saleProductID) throws DataAccessException; 
 }
