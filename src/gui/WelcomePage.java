@@ -164,8 +164,8 @@ public class WelcomePage extends JFrame {
             setVisible(false);
             dispose();
             Menu menu = new Menu();
-            UpdatedCreateOrder createOrder = new UpdatedCreateOrder(Integer.toString(id)); // Pass the employee ID to UpdatedCreateOrder
-            menu.setEmployeeID(Integer.toString(id)); // Pass the employee ID to the Menu frame
+            UpdatedCreateOrder createOrder = new UpdatedCreateOrder(Integer.toString(id)); 
+            menu.setEmployeeID(Integer.toString(id)); 
             menu.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect ID or Password", "Login Error", JOptionPane.ERROR_MESSAGE);
