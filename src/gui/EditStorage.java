@@ -138,7 +138,11 @@ public class EditStorage extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				backClicked();
+				try {
+					backClicked();
+				} catch (DataAccessException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBack.setVerticalAlignment(SwingConstants.TOP);
@@ -150,11 +154,9 @@ public class EditStorage extends JFrame {
 		panel.add(btnBack, gbc_btnBack);
 	}
 
-	private void backClicked() {
+	private void backClicked() throws DataAccessException {
 		setVisible(false);
 		dispose();
 		Storage storage = new Storage(null);
-		storage.setVisible(true);
-		
 	}
 }

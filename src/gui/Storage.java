@@ -21,8 +21,10 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
 
+import controller.PersonController;
 import controller.SaleOrderController;
 import db.DataAccessException;
+import db.PersonDB;
 import db.SaleProductDB;
 
 import javax.swing.border.BevelBorder;
@@ -54,9 +56,10 @@ public class Storage extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws DataAccessException 
 	 */
 	@SuppressWarnings("serial")
-	public Storage(SaleOrderController soc) {
+	public Storage(SaleOrderController soc) throws DataAccessException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -120,24 +123,50 @@ public class Storage extends JFrame {
 		JButton btnNewButton = new JButton("Vælg");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				vælgClicked();
+				try {
+					vælgClicked();
+				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(238, 229, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		
+		
+		
+		
+		init();
+		
 	}
 
-	private void vælgClicked() {
+	private void init() throws DataAccessException {
+		try {
+			PersonController personctrl = new PersonController();
+			PersonDB persondb = new PersonDB();
+			persondb.findAll();
+			personctrl.findByEmployeeNo(getName());
+			System.out.println(personctrl);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void vælgClicked() throws DataAccessException, SQLException {
 		setVisible(false);
 		dispose();
-		Storage stor = new Storage(null);
-		setVisible(true);
+		EditStorage es = new EditStorage();
+		es.setVisible(true);
 	}
 	
 	
 	
 	
-//	intit();
 
 	private void backClicked() {
 		setVisible(false);
