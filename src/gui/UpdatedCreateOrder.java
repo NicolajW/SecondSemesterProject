@@ -25,7 +25,7 @@ import db.DataAccessException;
 import model.Product;
 import controller.SaleProductController;
 import controller.SaleOrderController;
-import net.miginfocom.swing.MigLayout;
+
 
 public class UpdatedCreateOrder extends JFrame {
 
@@ -64,7 +64,7 @@ public class UpdatedCreateOrder extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new MigLayout("", "[481px][86px][][][]", "[24px]"));
+		
 
 		JLabel lblNewLabel = new JLabel("Kassesystem");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
