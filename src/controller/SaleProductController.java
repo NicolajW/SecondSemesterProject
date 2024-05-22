@@ -8,6 +8,7 @@ import db.InventoryDB;
 import db.SaleProductDAO;
 import model.Inventory;
 import model.SaleProduct;
+import model.Wine;
 import db.SaleProductDB;
 
 
@@ -25,5 +26,13 @@ public class SaleProductController {
 	}
 	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
 		iDao.updateProductQuantity(inventory);
+	}
+	
+	int findProductIDOnWine(int saleProductID) throws DataAccessException{
+		return pDao.findProductIDOnWine(saleProductID);
+	}
+	
+	Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException {
+		return pDao.findWineOnSaleProductID(saleProductID);
 	}
 }

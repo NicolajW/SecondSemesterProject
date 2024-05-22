@@ -19,10 +19,12 @@ public class SaleProductDB implements SaleProductDAO {
 	private Food f;
 
 	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
+	private static final String FIND_ALL_Q_Wine = "select grapeType, yearProduced, wineHouse, region, productID_PKFK from Wine";
     private static final String JOIN_ALL_Q = "SELECT * FROM saleProduct"
     		+ " FULL OUTER JOIN wine ON saleProductID = saleProductID_PKFK"
     		+ " FULL OUTER JOIN food ON saleProductID = food_id";
 	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductID= ?"; 
+	private static final String FIND_BY_Q_WINE = JOIN_ALL_Q + " WHERE saleProductID_PKFK= ?"; 
 	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";
@@ -30,10 +32,12 @@ public class SaleProductDB implements SaleProductDAO {
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByProductIDPS;
 	private PreparedStatement insertInSP, insertInW, insertInF;
+	private PreparedStatement findByProductIDPKFKPS;
 
 	public SaleProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
+			findByProductIDPKFKPS = con.prepareStatement(FIND_BY_Q_WINE);
 			findAllPSS = con.prepareStatement(FIND_ALL_Q);
 			findByProductIDPS = con.prepareStatement(FIND_BY_Q);
 			insertInSP = con.prepareStatement(INSERT_INTO_SALEPRODUCT_Q);
@@ -54,6 +58,36 @@ public class SaleProductDB implements SaleProductDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find all saleProducts", e);
 		}
+	}
+	
+	@Override
+	public int findProductIDOnWine(int saleProductID) throws DataAccessException {
+		int res = 0;
+		try {
+			findByProductIDPKFKPS.setInt(1, saleProductID);
+			ResultSet rs = findByProductIDPKFKPS.executeQuery();
+			if (rs.next()) {
+				res = rs.getInt("productID_PKFK");
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not find by id = " + saleProductID, e);
+		}
+		return res;
+	}
+	
+	@Override
+	public Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException {
+		Wine res = null;
+		try {
+			findByProductIDPKFKPS.setInt(1, saleProductID);
+			ResultSet rs = findByProductIDPKFKPS.executeQuery();
+			if (rs.next()) {
+					res = (Wine) buildObject(rs);
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not find by id = " + saleProductID, e);
+		}
+		return res;
 	}
 
 	@Override

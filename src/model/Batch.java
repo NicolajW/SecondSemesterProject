@@ -2,12 +2,12 @@ package model;
 
 public class Batch extends Product {
 	private Wine wine;
-	private String wineHouse;
+	private int numberOfBatches;
 
-	public Batch(String barcode, Wine wine, String wineHouse, String type) {
+	public Batch(String barcode, Wine wine, int numberOfBatches, String type) {
 		super(barcode, type);
 		this.wine = wine;
-		this.wineHouse = wineHouse;
+		this.numberOfBatches = numberOfBatches;
 	}
 
 	public Wine getWine() {
@@ -18,12 +18,12 @@ public class Batch extends Product {
 		this.wine = wine;
 	}
 
-	public String getWineHouse() {
-		return wineHouse;
+	public int getnumberOfBatches() {
+		return numberOfBatches;
 	}
 
-	public void setWineHouse(String wineHouse) {
-		this.wineHouse = wineHouse;
+	public void setnumberOfBatches(int numberOfBatches) {
+		this.numberOfBatches = numberOfBatches;
 	}
 	
 

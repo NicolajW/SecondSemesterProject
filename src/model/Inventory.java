@@ -4,10 +4,10 @@ import db.DataAccessException;
 import db.SaleProductDB;
 
 public class Inventory {
-	private int quantity;
+	private double quantity;
 	private int id;
 
-	public Inventory(int quantity, int id) {
+	public Inventory(double quantity, int id) {
 		super();
 		this.quantity = quantity;
 		this.id = id;
@@ -24,12 +24,12 @@ public class Inventory {
 	}
 
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuantity(double d) {
+		this.quantity = d;
 	}
 	
 }

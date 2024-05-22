@@ -1,6 +1,7 @@
 package test;
 
 import controller.PersonController;
+import controller.ProductController;
 import controller.SaleProductController;
 import controller.SaleOrderController;
 import controller.TableController;
@@ -18,15 +19,17 @@ public class TryMe {
 	public static void main(String[] args) throws DataAccessException {
 //		
 //		TableDB tbd = new TableDB();
-		Table t = new Table(false, 1);
 //		tbd.updateTableStatus(t);
-//		tbd.findAll();
-		
-		
+		//tbd.findAll();
+//		
+//		
+		Table t = new Table(false, 1);
 		TableController tc = new TableController();
 		tc.updateTableStatus(t);
 		tc.findByTableNo(1);
 		System.out.println(t);
+//		
+		
 //		for(int i = 0; i < tbd.findAll().size(); i++) {
 //			System.out.println(tbd.findAll().get(i).isTableStatus());
 //		}
@@ -36,13 +39,17 @@ public class TryMe {
 //		Person p = pdb.findByEmployeeNo("uggabugga@hotmail.com");
 //		System.out.println(p.toString());
 		
-//		ProductController pctrl = new ProductController();
+		//ProductController pctrl = new ProductController();
 //		SaleOrderDB sodb = new SaleOrderDB();
-//		SaleOrderController octrl = new SaleOrderController();
-//		SaleOrder so = octrl.createSaleOrder("uggabugga@hotmail.com", 1);
-//		octrl.addProduct(1, 2);
-//		octrl.addProduct(1, 2);
-//		octrl.saveOrder();
+		
+
+		
+		SaleOrderController octrl = new SaleOrderController();
+		SaleOrder so = octrl.createSaleOrder("bobby@hotmail.com", 1);
+		octrl.addProduct(1, 1);
+		
+		octrl.saveOrder();
+		octrl.updateInventory();
 		//System.out.println(so.getOl().get(0).getSaleProduct());
 		//System.out.println(so.getOl().get(0).getQuantity());
 //		ProductDB prdb = new ProductDB();

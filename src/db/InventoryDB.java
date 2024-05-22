@@ -65,10 +65,10 @@ public class InventoryDB implements InventoryDAO {
 
 	@Override
 	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
-		final int quantity = inventory.getQuantity();
+		final double quantity = inventory.getQuantity();
 		final int id = inventory.getId();
 		try {
-			update.setInt(1, quantity);
+			update.setDouble(1, quantity);
 			update.setInt(2, id);
 			
 			update.executeUpdate();
