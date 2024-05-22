@@ -150,17 +150,26 @@ public class WelcomePage extends JFrame {
 
     
     private void logInClicked() {
-//    	 int id = Integer.parseInt(textID.getText());
+        int id;
+        try {
+            id = Integer.parseInt(textID.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid ID format", "Login Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         String password = new String(txtPassword.getPassword());
-        if ("pass".equals(password)) {
-        	System.out.println("logged in");
+        if (id == 1234 && "pass".equals(password)) {
+            System.out.println("logged in");
             setVisible(false);
             dispose();
             Menu menu = new Menu();
+            UpdatedCreateOrder createOrder = new UpdatedCreateOrder(Integer.toString(id)); // Pass the employee ID to UpdatedCreateOrder
+            menu.setEmployeeID(Integer.toString(id)); // Pass the employee ID to the Menu frame
             menu.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Forket Password", "Login Error", JOptionPane.ERROR_MESSAGE);
-            txtPassword.setText("pass");
+            JOptionPane.showMessageDialog(this, "Incorrect ID or Password", "Login Error", JOptionPane.ERROR_MESSAGE);
+            txtPassword.setText("");
         }
     }
 }

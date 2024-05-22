@@ -139,13 +139,12 @@ public class Menu extends JFrame {
 		textField.setColumns(10);
 	}
 	
-	private void orderClicked() {
-	    CreateOrder co = new CreateOrder();
-	    co.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	    co.setVisible(true);
-	    setVisible(false);
-	    dispose();
-	}
+		private void orderClicked() {
+		    UpdatedCreateOrder uco = new UpdatedCreateOrder(textField.getText()); 
+		    uco.setVisible(true);
+		    setVisible(false);
+		    dispose();
+		}
 
 	private void storageClicked() {
 		setVisible(false);
@@ -161,6 +160,9 @@ public class Menu extends JFrame {
 	    welcomePage.setVisible(true);
 	}
 	
+	public void setEmployeeID(String employeeID) {
+	    textField.setText(employeeID);
+	}
 }
 
 
