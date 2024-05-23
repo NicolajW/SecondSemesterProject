@@ -13,16 +13,13 @@ public class Inventory {
 		this.id = id;
 	}
 
-
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public double getQuantity() {
 		return quantity;
@@ -31,5 +28,5 @@ public class Inventory {
 	public void setQuantity(double d) {
 		this.quantity = d;
 	}
-	
+
 }

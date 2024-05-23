@@ -7,7 +7,6 @@ import model.Inventory;
 
 public class InventoryController {
 
-	
 	private InventoryDAO iDao;
 
 	public InventoryController() throws DataAccessException {
@@ -21,5 +20,5 @@ public class InventoryController {
 	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
 		iDao.updateProductQuantity(inventory);
 	}
-	
+
 }

@@ -25,6 +25,5 @@ public class Batch extends Product {
 	public void setnumberOfBatches(int numberOfBatches) {
 		this.numberOfBatches = numberOfBatches;
 	}
-	
 
 }

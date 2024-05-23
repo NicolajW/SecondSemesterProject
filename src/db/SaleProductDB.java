@@ -22,22 +22,22 @@ public class SaleProductDB implements SaleProductDAO {
 	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
 	private static final String FIND_ALL_Q_WINE = "select grapeType, yearProduced, wineHouse, region, productID_PKFK from Wine";
 	private static final String FIND_ALL_Q_FOOD = "select food_id, menuName, type from Food";
-    private static final String JOIN_ALL_Q = "SELECT * FROM saleProduct"
-    		+ " FULL OUTER JOIN wine ON saleProductID = saleProductID_PKFK"
-    		+ " FULL OUTER JOIN food ON saleProductID = food_id";
-	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductID= ?"; 
-	private static final String FIND_BY_Q_WINE = JOIN_ALL_Q + " WHERE saleProductID_PKFK = ?"; 
-	private static final String FIND_BY_Q_FOOD = JOIN_ALL_Q + " WHERE food_id = ?"; 
-	
-	//NYT-------------------------------------------
+	private static final String JOIN_ALL_Q = "SELECT * FROM saleProduct"
+			+ " FULL OUTER JOIN wine ON saleProductID = saleProductID_PKFK"
+			+ " FULL OUTER JOIN food ON saleProductID = food_id";
+	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductID= ?";
+	private static final String FIND_BY_Q_WINE = JOIN_ALL_Q + " WHERE saleProductID_PKFK = ?";
+	private static final String FIND_BY_Q_FOOD = JOIN_ALL_Q + " WHERE food_id = ?";
+
+	// NYT-------------------------------------------
 	private static final String FIND_PRODUCT_ID_ON_INGREDIENT_Q = "SELECT productID_PKFK FROM Ingredients WHERE saleProductID_PKFK = ?";
-	
+
 	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region) values (?, ?, ?, ?);";
-	
-	//NYT-------------------------------------------
+
+	// NYT-------------------------------------------
 	private static final String FIND_INGREDIENTS_BY_FOOD_Q = "SELECT name, typeOfFood, type FROM Ingredients WHERE saleProductID_PKFK = ?";
-	
+
 	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";
 
 	private PreparedStatement findAllPSS;
@@ -47,7 +47,6 @@ public class SaleProductDB implements SaleProductDAO {
 	private PreparedStatement findByFoodIDPS;
 	private PreparedStatement findProductIDOnIngredientPS;
 	private PreparedStatement findIngredientsByFoodPS;
-	
 
 	public SaleProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
@@ -57,10 +56,10 @@ public class SaleProductDB implements SaleProductDAO {
 			findAllPSS = con.prepareStatement(FIND_ALL_Q);
 			findByProductIDPS = con.prepareStatement(FIND_BY_Q);
 			insertInSP = con.prepareStatement(INSERT_INTO_SALEPRODUCT_Q);
-			insertInW = con.prepareStatement(INSERT_INTO_WINE_Q); 
+			insertInW = con.prepareStatement(INSERT_INTO_WINE_Q);
 			insertInF = con.prepareStatement(INSERT_INTO_FOOD_Q);
-			
-			//NYT-------------------------------------------
+
+			// NYT-------------------------------------------
 			findIngredientsByFoodPS = con.prepareStatement(FIND_INGREDIENTS_BY_FOOD_Q);
 			findProductIDOnIngredientPS = con.prepareStatement(FIND_PRODUCT_ID_ON_INGREDIENT_Q);
 
@@ -68,28 +67,23 @@ public class SaleProductDB implements SaleProductDAO {
 			throw new DataAccessException("Could not prepare queries", e);
 		}
 	}
-	
-	//NYT-------------------------------------------
+
+	// NYT-------------------------------------------
 	@Override
 	public List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException {
-	    List<Ingredients> ingredients = new ArrayList<>();
-	    try {
-	        findIngredientsByFoodPS.setInt(1, foodID);
-	        ResultSet rs = findIngredientsByFoodPS.executeQuery();
-	        while (rs.next()) {
-	            Ingredients ingredient = new Ingredients(
-	                rs.getString("name"),
-	                rs.getString("typeOfFood"),
-	                null,
-	                null,
-	                rs.getString("type")
-	            );
-	            ingredients.add(ingredient);
-	        }
-	    } catch (SQLException e) {
-	        throw new DataAccessException("Could not find ingredients for food ID = " + foodID, e);
-	    }
-	    return ingredients;
+		List<Ingredients> ingredients = new ArrayList<>();
+		try {
+			findIngredientsByFoodPS.setInt(1, foodID);
+			ResultSet rs = findIngredientsByFoodPS.executeQuery();
+			while (rs.next()) {
+				Ingredients ingredient = new Ingredients(rs.getString("name"), rs.getString("typeOfFood"), null, null,
+						rs.getString("type"));
+				ingredients.add(ingredient);
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not find ingredients for food ID = " + foodID, e);
+		}
+		return ingredients;
 	}
 
 	@Override
@@ -102,23 +96,23 @@ public class SaleProductDB implements SaleProductDAO {
 			throw new DataAccessException("Could not find all saleProducts", e);
 		}
 	}
-	
-	//NYT-------------------------------------------
+
+	// NYT-------------------------------------------
 	@Override
-    public int findProductIDOnIngredient(int saleProductID) throws DataAccessException {
-        int res = 0;
-        try {
-            findProductIDOnIngredientPS.setInt(1, saleProductID);
-            ResultSet rs = findProductIDOnIngredientPS.executeQuery();
-            if (rs.next()) {
-                res = rs.getInt("productID_PKFK");
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException("Could not find product ID for ingredient ID = " + saleProductID, e);
-        }
-        return res;
-    }
-	
+	public int findProductIDOnIngredient(int saleProductID) throws DataAccessException {
+		int res = 0;
+		try {
+			findProductIDOnIngredientPS.setInt(1, saleProductID);
+			ResultSet rs = findProductIDOnIngredientPS.executeQuery();
+			if (rs.next()) {
+				res = rs.getInt("productID_PKFK");
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not find product ID for ingredient ID = " + saleProductID, e);
+		}
+		return res;
+	}
+
 	@Override
 	public int findProductIDOnWine(int saleProductID) throws DataAccessException {
 		int res = 0;
@@ -133,7 +127,7 @@ public class SaleProductDB implements SaleProductDAO {
 		}
 		return res;
 	}
-	
+
 	@Override
 	public Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException {
 		Wine res = null;
@@ -141,14 +135,14 @@ public class SaleProductDB implements SaleProductDAO {
 			findByProductIDPKFKPS.setInt(1, saleProductID);
 			ResultSet rs = findByProductIDPKFKPS.executeQuery();
 			if (rs.next()) {
-					res = (Wine) buildObject(rs);
+				res = (Wine) buildObject(rs);
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find by id = " + saleProductID, e);
 		}
 		return res;
 	}
-	
+
 	@Override
 	public Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException {
 		Food res = null;
@@ -156,7 +150,7 @@ public class SaleProductDB implements SaleProductDAO {
 			findByFoodIDPS.setInt(1, saleProductID);
 			ResultSet rs = findByFoodIDPS.executeQuery();
 			if (rs.next()) {
-					res = (Food) buildObject(rs);
+				res = (Food) buildObject(rs);
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find by id = " + saleProductID, e);
@@ -171,7 +165,7 @@ public class SaleProductDB implements SaleProductDAO {
 			findByProductIDPS.setInt(1, saleProductID);
 			ResultSet rs = findByProductIDPS.executeQuery();
 			if (rs.next()) {
-					res = buildObject(rs);
+				res = buildObject(rs);
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find by id = " + saleProductID, e);
@@ -183,25 +177,12 @@ public class SaleProductDB implements SaleProductDAO {
 		SaleProduct sp = null;
 		String type = rs.getString("type");
 		if (type.equals("wine")) {
-			sp = new Wine(
-					rs.getInt("saleProductID"), 
-					rs.getString("name"), 
-					rs.getDouble("price"), 
-					rs.getString("description"),
-					rs.getString("type"), 
-					rs.getString("grapeType"), 
-					rs.getString("yearProduced"),
-					rs.getString("wineHouse"), 
-					rs.getString("region")
-					);
+			sp = new Wine(rs.getInt("saleProductID"), rs.getString("name"), rs.getDouble("price"),
+					rs.getString("description"), rs.getString("type"), rs.getString("grapeType"),
+					rs.getString("yearProduced"), rs.getString("wineHouse"), rs.getString("region"));
 		} else if (type.equals("food")) {
-			sp = new Food(
-					rs.getInt("saleProductID"), 
-					rs.getString("name"), 
-					rs.getDouble("price"), 
-					rs.getString("description"),
-					rs.getString("type"), 
-					rs.getString("menuName"));
+			sp = new Food(rs.getInt("saleProductID"), rs.getString("name"), rs.getDouble("price"),
+					rs.getString("description"), rs.getString("type"), rs.getString("menuName"));
 		}
 		return sp;
 	}

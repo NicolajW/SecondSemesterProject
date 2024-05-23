@@ -6,7 +6,7 @@ public class OrderLine {
 	private double quantity;
 	private SaleProduct saleProduct;
 	private SaleOrder saleOrder;
-	
+
 	public OrderLine(double quantity, SaleProduct saleProduct, SaleOrder saleOrder) {
 		this.quantity = quantity;
 		this.saleProduct = saleProduct;
@@ -29,7 +29,6 @@ public class OrderLine {
 		this.saleOrder = saleOrder;
 	}
 
-
 	public double getQuantity() {
 		return quantity;
 	}
@@ -37,5 +36,5 @@ public class OrderLine {
 	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
-	
+
 }

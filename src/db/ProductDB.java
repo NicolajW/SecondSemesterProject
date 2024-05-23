@@ -73,7 +73,6 @@ public class ProductDB implements ProductDAO {
 
 	private List<Product> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
 		List<Product> res = new ArrayList<>();
-		// Product p = buildObject(rs);
 		while (rs.next()) {
 			Product p = buildObject(rs);
 			res.add(p);
@@ -91,7 +90,7 @@ public class ProductDB implements ProductDAO {
 			throw new DataAccessException("Could not find all", e);
 		}
 	}
-	
+
 	@Override
 	public Product findInventoryById(int inventoryID) throws DataAccessException {
 		Product res = null;
@@ -106,7 +105,7 @@ public class ProductDB implements ProductDAO {
 		}
 		return res;
 	}
-	
+
 	@Override
 	public Product findProductByBarcode(String barcode) throws DataAccessException {
 		Product res = null;
@@ -121,7 +120,7 @@ public class ProductDB implements ProductDAO {
 		}
 		return res;
 	}
-	
+
 	@Override
 	public int findInventoryIDByBarcode(String barcode) throws DataAccessException {
 		int res = 0;

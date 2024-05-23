@@ -9,14 +9,14 @@ import java.util.List;
 
 import model.Table;
 
-public class TableDB implements TableDAO{
+public class TableDB implements TableDAO {
 	private static final String FIND_ALL_Q = "select tableNo, tableStatus from TableSeating";
 	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where tableNo = ?";
 	private static final String UPDATE_Q = "update TableSeating set tableStatus = ? where tableNo = ?";
 	private PreparedStatement findAllPS;
 	private PreparedStatement findByIDPS;
 	private PreparedStatement update;
-	
+
 	public TableDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -29,7 +29,7 @@ public class TableDB implements TableDAO{
 		}
 
 	}
-	
+
 	private Table buildObject(ResultSet rs) throws SQLException {
 		Table res = null;
 		if (rs.next()) {
@@ -48,7 +48,7 @@ public class TableDB implements TableDAO{
 		return res;
 
 	}
-	
+
 	@Override
 	public List<Table> findAll() throws DataAccessException {
 		try {
@@ -80,12 +80,12 @@ public class TableDB implements TableDAO{
 		try {
 			update.setBoolean(1, tableStatus);
 			update.setInt(2, tableNo);
-			
+
 			update.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not save Object", e);
 		}
-		
+
 	}
 
 }

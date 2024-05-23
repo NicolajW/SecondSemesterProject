@@ -71,7 +71,5 @@ public class Person {
 		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNo=" + phoneNo
 				+ ", employeeNo=" + employeeNo + ", adminNo=" + adminNo + "]";
 	}
-	
-	
 
 }

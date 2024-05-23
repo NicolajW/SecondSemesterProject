@@ -6,15 +6,15 @@ public class Wine extends SaleProduct {
 	public String wineHouse;
 	public String region;
 	public int amountLeft;
-	
-	public Wine(int saleProductID, String name, Double price, String description, String type, String grapeType, String yearProduced, String wineHouse, String region) {
+
+	public Wine(int saleProductID, String name, Double price, String description, String type, String grapeType,
+			String yearProduced, String wineHouse, String region) {
 		super(saleProductID, name, price, description, type);
 		this.grapeType = grapeType;
 		this.yearProduced = yearProduced;
 		this.wineHouse = wineHouse;
 		this.region = region;
 	}
-
 
 	public String getGrapeType() {
 		return grapeType;
@@ -48,7 +48,4 @@ public class Wine extends SaleProduct {
 		this.region = region;
 	}
 
-
-	
-	
 }

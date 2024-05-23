@@ -18,7 +18,7 @@ public class InventoryDB implements InventoryDAO {
 	private PreparedStatement findAllPS;
 	private PreparedStatement findByIDPS;
 	private PreparedStatement update;
-	
+
 	public InventoryDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -30,7 +30,7 @@ public class InventoryDB implements InventoryDAO {
 			throw new DataAccessException("Could not prepare query", e);
 		}
 	}
-	
+
 	private Inventory buildObject(ResultSet rs) throws SQLException {
 		Inventory res = null;
 		if (rs.next()) {
@@ -70,7 +70,7 @@ public class InventoryDB implements InventoryDAO {
 		try {
 			update.setDouble(1, quantity);
 			update.setInt(2, id);
-			
+
 			update.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not update inventory", e);

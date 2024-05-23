@@ -6,6 +6,7 @@ import java.util.List;
 import db.DataAccessException;
 
 import db.PersonDB;
+import db.SaleOrderDAO;
 import db.SaleOrderDB;
 import model.Food;
 import model.Ingredients;
@@ -22,7 +23,7 @@ public class SaleOrderController {
 	private PersonController perctrl;
 	private SaleProductController spctrl;
 	private ProductController pctrl;
-	private SaleOrderDB sodb;
+	private SaleOrderDAO soDao;
 	private SaleOrder saleOrder;
 	private TableController tc;
 	private InventoryController ictrl;
@@ -30,10 +31,10 @@ public class SaleOrderController {
 	public SaleOrderController() {
 		try {
 
-			sodb = new SaleOrderDB();
+			soDao = new SaleOrderDB();
 			perctrl = new PersonController();
 			spctrl = new SaleProductController();
-			saleOrder = this.saleOrder;
+			this.saleOrder = saleOrder;
 			tc = new TableController();
 			ictrl = new InventoryController();
 			pctrl = new ProductController();
@@ -56,25 +57,24 @@ public class SaleOrderController {
 		SaleProduct saleProduct = spctrl.findByProductById(saleProductID);
 		OrderLine orderLine = new OrderLine(quantity, saleProduct, saleOrder);
 		saleOrder.saleOrderLinesHashMap(orderLine);
-		
-		
+
 		Wine wine = spctrl.findWineOnSaleProductID(saleProductID);
 		Food food = spctrl.findFoodOnSaleProductID(saleProductID);
-		if(wine != null) {
-			saleProduct.setWine(wine);			
-		   } else if (food != null) {
-		        List<Ingredients> ingredients = spctrl.findIngredientsByFoodID(saleProductID);
-		        food.setIngredients(ingredients); // Set the ingredients list for the Food object
-		        saleProduct.setFood(food);
-		    }
+		if (wine != null) {
+			saleProduct.setWine(wine);
+		} else if (food != null) {
+			List<Ingredients> ingredients = spctrl.findIngredientsByFoodID(saleProductID);
+			food.setIngredients(ingredients); // Set the ingredients list for the Food object
+			saleProduct.setFood(food);
+		}
 		System.out.println(saleProduct.getWine());
 		System.out.println(saleProduct.getFood());
 
 	}
 
 	public void saveOrder() throws DataAccessException {
-		sodb.saveOrder(saleOrder);
-		// updateInventory(saleOrder.getOrderNo());
+		soDao.saveOrder(saleOrder);
+		updateInventory();
 		updateTableStatus();
 	}
 
@@ -85,32 +85,34 @@ public class SaleOrderController {
 
 	public void updateInventory() throws DataAccessException {
 
-		for(int i = 0; i < saleOrder.getOl().size(); i++) {
-			if(saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
+		for (int i = 0; i < saleOrder.getOl().size(); i++) {
+			if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
 				Wine wine = saleOrder.getOl().get(i).getSaleProduct().getWine();
-				
-				int productID = spctrl.findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
-				
+
+				int productID = spctrl
+						.findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+
 				Product p = pctrl.findByProductID(productID);
 				int inventoryID = pctrl.findInventoryIDByBarcode(p.getBarcode());
 				Inventory inventory = ictrl.findByInventoryNo(inventoryID);
 				inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
 				ictrl.updateProductQuantity(inventory);
-				
-				
-				//NYT
-			}else if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
-				 Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
-		         List<Ingredients> ingredients = food.getIngredients();
-		            for (Ingredients ingredient : ingredients) {
-		                int ingredientProductID = spctrl.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
-		                Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
-		                int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
-		                Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
-		                ingredientInventory.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
-		                ictrl.updateProductQuantity(ingredientInventory);
-		            }
-				
+
+				// NYT
+			} else if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
+				Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
+				List<Ingredients> ingredients = food.getIngredients();
+				for (Ingredients ingredient : ingredients) {
+					int ingredientProductID = spctrl
+							.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+					Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
+					int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
+					Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
+					ingredientInventory
+							.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+					ictrl.updateProductQuantity(ingredientInventory);
+				}
+
 			}
 		}
 	}

@@ -39,26 +39,22 @@ public class SaleOrderDB implements SaleOrderDAO {
 
 	}
 
-	private List<SaleOrder> buildObjects(ResultSet rs, boolean fullAssociation) throws DataAccessException {
+	private List<SaleOrder> buildObjects(ResultSet rs) throws DataAccessException {
 		List<SaleOrder> res = new ArrayList<>();
-		SaleOrder o = buildObject(rs, fullAssociation);
+		SaleOrder o = buildObject(rs);
 		while (o != null) {
 			res.add(o);
-			o = buildObject(rs, fullAssociation);
+			o = buildObject(rs);
 		}
 		return res;
 	}
 
-	private SaleOrder buildObject(ResultSet rs, boolean fullAssociation) throws DataAccessException {
+	private SaleOrder buildObject(ResultSet rs) throws DataAccessException {
 		SaleOrder res = null;
 		try {
 			if (rs.next()) {
-				res = new SaleOrder(
-						rs.getInt("orderNo"), 
-						rs.getDouble("totalPrice"),
-						new Person(null, null, rs.getString("email_FK"), null, 0, 0), 
-						rs.getInt("tableNo_FK"));
-		
+				res = new SaleOrder(rs.getInt("orderNo"), rs.getDouble("totalPrice"),
+						new Person(null, null, rs.getString("email_FK"), null, 0, 0), rs.getInt("tableNo_FK"));
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not build object", e);
@@ -66,23 +62,13 @@ public class SaleOrderDB implements SaleOrderDAO {
 		return res;
 	}
 
-//	@Override
-//	public void saveOrder(SaleOrder order) throws DataAccessException {
-//		 int orderNo = generateOrderNumber();
-//		 order.setOrderNo(orderNo);
-//	}
-
 	public void saveOrder(SaleOrder saleOrder) throws DataAccessException {
 		try {
-			//Connection con = DBConnection.getInstance().getConnection();
-			//con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-			
 			dbconnection.startTransaction();
-			//insertSaleOrder.setInt(1, saleOrder.getOrderNo());
+
 			insertSaleOrder.setDouble(1, saleOrder.getTotalPrice());
 			insertSaleOrder.setString(2, saleOrder.getEmployee().getEmail());
 			insertSaleOrder.setInt(3, saleOrder.getTableNo());
-			//insertSaleOrder.executeQuery();
 
 			int orderId = dbconnection.executeInsertWithIdentity(insertSaleOrder);
 			for (OrderLine ol : saleOrder.getOl()) {
@@ -105,7 +91,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 		try {
 			findByOrderNoPS.setInt(1, orderNo);
 			ResultSet rs = findByOrderNoPS.executeQuery();
-			res = buildObject(rs, fullAssociation);
+			res = buildObject(rs);
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find by OrderNo", e);
 		}

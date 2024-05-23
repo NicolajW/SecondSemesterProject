@@ -3,7 +3,7 @@ package model;
 public class Address {
 	private String name;
 	private String city;
-	
+
 	public Address(String name, String city) {
 		super();
 		this.name = name;
@@ -25,9 +25,5 @@ public class Address {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
-	
-	
-	
-	
+
 }
