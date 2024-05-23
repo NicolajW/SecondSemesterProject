@@ -94,19 +94,15 @@ public class SaleOrderController {
 
 	private void updateFoodInventory() throws DataAccessException {
 		for (int i = 0; i < saleOrder.getOl().size(); i++) {
-			Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
-			List<Ingredients> ingredients = food.getIngredients();
 			
-			for (Ingredients ingredient : ingredients) {
-				int ingredientProductID = spctrl.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
-				Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
+			int ingredientProductID = spctrl.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+			Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
 				
-				int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
-				Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
+			int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
+			Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
 				
-				ingredientInventory.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
-				ictrl.updateProductQuantity(ingredientInventory);
-			}
+			ingredientInventory.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+			ictrl.updateProductQuantity(ingredientInventory);
 		}
 	}
 
