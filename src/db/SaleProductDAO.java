@@ -19,7 +19,5 @@ public interface SaleProductDAO {
 
 	Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException;
 
-	int findProductIDOnIngredient(int saleProductID) throws DataAccessException;
 
-	List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException;
 }

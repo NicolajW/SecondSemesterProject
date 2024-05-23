@@ -10,9 +10,9 @@ public interface ProductDAO {
 
 	Product findByProductID(int productID) throws DataAccessException;
 
-	Product findInventoryById(int inventoryID) throws DataAccessException;
-
-	Product findProductByBarcode(String barcode) throws DataAccessException;
-
 	int findInventoryIDByBarcode(String barcode) throws DataAccessException;
+
+	int findProductIDOnIngredient(int saleProductID) throws DataAccessException;
+
+	List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException;
 }

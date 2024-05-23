@@ -16,31 +16,67 @@ import model.SaleProduct;
 import model.Wine;
 
 public class ProductDB implements ProductDAO {
-
-	private static final String FIND_ALL_Q = "select productID, barcode, type from Product";
 	private static final String JOIN_ALL_Q = "SELECT * FROM Product"
 			+ " FULL OUTER JOIN Batch ON productID = proID_PKFK"
 			+ " FULL OUTER JOIN Ingredients ON productID = productID_PKFK";
 	private static final String FIND_BY_PRODUCT_ID_Q = JOIN_ALL_Q + " WHERE productID= ?";
 	private static final String FIND_BY_PRODUCT_BARCODE_Q= JOIN_ALL_Q + " WHERE barcode= ?";
+	private static final String FIND_INGREDIENTS_BY_FOOD_Q = "SELECT name, typeOfFood, type FROM Ingredients WHERE saleProductID_PKFK = ?";
+	private static final String FIND_PRODUCT_ID_ON_INGREDIENT_Q = "SELECT productID_PKFK FROM Ingredients WHERE saleProductID_PKFK = ?";
 	
 	private PreparedStatement findByProductIDPS;
 	private PreparedStatement joinAllPS;
-	private PreparedStatement findByInventoryIDPS;
 	private PreparedStatement findProductByBarcodePS;
+	private PreparedStatement findProductIDOnIngredientPS;
+	private PreparedStatement findIngredientsByFoodPS;
 
 	public ProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
 			findByProductIDPS = con.prepareStatement(FIND_BY_PRODUCT_ID_Q);
-			findByInventoryIDPS = con.prepareStatement(FIND_ALL_Q);
 			findProductByBarcodePS = con.prepareStatement(FIND_BY_PRODUCT_BARCODE_Q);
 			joinAllPS = con.prepareStatement(JOIN_ALL_Q);
+			findIngredientsByFoodPS = con.prepareStatement(FIND_INGREDIENTS_BY_FOOD_Q);
+			findProductIDOnIngredientPS = con.prepareStatement(FIND_PRODUCT_ID_ON_INGREDIENT_Q);
 
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not prepare queries", e);
 		}
 	}
+	
+	// NYT-------------------------------------------
+		@Override
+		public List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException {
+			List<Ingredients> ingredients = new ArrayList<>();
+			try {
+				findIngredientsByFoodPS.setInt(1, foodID);
+				ResultSet rs = findIngredientsByFoodPS.executeQuery();
+				while (rs.next()) {
+					Ingredients ingredient = new Ingredients(rs.getString("name"), rs.getString("typeOfFood"), null, null,
+							rs.getString("type"));
+					ingredients.add(ingredient);
+				}
+			} catch (SQLException e) {
+				throw new DataAccessException("Could not find ingredients for food ID = " + foodID, e);
+			}
+			return ingredients;
+		}
+		
+		// NYT-------------------------------------------
+		@Override
+		public int findProductIDOnIngredient(int saleProductID) throws DataAccessException {
+			int res = 0;
+			try {
+				findProductIDOnIngredientPS.setInt(1, saleProductID);
+				ResultSet rs = findProductIDOnIngredientPS.executeQuery();
+				if (rs.next()) {
+					res = rs.getInt("productID_PKFK");
+				}
+			} catch (SQLException e) {
+				throw new DataAccessException("Could not find product ID for ingredient ID = " + saleProductID, e);
+			}
+			return res;
+		}
 
 	private Product buildObject(ResultSet rs) throws SQLException {
 		Product p = null;
@@ -75,36 +111,6 @@ public class ProductDB implements ProductDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find all", e);
 		}
-	}
-
-	@Override
-	public Product findInventoryById(int inventoryID) throws DataAccessException {
-		Product res = null;
-		try {
-			findByInventoryIDPS.setInt(1, inventoryID);
-			ResultSet rs = findByProductIDPS.executeQuery();
-			if (rs.next()) {
-				res = buildObject(rs);
-			}
-		} catch (SQLException e) {
-			throw new DataAccessException("Could not find by id = " + inventoryID, e);
-		}
-		return res;
-	}
-
-	@Override
-	public Product findProductByBarcode(String barcode) throws DataAccessException {
-		Product res = null;
-		try {
-			findProductByBarcodePS.setString(1, barcode);
-			ResultSet rs = findProductByBarcodePS.executeQuery();
-			if (rs.next()) {
-				res = buildObject(rs);
-			}
-		} catch (SQLException e) {
-			throw new DataAccessException("Could not find by id = " + barcode, e);
-		}
-		return res;
 	}
 
 	@Override

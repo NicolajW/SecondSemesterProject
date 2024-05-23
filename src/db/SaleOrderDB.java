@@ -67,7 +67,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 			dbconnection.startTransaction();
 
 			insertSaleOrder.setDouble(1, saleOrder.getTotalPrice());
-			insertSaleOrder.setString(2, saleOrder.getEmployee().getEmail());
+			insertSaleOrder.setString(2, saleOrder.getPerson().getEmail());
 			insertSaleOrder.setInt(3, saleOrder.getTableNo());
 
 			int orderId = dbconnection.executeInsertWithIdentity(insertSaleOrder);

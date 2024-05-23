@@ -13,10 +13,10 @@ public class SaleOrder {
 	private List<OrderLine> ol;
 	private Map<Integer, List<OrderLine>> orderLinesMap;
 
-	public SaleOrder(int orderNo, double totalPrice, Person employee, int tableNo) {
+	public SaleOrder(int orderNo, double totalPrice, Person person, int tableNo) {
 		this.totalPrice = totalPrice;
 		this.orderNo = orderNo;
-		this.person = employee;
+		this.person = person;
 		this.tableNo = tableNo;
 		this.ol = new ArrayList<>();
 		this.orderLinesMap = new HashMap<>();
@@ -46,11 +46,11 @@ public class SaleOrder {
 		this.orderNo = orderNo;
 	}
 
-	public Person getEmployee() {
+	public Person getPerson() {
 		return person;
 	}
 
-	public void addOrderLine(OrderLine orderLine) {
+	private void addOrderLine(OrderLine orderLine) {
 		if (ol == null) {
 			ol = new ArrayList<>();
 		}
@@ -77,8 +77,8 @@ public class SaleOrder {
 		return orderLinesMap;
 	}
 
-	public void setEmployee(Person employee) {
-		this.person = employee;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public List<OrderLine> getOl() {

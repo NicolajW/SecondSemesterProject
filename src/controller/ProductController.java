@@ -1,8 +1,11 @@
 package controller;
 
+import java.util.List;
+
 import db.DataAccessException;
 import db.ProductDAO;
 import db.ProductDB;
+import model.Ingredients;
 import model.Product;
 
 public class ProductController {
@@ -21,17 +24,16 @@ public class ProductController {
 		return pDao.findByProductID(productID);
 	}
 
-	public Product findInventoryByID(int inventoryID) throws DataAccessException {
-		return pDao.findInventoryById(inventoryID);
-
-	}
-
-	public Product findProductByBarcode(String barcode) throws DataAccessException {
-		return pDao.findProductByBarcode(barcode);
-	}
-
 	public int findInventoryIDByBarcode(String barcode) throws DataAccessException {
 		return pDao.findInventoryIDByBarcode(barcode);
+	}
+	
+	public int findProductIDOnIngredient(int saleProductID) throws DataAccessException{
+		return pDao.findProductIDOnIngredient(saleProductID);
+	}
+	
+	public List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException{
+		return pDao.findIngredientsByFoodID(foodID);
 	}
 
 }

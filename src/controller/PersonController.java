@@ -13,7 +13,7 @@ public class PersonController {
 		pDao = new PersonDB();
 	}
 
-	public Person findByEmployeeNo(String email) throws DataAccessException {
-		return pDao.findByEmployeeNo(email);
+	public Person findByPersonEmail(String email) throws DataAccessException{
+		return pDao.findByPersonEmail(email);
 	}
 }

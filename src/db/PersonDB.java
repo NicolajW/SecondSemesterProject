@@ -12,38 +12,20 @@ import model.Person;
 public class PersonDB implements PersonDAO {
 	private static final String FIND_ALL_Q = "select email, firstName, lastName, phoneNo, adminNo, employeeNo from Person";
 	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where email = ?";
-	private static final String INSERT_Q = "INSERT INTO Employee (email, firstName, lastName, phoneNo, adminNo, employeeNo) VALUES (?, ?, ?, ?, ?, ?)";
-	private PreparedStatement findAllPSS;
 	private PreparedStatement findByIDPS;
-	private PreparedStatement insert;
 
 	public PersonDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			findAllPSS = con.prepareStatement(FIND_ALL_Q);
 			findByIDPS = con.prepareStatement(FIND_BY_ID_Q);
-			insert = con.prepareStatement(INSERT_Q);
 
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not prepare query", e);
 		}
 	}
-
-	@Override
-	public List<Person> findAll() throws DataAccessException {
-		try {
-			ResultSet rs = findAllPSS.executeQuery();
-			List<Person> res = buildObjects(rs);
-			return res;
-		} catch (SQLException e) {
-			throw new DataAccessException("Could not find all Persons", e);
-		}
-		
-	}
-
 	
 	@Override
-	public Person findByEmployeeNo(String email) throws DataAccessException {
+	public Person findByPersonEmail(String email) throws DataAccessException {
 		Person res = null;
 		try {
 			findByIDPS.setString(1, email);
@@ -78,32 +60,6 @@ public class PersonDB implements PersonDAO {
 		}
 		return res;
 
-	}
-
-	public void saveCustomer(Person p) throws DataAccessException {
-		final String email = p.getEmail();
-		final String firstName = p.getFirstName();
-		final String lastName = p.getLastName();
-		final String phoneNo = p.getPhoneNo();
-		final int adminNo = p.getAdminNo();
-		final int employeeNo = p.getEmployeeNo(); 
-		
-
-
-		try {
-			insert.setString(1, email);
-			insert.setString(2, firstName);
-			insert.setString(3, lastName);
-			insert.setString(4, phoneNo);
-			insert.setInt(5, adminNo);
-			insert.setInt(6, employeeNo);
-			
-
-			insert.executeUpdate();
-
-		} catch (SQLException ex) {
-			throw new DataAccessException("Could not build object", ex);
-		}
 	}
 
 }
