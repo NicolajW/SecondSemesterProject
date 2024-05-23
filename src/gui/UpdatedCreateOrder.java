@@ -21,10 +21,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import db.DataAccessException;
-import model.Product;
-import controller.SaleProductController;
-import controller.SaleOrderController;
 
 
 public class UpdatedCreateOrder extends JFrame {
