@@ -4,13 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -19,10 +15,7 @@ import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
-import java.awt.SystemColor;
 import javax.swing.JOptionPane;
 
 public class WelcomePage extends JFrame {
@@ -62,7 +55,6 @@ public class WelcomePage extends JFrame {
         contentPane.setBorder(null);
 
         setContentPane(contentPane);
-        ImageIcon img = new ImageIcon(this.getClass().getResource("/logomedtekst_5_10.jpg"));
         contentPane.setLayout(new BorderLayout(0, 0));
         
         JPanel panel = new JPanel();
