@@ -30,7 +30,6 @@ public class TryMe {
 		TableController tc = new TableController();
 		tc.updateTableStatus(t);
 		tc.findByTableNo(1);
-		System.out.println(t);
 //		
 		
 //		for(int i = 0; i < tbd.findAll().size(); i++) {

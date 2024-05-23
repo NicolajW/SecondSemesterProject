@@ -20,25 +20,20 @@ public class SaleProductDB implements SaleProductDAO {
 	private Food f;
 
 	private static final String FIND_ALL_Q = "select saleProductID, name, price, description, type from saleProduct";
-	private static final String FIND_ALL_Q_WINE = "select grapeType, yearProduced, wineHouse, region, productID_PKFK from Wine";
-	private static final String FIND_ALL_Q_FOOD = "select food_id, menuName, type from Food";
 	private static final String JOIN_ALL_Q = "SELECT * FROM saleProduct"
 			+ " FULL OUTER JOIN wine ON saleProductID = saleProductID_PKFK"
 			+ " FULL OUTER JOIN food ON saleProductID = food_id";
 	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE saleProductID= ?";
 	private static final String FIND_BY_Q_WINE = JOIN_ALL_Q + " WHERE saleProductID_PKFK = ?";
 	private static final String FIND_BY_Q_FOOD = JOIN_ALL_Q + " WHERE food_id = ?";
-
-	// NYT-------------------------------------------
+	private static final String FIND_INGREDIENTS_BY_FOOD_Q = "SELECT name, typeOfFood, type FROM Ingredients WHERE saleProductID_PKFK = ?";
 	private static final String FIND_PRODUCT_ID_ON_INGREDIENT_Q = "SELECT productID_PKFK FROM Ingredients WHERE saleProductID_PKFK = ?";
 
 	private static final String INSERT_INTO_SALEPRODUCT_Q = "insert into saleProduct (name, price, description, type) values (?, ?, ?, ?);";
 	private static final String INSERT_INTO_WINE_Q = "insert into Wine (grapeType, yearProduced, wineHouse, region) values (?, ?, ?, ?);";
-
-	// NYT-------------------------------------------
-	private static final String FIND_INGREDIENTS_BY_FOOD_Q = "SELECT name, typeOfFood, type FROM Ingredients WHERE saleProductID_PKFK = ?";
-
 	private static final String INSERT_INTO_FOOD_Q = "insert into Food (menuName) values (?);";
+
+
 
 	private PreparedStatement findAllPSS;
 	private PreparedStatement findByProductIDPS;

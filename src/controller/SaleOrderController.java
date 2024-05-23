@@ -30,7 +30,6 @@ public class SaleOrderController {
 
 	public SaleOrderController() {
 		try {
-
 			soDao = new SaleOrderDB();
 			perctrl = new PersonController();
 			spctrl = new SaleProductController();
@@ -64,12 +63,9 @@ public class SaleOrderController {
 			saleProduct.setWine(wine);
 		} else if (food != null) {
 			List<Ingredients> ingredients = spctrl.findIngredientsByFoodID(saleProductID);
-			food.setIngredients(ingredients); // Set the ingredients list for the Food object
+			food.setIngredients(ingredients); 
 			saleProduct.setFood(food);
 		}
-		System.out.println(saleProduct.getWine());
-		System.out.println(saleProduct.getFood());
-
 	}
 
 	public void saveOrder() throws DataAccessException {
@@ -83,39 +79,47 @@ public class SaleOrderController {
 		tc.updateTableStatus(t);
 	}
 
-	public void updateInventory() throws DataAccessException {
-
+	private void updateWineInventory() throws DataAccessException {
 		for (int i = 0; i < saleOrder.getOl().size(); i++) {
-			if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
-				Wine wine = saleOrder.getOl().get(i).getSaleProduct().getWine();
+			int productID = spctrl.findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+			Product p = pctrl.findByProductID(productID);
 
-				int productID = spctrl
-						.findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+			int inventoryID = pctrl.findInventoryIDByBarcode(p.getBarcode());
+			Inventory inventory = ictrl.findByInventoryNo(inventoryID);
 
-				Product p = pctrl.findByProductID(productID);
-				int inventoryID = pctrl.findInventoryIDByBarcode(p.getBarcode());
-				Inventory inventory = ictrl.findByInventoryNo(inventoryID);
-				inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
-				ictrl.updateProductQuantity(inventory);
+			inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+			ictrl.updateProductQuantity(inventory);
+		}
+	}
 
-				// NYT
-			} else if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
-				Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
-				List<Ingredients> ingredients = food.getIngredients();
-				for (Ingredients ingredient : ingredients) {
-					int ingredientProductID = spctrl
-							.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
-					Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
-					int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
-					Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
-					ingredientInventory
-							.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
-					ictrl.updateProductQuantity(ingredientInventory);
-				}
-
+	private void updateFoodInventory() throws DataAccessException {
+		for (int i = 0; i < saleOrder.getOl().size(); i++) {
+			Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
+			List<Ingredients> ingredients = food.getIngredients();
+			
+			for (Ingredients ingredient : ingredients) {
+				int ingredientProductID = spctrl.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+				Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
+				
+				int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
+				Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
+				
+				ingredientInventory.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+				ictrl.updateProductQuantity(ingredientInventory);
 			}
 		}
 	}
+
+	public void updateInventory() throws DataAccessException {
+		for (int i = 0; i < saleOrder.getOl().size(); i++) {
+			if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
+				updateWineInventory();
+			} else if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
+				updateFoodInventory();				
+				}
+			}
+		}
+
 
 	public void checkTable(int tableNo) throws DataAccessException {
 		tc.checkTable(tableNo);

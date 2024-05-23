@@ -16,25 +16,15 @@ import model.SaleProduct;
 import model.Wine;
 
 public class ProductDB implements ProductDAO {
-	private Batch b;
-	private Ingredients i;
 
 	private static final String FIND_ALL_Q = "select productID, barcode, type from Product";
-	private static final String FIND_ALL_Qt = "select productID, barcode, type from Product";
-	private static final String FIND_ALL_Qtt = "select productID, barcode, type from Product";
 	private static final String JOIN_ALL_Q = "SELECT * FROM Product"
 			+ " FULL OUTER JOIN Batch ON productID = proID_PKFK"
 			+ " FULL OUTER JOIN Ingredients ON productID = productID_PKFK";
-	private static final String FIND_BY_Q = JOIN_ALL_Q + " WHERE productID= ?";
-	private static final String FIND_BY_Qt = JOIN_ALL_Q + " WHERE inventoryID_FK= ?";
-	private static final String FIND_BY_Qtt = JOIN_ALL_Q + " WHERE barcode= ?";
-	private static final String INSERT_INTO_PRODUCT_Q = "insert into Product (productID, barcode, inventoryID_FK, type) values (?, ?, ?, ?);";
-	private static final String INSERT_INTO_BATCH_Q = "insert into Batch (proID_PKFK, numberOfBatches) values (?, ?);";
-	private static final String INSERT_INTO_INGREDIENTS_Q = "insert into Ingredients (productID_PKFK, saleProductID_PKFK, type, name, typeOfFood) values (?, ?, ?, ?, ?);";
-
-	private PreparedStatement findAllPSS;
+	private static final String FIND_BY_PRODUCT_ID_Q = JOIN_ALL_Q + " WHERE productID= ?";
+	private static final String FIND_BY_PRODUCT_BARCODE_Q= JOIN_ALL_Q + " WHERE barcode= ?";
+	
 	private PreparedStatement findByProductIDPS;
-	private PreparedStatement insertInP, insertInB, insertInI;
 	private PreparedStatement joinAllPS;
 	private PreparedStatement findByInventoryIDPS;
 	private PreparedStatement findProductByBarcodePS;
@@ -42,14 +32,10 @@ public class ProductDB implements ProductDAO {
 	public ProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			findAllPSS = con.prepareStatement(FIND_ALL_Q);
-			findByProductIDPS = con.prepareStatement(FIND_BY_Q);
-			findByInventoryIDPS = con.prepareStatement(FIND_ALL_Qt);
-			findProductByBarcodePS = con.prepareStatement(FIND_BY_Qtt);
+			findByProductIDPS = con.prepareStatement(FIND_BY_PRODUCT_ID_Q);
+			findByInventoryIDPS = con.prepareStatement(FIND_ALL_Q);
+			findProductByBarcodePS = con.prepareStatement(FIND_BY_PRODUCT_BARCODE_Q);
 			joinAllPS = con.prepareStatement(JOIN_ALL_Q);
-			insertInP = con.prepareStatement(INSERT_INTO_PRODUCT_Q);
-			insertInB = con.prepareStatement(INSERT_INTO_BATCH_Q);
-			insertInI = con.prepareStatement(INSERT_INTO_INGREDIENTS_Q);
 
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not prepare queries", e);

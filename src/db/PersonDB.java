@@ -9,7 +9,6 @@ import java.util.List;
 
 import model.Person;
 
-// Tjek at FIND ALL Q, FIND BY ID Q osv. er sat op på samme måde som tabellerne i databasen
 public class PersonDB implements PersonDAO {
 	private static final String FIND_ALL_Q = "select email, firstName, lastName, phoneNo, adminNo, employeeNo from Person";
 	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where email = ?";
@@ -18,7 +17,6 @@ public class PersonDB implements PersonDAO {
 	private PreparedStatement findByIDPS;
 	private PreparedStatement insert;
 
-	// PreparedStatements skal muligvis fixes?
 	public PersonDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
