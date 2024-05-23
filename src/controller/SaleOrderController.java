@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Iterator;
+import java.util.List;
 
 import db.DataAccessException;
 
@@ -61,10 +62,11 @@ public class SaleOrderController {
 		Food food = spctrl.findFoodOnSaleProductID(saleProductID);
 		if(wine != null) {
 			saleProduct.setWine(wine);			
-		}else {
-			saleProduct.setFood(food);
-			
-		}
+		   } else if (food != null) {
+		        List<Ingredients> ingredients = spctrl.findIngredientsByFoodID(saleProductID);
+		        food.setIngredients(ingredients); // Set the ingredients list for the Food object
+		        saleProduct.setFood(food);
+		    }
 		System.out.println(saleProduct.getWine());
 		System.out.println(saleProduct.getFood());
 
@@ -82,18 +84,6 @@ public class SaleOrderController {
 	}
 
 	public void updateInventory() throws DataAccessException {
-		
-		//GET PRODUCT FROM ORDERLINE
-		//GET INVENTORYID FROM PRODUCT OBJECT
-		//SEARCH AND GET PRODUCT FROM BARCODE WITH PRODUCT OBJECTS BARCODE
-		//GET INVENTORY ID FROM PRODUCT DB
-		//FIND INVENTORY BY ID
-		//CALL UPDATE INVENTORY BY INVENTORY OBJEC
-		
-		//WINE AND FOOD IF STATEMENT
-		//OBJECT WINE AND FOOD ON SALEPRODUCT
-		//ADD WINE AND FOOD ON SALE PRODUCT
-		//FIND FUCKING PRODUCT ID ON WINE/FOOD
 
 		for(int i = 0; i < saleOrder.getOl().size(); i++) {
 			if(saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
@@ -106,28 +96,23 @@ public class SaleOrderController {
 				Inventory inventory = ictrl.findByInventoryNo(inventoryID);
 				inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
 				ictrl.updateProductQuantity(inventory);
-			}else {
+				
+				
+				//NYT
+			}else if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
+				 Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
+		         List<Ingredients> ingredients = food.getIngredients();
+		            for (Ingredients ingredient : ingredients) {
+		                int ingredientProductID = spctrl.findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+		                Product ingredientProduct = pctrl.findByProductID(ingredientProductID);
+		                int ingredientInventoryID = pctrl.findInventoryIDByBarcode(ingredientProduct.getBarcode());
+		                Inventory ingredientInventory = ictrl.findByInventoryNo(ingredientInventoryID);
+		                ingredientInventory.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+		                ictrl.updateProductQuantity(ingredientInventory);
+		            }
 				
 			}
-				
-				
-				
-//			Product p = saleOrder.getOl().get(i).getSaleProduct().getProduct();
-//			//p = pctrl.findProductByBarcode(p.getBarcode());
-//			int inventoryID = pctrl.findInventoryIDByBarcode(p.getBarcode());
-//			Inventory inventory = ictrl.findByInventoryNo(inventoryID);
-//			inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
-//			ictrl.updateProductQuantity(inventory);
 		}
-		
-		
-		//Product p = pctrl.findInventoryByID();
-		
-		//ictrl.updateProductQuantity(null);
-		
-		
-		
-		
 	}
 
 	public void checkTable(int tableNo) throws DataAccessException {

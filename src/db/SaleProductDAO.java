@@ -5,6 +5,7 @@ import java.util.Map;
 import java.sql.SQLException;
 import model.SaleProduct;
 import model.Food;
+import model.Ingredients;
 import model.Wine;
 
 
@@ -17,4 +18,6 @@ public interface SaleProductDAO {
 	int findProductIDOnWine(int saleProductID) throws DataAccessException;
 	Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException;
 	Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException;
+	int findProductIDOnIngredient(int saleProductID) throws DataAccessException;
+	List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException;
 }

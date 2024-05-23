@@ -11,5 +11,4 @@ public interface ProductDAO {
 	Product findInventoryById(int inventoryID) throws DataAccessException;
 	Product findProductByBarcode(String barcode) throws DataAccessException;
 	int findInventoryIDByBarcode(String barcode) throws DataAccessException;
-	List<Ingredients> findIngredientsOnID(int saleProductID) throws DataAccessException; 
 }
