@@ -50,7 +50,7 @@ public class TableDB implements TableDAO {
 	}
 
 	@Override
-	public List<Table> findAll() throws DataAccessException {
+	public List<Table> findAllTables() throws DataAccessException {
 		try {
 			ResultSet rs = findAllPS.executeQuery();
 			List<Table> res = buildObjects(rs);

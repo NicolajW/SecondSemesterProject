@@ -26,43 +26,13 @@ public class TryMe {
 		//tbd.findAll();
 //		
 //		
-		Table t = new Table(false, 1);
-		TableController tc = new TableController();
-		tc.updateTableStatus(t);
-		tc.findByTableNo(1);
-//		
+		TableDB tDB = new TableDB();
 		
-//		for(int i = 0; i < tbd.findAll().size(); i++) {
-//			System.out.println(tbd.findAll().get(i).isTableStatus());
-//		}
-		
-		
-//		PersonDB pdb = new PersonDB();
-//		Person p = pdb.findByEmployeeNo("uggabugga@hotmail.com");
-//		System.out.println(p.toString());
-		
-		//ProductController pctrl = new ProductController();
-//		SaleOrderDB sodb = new SaleOrderDB();
-		
+		List<Table> list = tDB.findAllTables();
+		for(Table table : list) {
+			System.out.println(table);
+		}
 
-		
-		SaleOrderController octrl = new SaleOrderController();
-		SaleOrder so = octrl.createSaleOrder("bobby@hotmail.com", 1);
-		//octrl.addProduct(1, 1);
-		octrl.addProduct(1, 2);
-		octrl.addProduct(1, 2);
-		octrl.addProduct(1, 2);
-		//octrl.updateInventory();
-		octrl.saveOrder();
-		//octrl.updateInventory();
-		//System.out.println(so.getOl().get(0).getSaleProduct());
-		//System.out.println(so.getOl().get(0).getQuantity());
-		
-		
-		
-//		System.out.println(prdb.findAll());
-		
-//		octrl.saveOrder();
 	
 		
 		

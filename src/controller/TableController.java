@@ -13,11 +13,14 @@ public class TableController {
 	
 	public TableController() throws DataAccessException{
 		tDao = new TableDB();
-		
 	}
 	
 	public void updateTableStatus(Table table) throws DataAccessException {
 		tDao.updateTableStatus(table);
+	}
+	
+	public void findAllTables() throws DataAccessException {
+		tDao.findAllTables();
 	}
 	
 	public void findByTableNo(int tableNo) throws DataAccessException {

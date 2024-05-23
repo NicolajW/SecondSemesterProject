@@ -168,5 +168,9 @@ public class SaleOrderController {
 	public void checkTable(int tableNo) throws DataAccessException {
 		tc.checkTable(tableNo);
 	}
+	
+	public void findAllTables() throws DataAccessException {
+		tc.findAllTables();
+	}
 
 }
