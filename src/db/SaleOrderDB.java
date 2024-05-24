@@ -17,7 +17,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 	private static final String FIND_ALL_Q = "select orderNo, totalPrice, email_FK, tableNo_FK from SaleOrder";
 	private static final String FIND_BY_ID_Q = FIND_ALL_Q + " where orderNo = ?";
 	private static final String INSERT_Q = "INSERT INTO SaleOrder (totalPrice, email_FK, tableNo_FK) VALUES (?, ?, ?)";
-	private static final String insertOrderLineQ = "insert into orderline values (?,?,?)";
+	private static final String INSERT_ORDERLINE_Q = "insert into orderline values (?,?,?)";
 	private PreparedStatement findAllPS;
 	private PreparedStatement findByOrderNoPS;
 	private PreparedStatement insertSaleOrder;
@@ -31,7 +31,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 			findAllPS = con.prepareStatement(FIND_ALL_Q);
 			findByOrderNoPS = con.prepareStatement(FIND_BY_ID_Q);
 			insertSaleOrder = con.prepareStatement(INSERT_Q, Statement.RETURN_GENERATED_KEYS);
-			insertOrderLine = con.prepareStatement(insertOrderLineQ);
+			insertOrderLine = con.prepareStatement(INSERT_ORDERLINE_Q);
 
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not prepare query", e);

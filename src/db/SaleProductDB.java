@@ -142,7 +142,7 @@ public class SaleProductDB implements SaleProductDAO {
 		return sp;
 	}
 
-	public List<SaleProduct> buildObjects(ResultSet rs) throws SQLException {
+	private List<SaleProduct> buildObjects(ResultSet rs) throws SQLException {
 		List<SaleProduct> res = new ArrayList<>();
 		while (rs.next()) {
 			res.add(buildObject(rs));
