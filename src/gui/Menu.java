@@ -69,19 +69,19 @@ public class Menu extends JFrame {
 		panel_1.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Salgssystem");
-		btnNewButton.setBounds(50, 42, 195, 45);
+		btnNewButton.setBounds(334, 29, 195, 45);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.addActionListener(e -> orderClicked());
         panel_1.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Lagersystem");
-		btnNewButton_1.setBounds(343, 42, 199, 45);
+		btnNewButton_1.setBounds(330, 121, 199, 45);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.addActionListener(e -> storageClicked());
         panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Salgsstatistik");
-		btnNewButton_2.setBounds(50, 139, 203, 45);
+		btnNewButton_2.setBounds(64, 217, 195, 45);
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(btnNewButton_2);
 		
@@ -90,17 +90,18 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(343, 139, 189, 45);
+		btnNewButton_3.setBounds(64, 121, 195, 45);
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(btnNewButton_3);
 		
-		JButton btnNewButton_4 = new JButton("Administration");
-		btnNewButton_4.setBounds(48, 236, 223, 45);
+		JButton btnNewButton_4 = new JButton("Borde");
+		btnNewButton_4.addActionListener(e -> openTableGui());
+		btnNewButton_4.setBounds(64, 29, 195, 45);
 		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Log af");
-		btnNewButton_5.setBounds(343, 236, 157, 45);
+		btnNewButton_5.setBounds(330, 217, 199, 45);
 		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_5.addActionListener(e -> backToWelcomePage());
 		panel_1.add(btnNewButton_5);
@@ -159,6 +160,12 @@ public class Menu extends JFrame {
 	public void setEmployeeID(String employeeID) {
 	    textField.setText(employeeID);
 	}
+	
+	private void openTableGui() {
+        Table table = new Table(); // Create an instance of Table GUI
+        table.setVisible(true); // Make the Table GUI visible
+        dispose(); // Close the current Menu frame
+    }
 }
 
 
