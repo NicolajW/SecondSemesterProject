@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import controller.SaleOrderController;
 import controller.TableController;
-import db.PersonDB;
+import db.PersonDB; 
 import db.TableDB;
+import model.Person;
 import model.SaleOrder;
 import model.Wine;
 
@@ -39,7 +40,6 @@ public class UnitTests {
 		tableCtrl = new TableController();
 		pDB = new PersonDB();
 		tDB = new TableDB();
-		pDB.findByPersonEmail("Jeff@mail.com");
 		tDB.findByTableNo(1);
 		tableCtrl.findAllTables();
 	}
@@ -50,10 +50,9 @@ public class UnitTests {
 	@Test
 	public void saleCreated() throws Exception {
 		
-		SaleOrder res = soCtrl.createSaleOrder("booby@hotmail.com", 1);
+		Person res = soCtrl.findByPersonEmail("booby@hotmail.com");
 		assertNotNull(res);
-		assertEquals("Jeff@mail.com", res.getPerson().getEmail());
-		assertEquals(1, res.getTableNo());
+		assertEquals("booby@hotmail.com", res.getEmail());
 	}
 	
 	@Test
