@@ -16,6 +16,11 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+
+import controller.SaleOrderController;
+import db.DataAccessException;
+import model.Person;
+
 import javax.swing.JOptionPane;
 
 public class WelcomePage extends JFrame {
@@ -24,6 +29,7 @@ public class WelcomePage extends JFrame {
     private JPanel contentPane;
     private JTextField textID;
     private JPasswordField txtPassword;
+    private SaleOrderController soc;
 
     /**
      * Launch the application.
@@ -90,7 +96,14 @@ public class WelcomePage extends JFrame {
         lblNewLabel_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         
         JButton btnNewButton = new JButton("Log In ");
-        btnNewButton.addActionListener(e -> logInClicked());
+        btnNewButton.addActionListener(e -> {
+			try {
+				logInClicked();
+			} catch (DataAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
         
         btnNewButton.setForeground(Color.BLACK);
         btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 12));
@@ -141,27 +154,13 @@ public class WelcomePage extends JFrame {
     
 
     
-    private void logInClicked() {
-        int id;
-        try {
-            id = Integer.parseInt(textID.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid ID format", "Login Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String password = new String(txtPassword.getPassword());
-        if (id == 1234 && "pass".equals(password)) {
-            System.out.println("logged in");
+    private void logInClicked() throws DataAccessException {
+    	SaleOrderController soc = new SaleOrderController();
+            Person p = soc.findByPersonEmail(textID.getText());
+            System.out.println(p);
+            Menu menu = new Menu(p);
+            menu.setVisible(true); 
             setVisible(false);
             dispose();
-            Menu menu = new Menu();
-            UpdatedCreateOrder createOrder = new UpdatedCreateOrder(Integer.toString(id)); 
-            menu.setEmployeeID(Integer.toString(id)); 
-            menu.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Incorrect ID or Password", "Login Error", JOptionPane.ERROR_MESSAGE);
-            txtPassword.setText("");
-        }
     }
 }

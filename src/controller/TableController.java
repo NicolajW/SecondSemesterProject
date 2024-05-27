@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import db.DataAccessException;
 import db.TableDAO;
 import db.TableDB;
@@ -19,8 +21,8 @@ public class TableController {
 		tDao.updateTableStatus(table);
 	}
 	
-	public void findAllTables() throws DataAccessException {
-		tDao.findAllTables();
+	public List<Table> findAllTables() throws DataAccessException {
+		return tDao.findAllTables();
 	}
 	
 	public void findByTableNo(int tableNo) throws DataAccessException {

@@ -4,7 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.DefaultListModel;
@@ -21,6 +22,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import controller.ProductController;
+import controller.SaleOrderController;
+import db.DataAccessException;
+import db.SaleProductDB;
+import model.Person;
+import model.Product;
+import model.SaleProduct;
+
 
 
 public class UpdatedCreateOrder extends JFrame {
@@ -28,17 +37,19 @@ public class UpdatedCreateOrder extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTable table;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private DefaultListModel<String> listModel;
 	private JList<String> list;
 	private String employeeID;
+	SaleOrderController soc = new SaleOrderController();
+	SaleProductTableModel sptm = new SaleProductTableModel(null);
+	private JTable tblSaleProduct;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				UpdatedCreateOrder frame = new UpdatedCreateOrder(null);
+				UpdatedCreateOrder frame = new UpdatedCreateOrder(null, 0);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -46,7 +57,7 @@ public class UpdatedCreateOrder extends JFrame {
 		});
 	}
 
-	public UpdatedCreateOrder(String employeeID) {
+	public UpdatedCreateOrder(Person p, int tableNo) throws DataAccessException {
 		this.employeeID = employeeID;
 		setTitle("Duoro > LogIn > Menu > Kassesystem ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,22 +90,7 @@ public class UpdatedCreateOrder extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPane = new JScrollPane();
-		panel_1.add(scrollPane, BorderLayout.CENTER);
-
-		table = new JTable();
-		table.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		scrollPane.setViewportView(table);
-		DefaultTableModel tableModel = new DefaultTableModel(
-				new Object[][] { { "1", "Product1", "10.00", "Type1", "Description1" },
-						{ "2", "Product2", "20.00", "Type2", "Description2" },
-
-				}, new String[] { "ID:", "Navn:", "Pris:", "Type:", "Beskrivelse:" });
-		table.setModel(tableModel);
-
-		TableColumn idColumn = table.getColumnModel().getColumn(0);
-		idColumn.setPreferredWidth(50);
+		DefaultTableModel tableModel = new DefaultTableModel();
 
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.NORTH);
@@ -118,10 +114,6 @@ public class UpdatedCreateOrder extends JFrame {
 		JButton btnNewButton = new JButton("       Søg         ");
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panel_3.add(btnNewButton, BorderLayout.EAST);
-		btnNewButton.addActionListener(e -> {
-			String searchId = textField_1.getText();
-			searchTableById(searchId);
-		});
 
 		JPanel panel_4 = new JPanel();
 		panel_1.add(panel_4, BorderLayout.SOUTH);
@@ -133,7 +125,12 @@ public class UpdatedCreateOrder extends JFrame {
 		JButton btnNewButton_2 = new JButton("Fjern");
 		btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_4.add(btnNewButton_2);
-		btnNewButton_2.addActionListener(e -> removeProductFromList());
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane, BorderLayout.CENTER);
+		
+		tblSaleProduct = new JTable();
+		scrollPane.setViewportView(tblSaleProduct);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.EAST);
@@ -176,70 +173,90 @@ public class UpdatedCreateOrder extends JFrame {
 		panel_5.add(textField_2, BorderLayout.CENTER);
 		textField_2.setColumns(10);
 
-		btnNewButton_1.addActionListener(e -> addSelectedProductToList());
-
-		btnNewButton_3.addActionListener(e -> {
-			calculateTotalPrice();
-		});
+		
+		init(employeeID, tableNo);
 	}
 
-	private void searchTableById(String searchId) {
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		boolean found = false;
-		for (int i = 0; i < model.getRowCount(); i++) {
-			String id = model.getValueAt(i, 0).toString();
-			if (id.equals(searchId)) {
-				table.setRowSelectionInterval(i, i);
-				table.scrollRectToVisible(table.getCellRect(i, 0, true));
-				found = true;
-				break;
-			}
-		}
-		if (!found) {
-			JOptionPane.showMessageDialog(this, "Product not found.");
-		}
+	private void init(String employeeID, int tableNo) throws DataAccessException {
+		createOrder(employeeID, tableNo);
+		displayProducts();
+		
 	}
 
-	private void addSelectedProductToList() {
-		int selectedRow = table.getSelectedRow();
-		if (selectedRow != -1) {
-			DefaultTableModel model = (DefaultTableModel) table.getModel();
-			String productName = model.getValueAt(selectedRow, 1).toString();
-			String productPrice = model.getValueAt(selectedRow, 2).toString();
-
-			String productDetails = String.format("%-20s %10s DK", productName, productPrice);
-			listModel.addElement(productDetails);
-
-			calculateTotalPrice();
-		} else {
-			JOptionPane.showMessageDialog(this, "No product selected.");
-		}
+	private void displayProducts() throws DataAccessException {
+		sptm = new SaleProductTableModel(new ArrayList<>());
+		SaleProductDB spdb = new SaleProductDB();
+		
+		
+		List<SaleProduct> sp = spdb.findAll();
+		sptm.setData(sp);
+		tblSaleProduct.setModel(sptm);
 	}
 
-	private void removeProductFromList() {
-		int selectedIndex = list.getSelectedIndex();
-		if (selectedIndex != -1) {
-			listModel.remove(selectedIndex);
-			calculateTotalPrice();
-		} else {
-			JOptionPane.showMessageDialog(this, "No product selected to remove.");
-		}
+	private void createOrder(String employeeID, int tableNo) throws DataAccessException {
+		soc.createSaleOrder(employeeID, tableNo);
+		
 	}
 
-	private void calculateTotalPrice() {
-		double totalPrice = 0.0;
-		for (int i = 0; i < listModel.getSize(); i++) {
-			String item = listModel.getElementAt(i);
-			String[] parts = item.split("\\s+");
-			double price = Double.parseDouble(parts[1]);
-			totalPrice += price;
-		}
-		textField_2.setText(String.format("%.2f DK", totalPrice));
-	}
 
-	public void setEmployeeID(String employeeID) {
-		textField.setText(employeeID);
-	}
+	
+//	private void searchTableById(String searchId) {
+//		DefaultTableModel model = (DefaultTableModel) table.getModel();
+//		boolean found = false;
+//		for (int i = 0; i < model.getRowCount(); i++) {
+//			String id = model.getValueAt(i, 0).toString();
+//			if (id.equals(searchId)) {
+//				table.setRowSelectionInterval(i, i);
+//				table.scrollRectToVisible(table.getCellRect(i, 0, true));
+//				found = true;
+//				break;
+//			}
+//		}
+//		if (!found) {
+//			JOptionPane.showMessageDialog(this, "Product not found.");
+//		}
+//	}
+//
+//	private void addSelectedProductToList() {
+//		int selectedRow = table.getSelectedRow();
+//		if (selectedRow != -1) {
+//			DefaultTableModel model = (DefaultTableModel) table.getModel();
+//			String productName = model.getValueAt(selectedRow, 1).toString();
+//			String productPrice = model.getValueAt(selectedRow, 2).toString();
+//
+//			String productDetails = String.format("%-20s %10s DK", productName, productPrice);
+//			listModel.addElement(productDetails);
+//
+//			calculateTotalPrice();
+//		} else {
+//			JOptionPane.showMessageDialog(this, "No product selected.");
+//		}
+//	}
+//
+//	private void removeProductFromList() {
+//		int selectedIndex = list.getSelectedIndex();
+//		if (selectedIndex != -1) {
+//			listModel.remove(selectedIndex);
+//			calculateTotalPrice();
+//		} else {
+//			JOptionPane.showMessageDialog(this, "No product selected to remove.");
+//		}
+//	}
+//
+//	private void calculateTotalPrice() {
+//		double totalPrice = 0.0;
+//		for (int i = 0; i < listModel.getSize(); i++) {
+//			String item = listModel.getElementAt(i);
+//			String[] parts = item.split("\\s+");
+//			double price = Double.parseDouble(parts[1]);
+//			totalPrice += price;
+//		}
+//		textField_2.setText(String.format("%.2f DK", totalPrice));
+//	}
+//
+//	public void setEmployeeID(String employeeID) {
+//		textField.setText(employeeID);
+//	}
 	
 	
 }

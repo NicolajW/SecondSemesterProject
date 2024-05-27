@@ -11,6 +11,7 @@ import db.DataAccessException;
 import db.PersonDB;
 import db.ProductDB;
 import db.SaleOrderDB;
+import db.SaleProductDB;
 import db.TableDB;
 import model.Ingredients;
 import model.Person;
@@ -21,16 +22,27 @@ import model.Table;
 public class TryMe {
 	public static void main(String[] args) throws DataAccessException {
 //		
-//		TableDB tbd = new TableDB();
-//		tbd.updateTableStatus(t);
-		//tbd.findAll();
-//		
-//		
-		TableDB tDB = new TableDB();
+		TableDB tbd = new TableDB();
+		Table t = new Table(false, 3);
+		tbd.updateTableStatus(t);
 		
-		List<Table> list = tDB.findAllTables();
-		for(Table table : list) {
-			System.out.println(table);
+//		SaleProductDB dosb = new SaleProductDB();
+//		dosb.findAll();
+		
+		
+		
+		
+		
+		
+		
+		
+//		tbd.findAll();
+//		
+//		TableDB tDB = new TableDB();
+		
+//		List<Table> list = tDB.findAllTables();
+//		for(Table table : list) {
+//			System.out.println(table);
 		}
 
 	
@@ -38,4 +50,4 @@ public class TryMe {
 		
 	}
 
-}
+//}

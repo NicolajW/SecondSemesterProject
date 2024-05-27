@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class Table extends JFrame {
+public class TableWindow extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -16,7 +16,7 @@ public class Table extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                Table frame = new Table();
+                TableWindow frame = new TableWindow();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -24,7 +24,7 @@ public class Table extends JFrame {
         });
     }
 
-    public Table() {
+    public TableWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 406);
         contentPane = new JPanel();

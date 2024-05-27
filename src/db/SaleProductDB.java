@@ -44,7 +44,7 @@ public class SaleProductDB implements SaleProductDAO {
 		try {
 			findByProductIDPKFKPS = con.prepareStatement(FIND_BY_Q_WINE);
 			findByFoodIDPS = con.prepareStatement(FIND_BY_Q_FOOD);
-			findAllPSS = con.prepareStatement(FIND_ALL_Q);
+			findAllPSS = con.prepareStatement(JOIN_ALL_Q);
 			findByProductIDPS = con.prepareStatement(FIND_BY_Q);
 			insertInSP = con.prepareStatement(INSERT_INTO_SALEPRODUCT_Q);
 			insertInW = con.prepareStatement(INSERT_INTO_WINE_Q);
