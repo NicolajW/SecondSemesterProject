@@ -68,10 +68,11 @@ public class SaleOrderController {
 		}
 	}
 
-	public void saveOrder() throws DataAccessException {
+	public SaleOrder saveOrder() throws DataAccessException {
 		soDao.saveOrder(saleOrder);
 		updateInventory();
 		updateTableForSaveOrder();
+		return saleOrder;
 	}
 
 	public void updateTableForSaveOrder() throws DataAccessException {

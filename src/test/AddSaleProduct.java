@@ -14,7 +14,7 @@ import model.Product;
 import model.SaleOrder;
 import model.SaleProduct;
 
-class addSaleProduct {
+class AddSaleProduct {
 	
 	private static PersonController pCtrl;
 	private static ProductController proCtrl;
@@ -46,6 +46,7 @@ class addSaleProduct {
 		
 		// Assert
 		assertNotNull(sp);
+		
 		System.out.println(sp);
 	}
 

@@ -19,8 +19,13 @@ import db.SaleProductDB;
 public class SaleProductController {
 	private SaleProductDAO pDao;
 	
-	public SaleProductController() throws DataAccessException {
-		pDao = new SaleProductDB();
+	public SaleProductController() {
+		try {
+			pDao = new SaleProductDB();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public SaleProduct findByProductById(int id) throws DataAccessException {
 		return pDao.findByProductById(id);

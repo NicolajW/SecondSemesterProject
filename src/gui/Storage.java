@@ -149,8 +149,8 @@ public class Storage extends JFrame {
 		try {
 			PersonController personctrl = new PersonController();
 			PersonDB persondb = new PersonDB();
-			persondb.findAll();
-			personctrl.findByEmployeeNo(getName());
+//			persondb.findAll();
+//			personctrl.findByEmployeeNo(getName());
 			System.out.println(personctrl);
 		} catch (DataAccessException e) {
 			e.printStackTrace();

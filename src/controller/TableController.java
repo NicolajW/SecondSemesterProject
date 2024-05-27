@@ -13,8 +13,13 @@ public class TableController {
 	
 	
 	
-	public TableController() throws DataAccessException{
-		tDao = new TableDB();
+	public TableController(){
+		try {
+			tDao = new TableDB();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateTableStatus(Table table) throws DataAccessException {
