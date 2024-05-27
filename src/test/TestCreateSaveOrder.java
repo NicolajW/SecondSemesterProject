@@ -2,10 +2,12 @@ package test;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import controller.PersonController;
@@ -45,11 +47,12 @@ public class TestCreateSaveOrder {
 		
 		// Act
 		saleOrder = soCtrl.createSaleOrder(p.getEmail(), 1);
-		soCtrl.saveOrder();
+		SaleOrder save = soCtrl.saveOrder();
 		
 		
 		// Assert
 		assertNotNull(saleOrder);
+		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 		
 	}
 	
