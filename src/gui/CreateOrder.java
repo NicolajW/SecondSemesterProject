@@ -143,9 +143,9 @@ public class CreateOrder extends JFrame {
 		lblRose.setHorizontalAlignment(SwingConstants.CENTER);
 		firstWine.add(lblRose, BorderLayout.CENTER);
 		btnNewButton.addActionListener(e -> {
-            AddToBasketPopUp dialog = new AddToBasketPopUp();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
+//            AddToBasketPopUp dialog = new AddToBasketPopUp();
+//            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//            dialog.setVisible(true);
         });
 		
 		
@@ -175,9 +175,9 @@ public class CreateOrder extends JFrame {
 		JButton btnNewButton_1 = new JButton("Tilføj til Kurv");
 		secondWine.add(btnNewButton_1, BorderLayout.SOUTH);
 		btnNewButton_1.addActionListener(e -> {
-            AddToBasketPopUp2 dialog = new AddToBasketPopUp2();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
+//            AddToBasketPopUp2 dialog = new AddToBasketPopUp2();
+//            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//            dialog.setVisible(true);
 		});
 		
 		JPanel thirdWine = new JPanel();
@@ -397,10 +397,10 @@ public class CreateOrder extends JFrame {
 	}
 
 	private void kurvClicked() throws DataAccessException {
-		pc.updateProductQuantity(null);
-		AddToBasketPopUp basket = new AddToBasketPopUp();
-		basket.setVisible(true);
-		updateTable();
+//		pc.updateProductQuantity(null);
+//		AddToBasketPopUp basket = new AddToBasketPopUp();
+//		basket.setVisible(true);
+//		updateTable();
 		
 	}
 
@@ -416,8 +416,8 @@ public class CreateOrder extends JFrame {
     }
 	
 	private void goToBasket() {
-		Basket basketFrame = new Basket();
-		basketFrame.setVisible(true);
+//		Basket basketFrame = new Basket();
+//		basketFrame.setVisible(true);
 		
 		
 	}

@@ -146,8 +146,8 @@ public class Menu extends JFrame {
 	private void storageClicked() {
 		setVisible(false);
 		dispose();
-		Storage stor = new Storage(null);
-		stor.setVisible(true);
+//		Storage stor = new Storage(null);
+//		stor.setVisible(true);
 	}
 
 	private void backToWelcomePage() {

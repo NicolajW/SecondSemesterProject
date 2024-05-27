@@ -12,20 +12,24 @@ import org.junit.jupiter.api.BeforeEach;
 
 import controller.PersonController;
 import controller.SaleOrderController;
+import controller.TableController;
 import db.DataAccessException;
 import model.Person;
 import model.SaleOrder;
+import model.Table;
 
 public class TestCreateSaveOrder {
 	
 	private static PersonController pctrl;
 	private static SaleOrderController soCtrl;
 	private static SaleOrder saleOrder;
+	private static TableController tCtrl;
 		
 	@BeforeAll
 	public static void setUpAll() throws Exception {
 		pctrl = new PersonController();
 		soCtrl = new SaleOrderController();
+		tCtrl = new TableController();
 	}
 	
 	@AfterAll
@@ -54,6 +58,23 @@ public class TestCreateSaveOrder {
 		assertNotNull(saleOrder);
 		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 		
+	}
+	
+	@Test
+	public void CreateSaveOrderFailed() throws DataAccessException {
+		
+		//Arrange
+		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
+        Table t = new Table(true, 2);
+        tCtrl.updateTableStatus(t);
+		
+		//Act
+		saleOrder = soCtrl.createSaleOrder(p.getEmail(), 2);
+		SaleOrder save = soCtrl.saveOrder();
+		
+		//Assert
+		assertNotNull(tCtrl);
+		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 	}
 	
 

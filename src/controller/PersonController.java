@@ -13,7 +13,6 @@ public class PersonController {
 		try {
 			pDao = new PersonDB();
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
