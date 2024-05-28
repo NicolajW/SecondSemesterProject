@@ -94,6 +94,11 @@ public class ChooseTableWindow extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						cancelClicked();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -101,11 +106,16 @@ public class ChooseTableWindow extends JDialog {
 		init(p);
 	}
 
+
 	private void init(Person p) throws DataAccessException {
 		displayItems();
 		System.out.println(p);
 	}
 	
+	protected void cancelClicked() {
+		setVisible(false);
+		dispose();
+	}
 	
 	public void okClicked(Person p) throws DataAccessException {
 		int selectedRowIndex = tblTables.getSelectedRow();
@@ -115,8 +125,7 @@ public class ChooseTableWindow extends JDialog {
 			UpdatedCreateOrder uco = new UpdatedCreateOrder(p, tableNo);
 			uco.setVisible(true);
 			
-			setVisible(false);
-			dispose();
+			cancelClicked();
 		}
 	}
 

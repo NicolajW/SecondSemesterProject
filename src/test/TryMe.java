@@ -25,11 +25,10 @@ public class TryMe {
 		TableDB tbd = new TableDB();
 		Table t = new Table(false, 3);
 		tbd.updateTableStatus(t);
+
 		
 //		SaleProductDB dosb = new SaleProductDB();
 //		dosb.findAll();
-		
-		
 		
 		
 		

@@ -31,7 +31,14 @@ public class SaleOrder {
 	}
 
 	public double getTotalPrice() {
-		return totalPrice;
+		double total = 0;
+	
+			for (OrderLine line : ol) {	
+				total += line.getSaleProduct().getPrice() * line.getQuantity();
+				System.out.println(line.getSaleProduct().getPrice());
+			}
+		this.totalPrice = total;
+		return total;
 	}
 
 	public void setTotalPrice(double totalPrice) {
@@ -65,10 +72,9 @@ public class SaleOrder {
 			for (OrderLine ol : existingOrderLines) {
 				if (ol.getSaleProduct().getSaleProductID() == saleProductId) {
 					ol.setQuantity(ol.getQuantity() + orderLine.getQuantity());
-					return orderLinesMap;
 				}
 			}
-			existingOrderLines.add(orderLine);
+			//existingOrderLines.add(orderLine);
 			orderLinesMap.put(saleProductId, existingOrderLines);
 		} else {
 			addOrderLine(orderLine);

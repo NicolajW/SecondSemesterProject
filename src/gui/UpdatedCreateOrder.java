@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JList;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -28,9 +29,10 @@ import db.DataAccessException;
 import db.SaleProductDB;
 import model.Person;
 import model.Product;
+import model.SaleOrder;
 import model.SaleProduct;
-
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UpdatedCreateOrder extends JFrame {
 
@@ -38,9 +40,11 @@ public class UpdatedCreateOrder extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private DefaultListModel<String> listModel;
-	private JList<String> list;
+	private JTextField txtTotal;
+	private DefaultListModel<SaleProduct> listModel = new DefaultListModel<>();
+	//private ListModel<SaleProduct> listModel;
+	//private JList<SaleProduct> listBasket;
+	private JList<SaleProduct> listBasket = new JList<>(listModel);
 	private String employeeID;
 	SaleOrderController soc = new SaleOrderController();
 	SaleProductTableModel sptm = new SaleProductTableModel(null);
@@ -71,7 +75,6 @@ public class UpdatedCreateOrder extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(panel, BorderLayout.NORTH);
-		
 
 		JLabel lblNewLabel = new JLabel("Kassesystem");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -119,16 +122,26 @@ public class UpdatedCreateOrder extends JFrame {
 		panel_1.add(panel_4, BorderLayout.SOUTH);
 
 		JButton btnNewButton_1 = new JButton("Tilføj ");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					addClicked();
+				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_4.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("Fjern");
 		btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_4.add(btnNewButton_2);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		panel_1.add(scrollPane, BorderLayout.CENTER);
-		
+
 		tblSaleProduct = new JTable();
 		scrollPane.setViewportView(tblSaleProduct);
 
@@ -140,8 +153,8 @@ public class UpdatedCreateOrder extends JFrame {
 		panel_2.add(scrollPane_1, BorderLayout.CENTER);
 
 		listModel = new DefaultListModel<>();
-		list = new JList<>(listModel);
-		scrollPane_1.setViewportView(list);
+		listBasket = new JList<>(listModel);
+		scrollPane_1.setViewportView(listBasket);
 
 		JLabel lblNewLabel_3 = new JLabel("Kurv");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -163,43 +176,84 @@ public class UpdatedCreateOrder extends JFrame {
 		btnNewButton_3.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_5.add(btnNewButton_3, BorderLayout.SOUTH);
 		btnNewButton_3.addActionListener(e -> {
+			try {
+				saveOrder();
+			} catch (DataAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			JOptionPane.showMessageDialog(this, "Betalt");
 		});
 
-		textField_2 = new JTextField();
-		textField_2.setBackground(Color.WHITE);
-		textField_2.setEditable(false);
-		textField_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_5.add(textField_2, BorderLayout.CENTER);
-		textField_2.setColumns(10);
-
+		txtTotal = new JTextField();
+		txtTotal.setBackground(Color.WHITE);
+		txtTotal.setEditable(false);
+		txtTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_5.add(txtTotal, BorderLayout.CENTER);
+		txtTotal.setColumns(10);
 		
-		init(employeeID, tableNo);
+		JButton btnNewButton_1_1 = new JButton("Cancel");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelClicked();
+			}
+		});
+		panel_5.add(btnNewButton_1_1, BorderLayout.EAST);
+		btnNewButton_1_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+		init(p, tableNo);
 	}
 
-	private void init(String employeeID, int tableNo) throws DataAccessException {
-		createOrder(employeeID, tableNo);
+
+
+	private void init(Person p, int tableNo) throws DataAccessException {
+		createOrder(p, tableNo);
 		displayProducts();
-		
+		listBasket.setCellRenderer(new SaleProductRenderer());
+		listBasket.setModel(listModel);
+
 	}
 
+	protected void addClicked() throws DataAccessException {
+		addItem();
+	}
+
+	private void addItem() throws DataAccessException {
+		int selectedRowIndex = tblSaleProduct.getSelectedRow();
+		if (selectedRowIndex != -1) {
+			SaleProduct selectedSaleProduct = sptm.getSaleProduct(selectedRowIndex);
+			int id = selectedSaleProduct.getSaleProductID();
+
+			soc.addProduct(1, id);
+			listModel.addElement(selectedSaleProduct);
+
+			this.txtTotal.setText("" + soc.getTotalPrice());
+		}
+	}
+
+	private void saveOrder() throws DataAccessException {
+		soc.saveOrder();
+		cancelClicked();
+	}
+	
+	
 	private void displayProducts() throws DataAccessException {
 		sptm = new SaleProductTableModel(new ArrayList<>());
 		SaleProductDB spdb = new SaleProductDB();
-		
-		
+
 		List<SaleProduct> sp = spdb.findAll();
 		sptm.setData(sp);
 		tblSaleProduct.setModel(sptm);
 	}
 
-	private void createOrder(String employeeID, int tableNo) throws DataAccessException {
-		soc.createSaleOrder(employeeID, tableNo);
-		
+	private SaleOrder createOrder(Person p, int tableNo) throws DataAccessException {
+		return soc.createSaleOrder(p.getEmail(), tableNo);
+	}
+	protected void cancelClicked() {
+		setVisible(false);
+		dispose();
 	}
 
-
-	
 //	private void searchTableById(String searchId) {
 //		DefaultTableModel model = (DefaultTableModel) table.getModel();
 //		boolean found = false;
@@ -257,6 +311,5 @@ public class UpdatedCreateOrder extends JFrame {
 //	public void setEmployeeID(String employeeID) {
 //		textField.setText(employeeID);
 //	}
-	
-	
+
 }

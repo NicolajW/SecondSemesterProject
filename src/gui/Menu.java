@@ -26,7 +26,7 @@ public class Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel menuPane;
-	private JTextField textField;
+	private JTextField txtEmployee;
 
 	/**
 	 * Launch the application.
@@ -136,20 +136,21 @@ public class Menu extends JFrame {
 		gbc_lblNewLabel_1.gridy = 0;
 		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setEditable(false);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.anchor = GridBagConstraints.WEST;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		panel_2.add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtEmployee = new JTextField();
+		txtEmployee.setEnabled(false);
+		txtEmployee.setEditable(false);
+		GridBagConstraints gbc_txtEmployee = new GridBagConstraints();
+		gbc_txtEmployee.anchor = GridBagConstraints.WEST;
+		gbc_txtEmployee.gridx = 1;
+		gbc_txtEmployee.gridy = 0;
+		panel_2.add(txtEmployee, gbc_txtEmployee);
+		txtEmployee.setColumns(10);
 		
 		init(p);
 	}
 
 	private void init(Person p) {
+		setEmployeeID(p);
 		System.out.println(p);
 	}
 
@@ -160,13 +161,13 @@ public class Menu extends JFrame {
 		
 //		UpdatedCreateOrder uco = new UpdatedCreateOrder(textField.getText());
 //		uco.setVisible(true);
-		setVisible(false);
-		dispose();
+//		setVisible(false);
+//		dispose();
 	}
 
 	private void storageClicked() {
-		setVisible(false);
-		dispose();
+//		setVisible(false);
+//		dispose();
 //		Storage stor = new Storage(null);
 //		stor.setVisible(true);
 	}
@@ -178,8 +179,8 @@ public class Menu extends JFrame {
 		welcomePage.setVisible(true);
 	}
 
-	public void setEmployeeID(String employeeID) {
-		textField.setText(employeeID);
+	public void setEmployeeID(Person p) {
+		txtEmployee.setText(p.getEmail());
 	}
 
 	private void openTableGui() {

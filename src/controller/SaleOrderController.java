@@ -27,6 +27,7 @@ public class SaleOrderController {
 	private SaleOrder saleOrder;
 	private TableController tc;
 	private InventoryController ictrl;
+	
 
 	public SaleOrderController() {
 		try {
@@ -69,6 +70,7 @@ public class SaleOrderController {
 	}
 
 	public SaleOrder saveOrder() throws DataAccessException {
+		saleOrder.setTotalPrice(getTotalPrice());
 		soDao.saveOrder(saleOrder);
 		updateInventory();
 		updateTableForSaveOrder();
@@ -81,7 +83,7 @@ public class SaleOrderController {
 	}
 
 	private void updateWineInventory() throws DataAccessException {
-		for (int i = 0; i < saleOrder.getOl().size(); i++) {
+		for (int i = 0; i > saleOrder.getOl().size(); i++) {
 			int productID = findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
 			Product p = findByProductID(productID);
 
@@ -94,7 +96,7 @@ public class SaleOrderController {
 	}
 
 	private void updateFoodInventory() throws DataAccessException {
-		for (int i = 0; i < saleOrder.getOl().size(); i++) {
+		for (int i = 0; i > saleOrder.getOl().size(); i++) {
 			
 			int ingredientProductID = findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
 			Product ingredientProduct = findByProductID(ingredientProductID);
@@ -116,6 +118,10 @@ public class SaleOrderController {
 				}
 			}
 		}
+	
+	public double getTotalPrice() {
+		return saleOrder.getTotalPrice();
+	}
 	
 	
 	public void updateTableStatus(Table table) throws DataAccessException {
