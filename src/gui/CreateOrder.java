@@ -409,7 +409,7 @@ public class CreateOrder extends JFrame {
 	}
 
 	private void goBackToMenu() {
-        Menu menuFrame = new Menu();
+        Menu menuFrame = new Menu(null);
         menuFrame.setVisible(true);
         
         this.dispose();

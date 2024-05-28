@@ -171,7 +171,7 @@ public class Storage extends JFrame {
 	private void backClicked() {
 		setVisible(false);
 		dispose();
-		Menu menu = new Menu();
+		Menu menu = new Menu(null);
 		menu.setVisible(true);
 	}
 }

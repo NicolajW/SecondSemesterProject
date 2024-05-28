@@ -61,9 +61,8 @@ public class TestOrderSavedInDatabase {
 	    SaleOrder saved = soCtrl.saveOrder();
 		
 	    //Assert
-//	    assertNotNull(tCtrl);
-		assertEquals(saved.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 		assertNotNull(saved.getOrderNo());
+		assertEquals(saved.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 	}
 	
 }

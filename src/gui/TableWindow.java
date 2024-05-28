@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import db.DataAccessException;
+
 public class TableWindow extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -45,7 +47,13 @@ public class TableWindow extends JFrame {
         JButton reserverButton = new JButton("Reserver");
         reserverButton.setBounds(403, 330, 100, 30);
         layeredPane.add(reserverButton);
-        reserverButton.addActionListener(e -> reserverButton());
+        reserverButton.addActionListener(e -> {
+			try {
+				reserverButton();
+			} catch (DataAccessException e1) {
+				e1.printStackTrace();
+			}
+		});
 
         JButton backButton = new JButton("Annuller");
         backButton.setBounds(513, 330, 100, 30);
@@ -105,14 +113,14 @@ public class TableWindow extends JFrame {
         }
     }
     
-    private void reserverButton() {
-        UpdatedCreateOrder updatedCreateOrder = new UpdatedCreateOrder(null);
+    private void reserverButton() throws DataAccessException {
+        UpdatedCreateOrder updatedCreateOrder = new UpdatedCreateOrder(null, getDefaultCloseOperation());
         updatedCreateOrder.setVisible(true);
         dispose();
     }
     
     private void backButton() {
-        Menu menu = new Menu();
+        Menu menu = new Menu(null);
         menu.setVisible(true);
         dispose();
     }

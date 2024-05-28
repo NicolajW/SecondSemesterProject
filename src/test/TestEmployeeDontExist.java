@@ -10,8 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controller.PersonController;
+import controller.SaleOrderController;
 import db.DataAccessException;
 import model.Person;
+import model.SaleOrder;
 
 public class TestEmployeeDontExist {
 
@@ -35,10 +37,9 @@ public class TestEmployeeDontExist {
 	}
 	
 	@Test
-	public void CreateSaveOrderSuccess() throws DataAccessException {
+	public void emailPersonDontExist() throws DataAccessException {
 		// Arrange
-		Person p = pCtrl.findByPersonEmail("fakeBobby@hotmail.com");
-		String per = p.getEmail();
+		Person p = pCtrl.findByPersonEmail("fakebobby@hotmail.com");
 		// Act
 		
 		
@@ -47,6 +48,17 @@ public class TestEmployeeDontExist {
 		assertEquals(p.getEmail(), "bobby@hotmail.com");
 		
 	}
+	@Test
+	public void emailPersonDoExist() throws DataAccessException {
+		// Arrange
+		Person p = pCtrl.findByPersonEmail("bobby@hotmail.com");
+		// Act
+		
+		
+		// Assert
+		assertNotNull(p);
+		assertEquals(p.getEmail(), "bobby@hotmail.com");
+		
 }
 
-
+}
