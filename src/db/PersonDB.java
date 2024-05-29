@@ -24,6 +24,13 @@ public class PersonDB implements PersonDAO {
 		}
 	}
 	
+	/**
+	 * This method find a person by its email with
+	 * @param <code> String </code> email
+	 * it finds the persons id and then its email, <code> ResultSet </code> rs executes the query for findByIDPS
+	 * @return res which an object of the <code> Person </code> class
+	 * @throws DataAccessException
+	 */
 	@Override
 	public Person findByPersonEmail(String email) throws DataAccessException {
 		Person res = null;
@@ -37,6 +44,13 @@ public class PersonDB implements PersonDAO {
 		return res;
 	}
 
+	/**
+	 * This method instantiates and object of <code>Person</code>
+	 * here it creates a new Person where it gets the information matching with the <code>Person</code> class
+	 * @param rs
+	 * @return res, which is an instance of <code> Person </code>
+	 * @throws SQLException
+	 */
 	private Person buildObject(ResultSet rs) throws SQLException {
 		Person res = null;
 		if (rs.next()) {
@@ -51,6 +65,12 @@ public class PersonDB implements PersonDAO {
 		return res;
 	}
 
+	/**
+	 * This method creates objects of List <code>Person</code> of type <code>ArrayList</code>
+	 * a while loop to add a Person p into the <code>ArrayList</code>
+	 * @param rs
+	 * @return res, which is an <code>ArrayList</code> of type Person
+	 */
 	private List<Person> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
 		List<Person> res = new ArrayList<>();
 		Person p = buildObject(rs);

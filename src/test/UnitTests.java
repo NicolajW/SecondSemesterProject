@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +12,6 @@ import controller.TableController;
 import db.PersonDB; 
 import db.TableDB;
 import model.Person;
-import model.SaleOrder;
 import model.Wine;
 
 import org.junit.jupiter.api.BeforeAll;

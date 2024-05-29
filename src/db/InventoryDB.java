@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Inventory;
-import model.SaleProduct;
-import model.Table;
 
 public class InventoryDB implements InventoryDAO {
 	private static final String FIND_ALL_Q = "select id, quantity from Inventory";
@@ -19,6 +17,11 @@ public class InventoryDB implements InventoryDAO {
 	private PreparedStatement findByIDPS;
 	private PreparedStatement update;
 
+	/**
+	 *Instantiates an object for the connection to dataBase with <code>FIND_ALL_Q</code>, <code>FIND_BY_ID_Q</code> and <code>UPDATE_Q</code>
+	 * to instantiate queries. 
+	 * @throws DataAccessException
+	 */
 	public InventoryDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -31,6 +34,12 @@ public class InventoryDB implements InventoryDAO {
 		}
 	}
 
+	/**
+	 * This method instantiates an object of <code> Inventory </code> where it uses an if statement to get quantity and id of products in the Inventory class
+	 * @param rs
+	 * @return res which is an object of Inventory
+	 * @throws SQLException
+	 */
 	private Inventory buildObject(ResultSet rs) throws SQLException {
 		Inventory res = null;
 		if (rs.next()) {
@@ -39,6 +48,15 @@ public class InventoryDB implements InventoryDAO {
 		return res;
 	}
 
+	/**
+	 * This method instantiates a <code>List</code> creating a new <code>ArrayList</code> of type Inventory
+	 * <code>Inventory</code> e sets the method buildObject with rs.
+	 * 
+	 * <code>while</code> loop adds e while we have a buildObject with data
+	 * @param rs
+	 * @return res which is a new <code>List</code> of the Inventory
+	 * @throws DataAccessException, SQLException
+	 */
 	private List<Inventory> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
 		List<Inventory> res = new ArrayList<>();
 		Inventory e = buildObject(rs);
@@ -50,6 +68,13 @@ public class InventoryDB implements InventoryDAO {
 
 	}
 
+	/**
+	 * This method finds by inventoryNo, with inventoryNo
+	 * @param <code>int</code> inventoryNo
+	 * We use a try catch, to handle the exception to tell if it can find tableNo of e
+	 * It uses <code>findByIDPS</code> and executes the query with inventoryNo
+	 * @throws DataAccessException
+	 */
 	@Override
 	public Inventory findByInventoryNo(int inventoryNo) throws DataAccessException {
 		Inventory res = null;
@@ -63,6 +88,14 @@ public class InventoryDB implements InventoryDAO {
 		return res;
 	}
 
+	/**
+	 * Updates the quantity of products where it then sets the a new quantity, and sets an id of the <code>inventory</code>
+	 * and then executes the update
+	 * @param inventory
+	 * it uses try catch to handle an SQLException
+	 * @exception SQLException 
+	 * @throws DataAccessException
+	 */
 	@Override
 	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
 		final double quantity = inventory.getQuantity();

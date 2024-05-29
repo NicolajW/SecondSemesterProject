@@ -45,6 +45,14 @@ public class ProductDB implements ProductDAO {
 	}
 	
 	// NYT-------------------------------------------
+	/**
+	 * This method creates a List of type <code>Ingredients</code> using <code>ArrayList</code>
+	 * it uses <code>findIngredientsByFoodPS</code> to find the ingredients for the food, and gets the id of the type food
+	 * a <code>while</code> loop used to create new <code>Ingredients</code> and then execute the query
+	 * @param foodID
+	 * @return ingredients
+	 * @throws DataAccessException
+	 */
 		@Override
 		public List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException {
 			List<Ingredients> ingredients = new ArrayList<>();
@@ -63,6 +71,14 @@ public class ProductDB implements ProductDAO {
 		}
 		
 		// NYT-------------------------------------------
+		/**
+		 * This method finds product id on ingredients and uses the <code>saleProductID</code>
+		 * It makes a ResultSet with the <code>saleProductID</code> on ingredients and executes the query
+		 * 
+		 * @param saleProductID
+		 * @return res
+		 * @throws DataAccessException
+		 */
 		@Override
 		public int findProductIDOnIngredient(int saleProductID) throws DataAccessException {
 			int res = 0;
