@@ -5,7 +5,6 @@ public class Wine extends SaleProduct {
 	public String yearProduced;
 	public String wineHouse;
 	public String region;
-	public int amountLeft;
 
 	public Wine(int saleProductID, String name, Double price, String description, String type, String grapeType,
 			String yearProduced, String wineHouse, String region) {

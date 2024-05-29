@@ -12,19 +12,13 @@ public class Ingredients extends Product {
 		this.quantity = quantity;
 	}
 	
-	
-
 	public int getQuantity() {
 		return quantity;
 	}
 
-
-
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-
 
 	public String getName() {
 		return name;
@@ -41,7 +35,4 @@ public class Ingredients extends Product {
 	public void setTypeOfFood(String typeOfFood) {
 		this.typeOfFood = typeOfFood;
 	}
-	
-	
-
 }

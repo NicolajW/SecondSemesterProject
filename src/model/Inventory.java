@@ -1,7 +1,5 @@
 package model;
 
-import db.DataAccessException;
-import db.SaleProductDB;
 
 public class Inventory {
 	private double quantity;
@@ -28,5 +26,4 @@ public class Inventory {
 	public void setQuantity(double d) {
 		this.quantity = d;
 	}
-
 }

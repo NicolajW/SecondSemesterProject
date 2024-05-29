@@ -65,11 +65,4 @@ public class Person {
 	public void setAdminNo(int adminNo) {
 		this.adminNo = adminNo;
 	}
-
-	@Override
-	public String toString() {
-		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNo=" + phoneNo
-				+ ", employeeNo=" + employeeNo + ", adminNo=" + adminNo + "]";
-	}
-
 }

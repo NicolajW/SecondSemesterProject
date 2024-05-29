@@ -28,11 +28,6 @@ public class Food extends SaleProduct {
 	public void setIngredients(List<Ingredients> ingredients) {
 		this.ingredients = ingredients;
 	}
-	
-	
-	
-	
-	
 }
 
 

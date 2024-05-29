@@ -32,11 +32,10 @@ public class SaleOrder {
 
 	public double getTotalPrice() {
 		double total = 0;
-	
-			for (OrderLine line : ol) {	
-				total += line.getSaleProduct().getPrice() * line.getQuantity();
-				System.out.println(line.getSaleProduct().getPrice());
-			}
+		for (OrderLine line : ol) {
+			total += line.getSaleProduct().getPrice() * line.getQuantity();
+			System.out.println(line.getSaleProduct().getPrice());
+		}
 		this.totalPrice = total;
 		return total;
 	}
@@ -74,7 +73,6 @@ public class SaleOrder {
 					ol.setQuantity(ol.getQuantity() + orderLine.getQuantity());
 				}
 			}
-			//existingOrderLines.add(orderLine);
 			orderLinesMap.put(saleProductId, existingOrderLines);
 		} else {
 			addOrderLine(orderLine);
@@ -94,14 +92,4 @@ public class SaleOrder {
 	public void setOl(List<OrderLine> ol) {
 		this.ol = ol;
 	}
-
-	public List<SaleOrder> findByOrderNo(int quantity) {
-		return null;
-	}
-
-	@Override
-	public String toString() {
-		return "SaleOrder [ol=" + ol + "]";
-	}
-
 }

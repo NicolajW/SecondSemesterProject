@@ -83,10 +83,4 @@ public abstract class SaleProduct {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	@Override
-	public String toString() {
-		return "SaleProduct [SaleProductID=" + SaleProductID + ", name=" + name + ", price=" + price + ", description="
-				+ description + ", type=" + type + "]";
-	}
 }
