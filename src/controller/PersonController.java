@@ -6,7 +6,6 @@ import db.PersonDB;
 import model.Person;
 
 public class PersonController {
-
 	private PersonDAO pDao;
 
 	public PersonController(){

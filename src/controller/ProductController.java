@@ -9,7 +9,6 @@ import model.Ingredients;
 import model.Product;
 
 public class ProductController {
-
 	private ProductDAO pDao;
 
 	public ProductController() throws DataAccessException {

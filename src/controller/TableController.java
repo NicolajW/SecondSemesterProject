@@ -10,14 +10,10 @@ import model.Table;
 public class TableController {
 	private TableDAO tDao;
 	
-	
-	
-	
 	public TableController(){
 		try {
 			tDao = new TableDB();
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

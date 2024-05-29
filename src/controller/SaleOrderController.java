@@ -1,11 +1,9 @@
 package controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import db.DataAccessException;
 
-import db.PersonDB;
 import db.SaleOrderDAO;
 import db.SaleOrderDB;
 import model.Food;
@@ -34,7 +32,6 @@ public class SaleOrderController {
 			soDao = new SaleOrderDB();
 			perctrl = new PersonController();
 			spctrl = new SaleProductController();
-			this.saleOrder = saleOrder;
 			tc = new TableController();
 			ictrl = new InventoryController();
 			pctrl = new ProductController();
