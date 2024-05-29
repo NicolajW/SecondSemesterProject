@@ -10,9 +10,6 @@ import controller.ProductController;
 import controller.SaleOrderController;
 import controller.SaleProductController;
 import db.DataAccessException;
-import model.Product;
-import model.SaleOrder;
-import model.SaleProduct;
 
 class AddSaleProduct {
 	

@@ -16,7 +16,6 @@ import model.Food;
 import model.Person;
 import model.SaleOrder;
 import model.Table;
-import controller.PersonController;
 import controller.SaleOrderController;
 
 
@@ -25,14 +24,12 @@ import controller.SaleOrderController;
 public class TestProductToOrder {
 	private static SaleProductController spCtrl;
     private static SaleOrderController soCtrl;
-    private static PersonController pCtrl;
     private static SaleOrder saleOrder;
     
     @BeforeAll
     public static void setUpAll() throws Exception {
         spCtrl = new SaleProductController();
         soCtrl = new SaleOrderController();
-        pCtrl = new PersonController();
         TableDB tbd = new TableDB();
         Table t = new Table(false, 1);
 		tbd.updateTableStatus(t);
@@ -83,9 +80,7 @@ public class TestProductToOrder {
     	
     	//Assert
     	assertNotNull(saleOrder.getOl());
-//    	assertEquals(saleOrder.getOl().get(0).getSaleProduct().getFood(), 2);
         assertEquals(2, saleOrder.getOl().get(0).getSaleProduct().getFood().getSaleProductID());
-//    	assertEquals(saleOrder.getOl().get(0).getSaleProduct().getFood().getMenuName(), "tapas");
     }
 
 }

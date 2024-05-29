@@ -10,10 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controller.PersonController;
-import controller.SaleOrderController;
 import db.DataAccessException;
 import model.Person;
-import model.SaleOrder;
 
 public class TestEmployeeDontExist {
 
@@ -45,7 +43,7 @@ public class TestEmployeeDontExist {
 		
 		// Assert
 		assertNotNull(p);
-		assertEquals(p.getEmail(), "bobby@hotmail.com");
+		assertEquals(p.getEmail(), "fakebobby@hotmail.com");
 		
 	}
 	@Test

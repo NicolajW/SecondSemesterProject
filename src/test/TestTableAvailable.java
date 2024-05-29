@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import controller.SaleOrderController;
-import controller.SaleProductController;
 import controller.TableController;
 import db.DataAccessException;
 import model.Table;
@@ -18,15 +16,11 @@ import model.Table;
 public class TestTableAvailable {
 
 	private static TableController tCtrl;
-	private static SaleOrderController soCtrl;
-	private static SaleProductController spCtrl;
 	
 	
 	@BeforeAll
 	public static void setUpAll() throws Exception {
 		tCtrl = new TableController();
-		soCtrl = new SaleOrderController();
-		spCtrl = new SaleProductController();
 	}
 	@AfterAll
 	public static void tearDownAll() throws Exception {
@@ -56,7 +50,7 @@ public class TestTableAvailable {
 		
 	}
 	@Test
-	public void chechIfTableIsFalse() throws DataAccessException {
+	public void checkIfTableIsFalse() throws DataAccessException {
 		//Arrange
 		Table t = new Table(false, 2);
 		
