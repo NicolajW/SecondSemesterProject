@@ -53,7 +53,7 @@ public class TestProductDontExist {
     	soCtrl.updateTableStatus(t);
         
         //Act
-        saleOrder = soCtrl.createSaleOrder(p.getEmail(), 1);
+        saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
         soCtrl.addProduct(1, 10);
         soCtrl.addProduct(1, 2);
 

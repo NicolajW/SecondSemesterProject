@@ -55,7 +55,7 @@ public class TestProductToOrder {
     	soCtrl.updateTableStatus(t);
         
         //Act
-        saleOrder = soCtrl.createSaleOrder(p.getEmail(), 1);
+        saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
         soCtrl.addProduct(2, 1);
         soCtrl.addProduct(1, 2);
 
@@ -75,7 +75,7 @@ public class TestProductToOrder {
     	soCtrl.updateTableStatus(t);
     	
     	//Act
-    	saleOrder = soCtrl.createSaleOrder(p2.getEmail(), 2);
+    	saleOrder = soCtrl.createSaleOrder(p2.getEmail(), t);
     	soCtrl.addProduct(2, 2);
     	
     	//Assert

@@ -48,9 +48,11 @@ public class TestCreateSaveOrder {
 	public void CreateSaveOrderSuccess() throws DataAccessException {
 		// Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
+		Table t = new Table(true, 2);
+		tCtrl.updateTableStatus(t);
 		
 		// Act
-		saleOrder = soCtrl.createSaleOrder(p.getEmail(), 1);
+		saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
 		SaleOrder save = soCtrl.saveOrder();
 		
 		
@@ -69,7 +71,7 @@ public class TestCreateSaveOrder {
         tCtrl.updateTableStatus(t);
 		
 		//Act
-		saleOrder = soCtrl.createSaleOrder(p.getEmail(), 2);
+		saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
 		SaleOrder save = soCtrl.saveOrder();
 		
 		//Assert

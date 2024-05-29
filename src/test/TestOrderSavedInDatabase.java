@@ -57,7 +57,7 @@ public class TestOrderSavedInDatabase {
 		soCtrl.updateTableStatus(t);
 		
 		//Act
-		saleOrder = soCtrl.createSaleOrder(p.getEmail(), 1);
+		saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
 	    SaleOrder saved = soCtrl.saveOrder();
 		
 	    //Assert
