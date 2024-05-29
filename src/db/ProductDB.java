@@ -74,7 +74,6 @@ public class ProductDB implements ProductDAO {
 		/**
 		 * This method finds product id on ingredients and uses the <code>saleProductID</code>
 		 * It makes a ResultSet with the <code>saleProductID</code> on ingredients and executes the query
-		 * 
 		 * @param saleProductID
 		 * @return res
 		 * @throws DataAccessException
@@ -94,6 +93,14 @@ public class ProductDB implements ProductDAO {
 			return res;
 		}
 
+		/**
+		 * This method creates an object of type <code>Product</code>
+		 * it starts with creating a Product p, and then and <code>if</code> statement to create a new Batch for the Product p
+		 * with the relevant information for the Product needed to create the object so we can see the type of product and the information of the product
+		 * @param rs
+		 * @return p
+		 * @throws SQLException
+		 */
 	private Product buildObject(ResultSet rs) throws SQLException {
 		Product p = null;
 		String type = rs.getString("type");
@@ -109,6 +116,15 @@ public class ProductDB implements ProductDAO {
 		return p;
 	}
 
+	/**
+	 * This method create objects with a <code>List</code> of Product using <code>ArrayList</code>
+	 * a <code>while</code> loop to build the object from the <code>buildObject</code> method
+	 * and then adds <code>Product</code> p
+	 * @param rs
+	 * @return res
+	 * @throws DataAccessException
+	 * @throws SQLException
+	 */
 	private List<Product> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
 		List<Product> res = new ArrayList<>();
 		while (rs.next()) {
@@ -119,6 +135,12 @@ public class ProductDB implements ProductDAO {
 	}
 
 	@Override
+	/**
+	 * This method finds all Products from the <code>List</code>
+	 * Then it joins all in the ResultSet and executes the query
+	 * @return res
+	 * @throws SQLException
+	 */
 	public List<Product> findAll() throws DataAccessException {
 		try {
 			ResultSet rs = joinAllPS.executeQuery();

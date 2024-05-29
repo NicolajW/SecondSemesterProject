@@ -29,7 +29,14 @@ public class TableController {
 	public void findByTableNo(int tableNo) throws DataAccessException {
 		tDao.findByTableNo(tableNo);
 	}
-	
+	/**
+	 * This method checks the table by its <code>tableNo</code>. 
+	 * It creates a new <code>TableDB</code> object. 
+	 * It then uses an <code>if</code> to determines whether or not the table is available, 
+	 * and if it isnt then it sets the <code>tableStatus</code> to true and updates the tableStatus
+	 * @param tableNo
+	 * @throws DataAccessException
+	 */
 	public void checkTable(int tableNo) throws DataAccessException {
 		TableDB tadb = new TableDB();
 		Table table = tadb.findByTableNo(tableNo);

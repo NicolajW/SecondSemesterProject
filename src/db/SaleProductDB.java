@@ -56,7 +56,13 @@ public class SaleProductDB implements SaleProductDAO {
 	}
 
 	
-
+	/**
+	 * Here it finds all sale products, with a <code>List</code>, and uses the <code>buildObjects</code> method
+	 * it uses a try catch where it executes the query for the <code>List</code> of SaleProducts
+	 * @return res
+	 * @throws DataAccessException
+	 * @throws SQLException
+	 */
 	@Override
 	public List<SaleProduct> findAll() throws DataAccessException {
 		try {
@@ -128,6 +134,13 @@ public class SaleProductDB implements SaleProductDAO {
 		return res;
 	}
 
+	/**
+	 * This method creates an object of <code>SaleProduct</code> and
+	 * we use an <code>if</code> statement that determines whether the saleProduct, is type wine or food
+	 * @param rs
+	 * @return sp
+	 * @throws SQLException
+	 */
 	private SaleProduct buildObject(ResultSet rs) throws SQLException {
 		SaleProduct sp = null;
 		String type = rs.getString("type");
@@ -142,6 +155,13 @@ public class SaleProductDB implements SaleProductDAO {
 		return sp;
 	}
 
+	/**
+	 * This method creates a <code>List</code> of type <code>SaleProduct</code> using <code>ArrayList</code>
+	 * a <code>while</code> loop to build the object
+	 * @param rs
+	 * @return res
+	 * @throws SQLException
+	 */
 	private List<SaleProduct> buildObjects(ResultSet rs) throws SQLException {
 		List<SaleProduct> res = new ArrayList<>();
 		while (rs.next()) {
@@ -150,6 +170,14 @@ public class SaleProductDB implements SaleProductDAO {
 		return res;
 	}
 
+	/**
+	 * 
+	 * This method saves the sale prodcuts and gets the relevant information for sp, w(for wine), and f(for food)
+	 * It then has a try catch to make sure it saves the the information, before assigning it to the <code>if</code> statement
+	 * The <code>if</code> statement determines whether it is a type Wine or type Food and  the saleProduct is saved as Wine or Food
+	 * @param sp
+	 * @throws DataAccessException
+	 */
 	public void saveSaleProduct(SaleProduct sp) throws DataAccessException {
 		ResultSet rs = null;
 		final String name = sp.getName();

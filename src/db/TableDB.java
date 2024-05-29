@@ -30,6 +30,14 @@ public class TableDB implements TableDAO {
 
 	}
 
+	/**
+	 * This method creates an object of type <code>Table</code>. 
+	 * Then we use the <code>if</code> statement for the next ResultSet that creates the new table, with
+	 * status and number of the <code>Table</code> object. 
+	 * @param rs
+	 * @return res
+	 * @throws SQLException
+	 */
 	private Table buildObject(ResultSet rs) throws SQLException {
 		Table res = null;
 		if (rs.next()) {
@@ -38,6 +46,14 @@ public class TableDB implements TableDAO {
 		return res;
 	}
 
+	/**
+	 * This method creates a <code>List</code> of type <code>Table</code> using <code>ArrayList</code>.
+	 * A <code>while</code> loop that adds the buildObejct, for Table e, while e isnt <code>null</code>.
+	 * @param rs
+	 * @return res
+	 * @throws DataAccessException
+	 * @throws SQLException
+	 */
 	private List<Table> buildObjects(ResultSet rs) throws DataAccessException, SQLException {
 		List<Table> res = new ArrayList<>();
 		Table e = buildObject(rs);
@@ -50,6 +66,10 @@ public class TableDB implements TableDAO {
 	}
 
 	@Override
+	/**
+	 * This method find all the table from the <code>List</code> of all <code>Table</code> objects
+	 * @return res
+	 */
 	public List<Table> findAllTables() throws DataAccessException {
 		try {
 			ResultSet rs = findAllPS.executeQuery();

@@ -24,6 +24,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 	private PreparedStatement insertOrderLine;
 	private DBConnection dbconnection;
 
+	//Instantiates SaleOrderDB
 	public SaleOrderDB() throws DataAccessException {
 		dbconnection = DBConnection.getInstance();
 		Connection con = DBConnection.getInstance().getConnection();
@@ -39,6 +40,14 @@ public class SaleOrderDB implements SaleOrderDAO {
 
 	}
 
+	/**
+	 * This method creates a <code>List</code> of object of the type <code>SaleOrder</code> using <code>ArrayList</code>
+	 * the object <code>SaleOrder</code> o is created, using the buildObject method
+	 * a <code>while</code> loop to add a SaleOrder o to the <code>List</code>
+	 * @param rs
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	private List<SaleOrder> buildObjects(ResultSet rs) throws DataAccessException {
 		List<SaleOrder> res = new ArrayList<>();
 		SaleOrder o = buildObject(rs);
@@ -49,6 +58,14 @@ public class SaleOrderDB implements SaleOrderDAO {
 		return res;
 	}
 
+	/**
+	 * This method creates an object of the SaleOrder
+	 * it needs <code>if</code> statement of the ResultSet rs to create a new SaleOrder
+	 * the try catch throws an SQLException to catch, whether it can create the <code>SaleOrder</code> Object or not. 
+	 * @param rs
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	private SaleOrder buildObject(ResultSet rs) throws DataAccessException {
 		SaleOrder res = null;
 		try {
@@ -66,6 +83,14 @@ public class SaleOrderDB implements SaleOrderDAO {
 		return res;
 	}
 
+	/**
+	 * This method saves the saleOrder where it starts a transaction to begin the saleOrder with the <code>DBConnection</code> class
+	 * this inserts the price, email from employee, and gets the tableNo
+	 * then it uses a <code>for</code> loop to set quantity, Id, and SaleProductID
+	 * It then commits the transaction to the Database and the order is saved
+	 * @param saleOrder
+	 * @throws DataAccessException
+	 */
 	public void saveOrder(SaleOrder saleOrder) throws DataAccessException {
 		try {
 			dbconnection.startTransaction();
@@ -90,6 +115,13 @@ public class SaleOrderDB implements SaleOrderDAO {
 	}
 
 	@Override
+	/**
+	 * This method find saleOrder by Order Number. here we use a try catch, where we find the orderNo and execute a query by
+	 * <code>findByOrderPS</code>. res uses the <code>buildObject</code> to build the object, before finding it?
+	 * @param orderNo, fullAssociation
+	 * @return res of the SaleOrder
+	 * @throws DataAccessException
+	 */
 	public SaleOrder findByOrderNo(int orderNo, boolean fullAssociation) throws DataAccessException {
 		SaleOrder res = null;
 		try {

@@ -54,7 +54,10 @@ public class DBConnection {
 		}
 		return dbConnection;
 	}
-
+	/**
+	 * This method starts the transaction. 
+	 * @throws DataAccessException
+	 */
 	public void startTransaction() throws DataAccessException {
 		try {
 			connection.setAutoCommit(false);
@@ -63,7 +66,10 @@ public class DBConnection {
 			throw new DataAccessException("Could not start transaction.", e);
 		}
 	}
-
+/**
+ * This method commits the transaction. 
+ * @throws DataAccessException
+ */
 	public void commitTransaction() throws DataAccessException {
 		try {
 			try {
@@ -93,7 +99,14 @@ public class DBConnection {
 			throw new DataAccessException("Could not rollback transaction", e);
 		}
 	}
-
+/**
+ * This method executes the insert with identity, using a <code>String</code> of sql. 
+ * it then prints out the connection insert of the sql, used. 
+ * the sql parameter, is for the generated keys stuff. 
+ * @param sql
+ * @return res
+ * @throws DataAccessException
+ */
 	public int executeInsertWithIdentity(String sql) throws DataAccessException {
 		System.out.println("DBConnection, Inserting: " + sql);
 		int res = -1;
@@ -107,7 +120,6 @@ public class DBConnection {
 			// s.close(); -- the try block does this for us now
 
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			throw new DataAccessException("Could not execute insert (" + sql + ").", e);
 		}
 		return res;

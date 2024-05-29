@@ -26,7 +26,8 @@ public class SaleOrderController {
 	private TableController tc;
 	private InventoryController ictrl;
 	
-
+	//Instantiates a new saleOrderController creating new controllers for saleOrderDB, PersonController, SaleProductController, 
+	//TableController, InventoryController, and ProductController, to be able to create a sale
 	public SaleOrderController() {
 		try {
 			soDao = new SaleOrderDB();
@@ -41,6 +42,16 @@ public class SaleOrderController {
 		}
 	}
 
+	/**
+	 * This method creates the saleOrder of type <code>SaleOrder</code>. 
+	 * It creates a saleOrder by getting a tableNo and <code>employee</code> email. 
+	 * It then checks the <code>tableNo</code> so it knows which table it is and then creates, 
+	 * a new <code>SaleOrder</code> object, with its parameters, including the tableNo and email, from the employee. 
+	 * @param email
+	 * @param table
+	 * @return saleOrder that was created
+	 * @throws DataAccessException
+	 */
 	public SaleOrder createSaleOrder(String email, Table table) throws DataAccessException {
 		int tableNo = table.getTableNo();
 		Person employee = findByPersonEmail(email);
@@ -50,6 +61,16 @@ public class SaleOrderController {
 
 	}
 
+	/**
+	 * This method adds a products with its quantity, and saleProductID. 
+	 * It creates a <code>SaleProduct</code> object, with the productId found.
+	 * It then creates an <code>OrderLine</code> object, using a new OrderLine with <code>quantity, saleProduct, saleOrder</code> as its parameters
+	 * Here it then have 2 types of products, which is a <code>Wine</code> object, and a <code>Food</code> object. 
+	 * Then it uses an <code>if</code> statement for firstly wine, and else food, where it set the wine or food to the <code>SaleProduct</code>. 
+	 * @param quantity
+	 * @param saleProductID
+	 * @throws DataAccessException
+	 */
 	public void addProduct(double quantity, int saleProductID) throws DataAccessException {
 		SaleProduct saleProduct = findByProductById(saleProductID);
 		OrderLine orderLine = new OrderLine(quantity, saleProduct, saleOrder);
@@ -66,6 +87,12 @@ public class SaleOrderController {
 		}
 	}
 
+	/**
+	 * This method saves the order, by making the price, saving it with <code>soDao</code> 
+	 * and updates the inventory and table with the given order saved in the dataBase
+	 * @return saleOrder saved in the inventory and table. 
+	 * @throws DataAccessException
+	 */
 	public SaleOrder saveOrder() throws DataAccessException {
 		saleOrder.setTotalPrice(getTotalPrice());
 		soDao.saveOrder(saleOrder);
@@ -74,11 +101,24 @@ public class SaleOrderController {
 		return saleOrder;
 	}
 
+	/**
+	 * This method updates the table for the saved order. 
+	 * @throws DataAccessException
+	 */
 	public void updateTableForSaveOrder() throws DataAccessException {
 		Table t = new Table(false, saleOrder.getTable().getTableNo());
 		updateTableStatus(t);
 	}
 
+	/**
+	 * This method updates the wine in the inventory
+	 * It uses a <code>for</code> loop, to get the saleOrder from the OrderLines. 
+	 * the <code>productID</code>  is used by finding the productID on the wine, and gets the saleProduct from the <code>saleOrder</code> saved in the OrderLine
+	 * Then it has a <code>Product</code> p object, that has a productID. 
+	 * it updates the inventoryID and sets the quantity of the inventory, 
+	 * and sets the <code>saleOrder</code> and gets the index and quantity, saved in the OrderLine. 
+	 * @throws DataAccessException
+	 */
 	private void updateWineInventory() throws DataAccessException {
 		for (int i = 0; i > saleOrder.getOl().size(); i++) {
 			int productID = findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
@@ -92,6 +132,10 @@ public class SaleOrderController {
 		}
 	}
 
+	/**
+	 * This method updates the foodInventory. 
+	 * @throws DataAccessException
+	 */
 	private void updateFoodInventory() throws DataAccessException {
 		for (int i = 0; i > saleOrder.getOl().size(); i++) {
 			
@@ -106,6 +150,10 @@ public class SaleOrderController {
 		}
 	}
 
+	/**
+	 * This method updates the Inventory. 
+	 * @throws DataAccessException
+	 */
 	public void updateInventory() throws DataAccessException {
 		for (int i = 0; i < saleOrder.getOl().size(); i++) {
 			if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
