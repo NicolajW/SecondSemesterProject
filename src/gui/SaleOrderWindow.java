@@ -34,7 +34,7 @@ import model.SaleProduct;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UpdatedCreateOrder extends JFrame {
+public class SaleOrderWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -42,8 +42,6 @@ public class UpdatedCreateOrder extends JFrame {
 	private JTextField textField_1;
 	private JTextField txtTotal;
 	private DefaultListModel<SaleProduct> listModel = new DefaultListModel<>();
-	//private ListModel<SaleProduct> listModel;
-	//private JList<SaleProduct> listBasket;
 	private JList<SaleProduct> listBasket = new JList<>(listModel);
 	private String employeeID;
 	SaleOrderController soc = new SaleOrderController();
@@ -53,7 +51,7 @@ public class UpdatedCreateOrder extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				UpdatedCreateOrder frame = new UpdatedCreateOrder(null, 0);
+				SaleOrderWindow frame = new SaleOrderWindow(null, 0);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -61,8 +59,7 @@ public class UpdatedCreateOrder extends JFrame {
 		});
 	}
 
-	public UpdatedCreateOrder(Person p, int tableNo) throws DataAccessException {
-		this.employeeID = employeeID;
+	public SaleOrderWindow(Person p, int tableNo) throws DataAccessException {
 		setTitle("Duoro > LogIn > Menu > Kassesystem ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 708, 605);
@@ -122,15 +119,13 @@ public class UpdatedCreateOrder extends JFrame {
 		panel_1.add(panel_4, BorderLayout.SOUTH);
 
 		JButton btnNewButton_1 = new JButton("Tilføj ");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton_1.addActionListener(e -> {
 				try {
 					addClicked();
 				} catch (DataAccessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
 		});
 		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_4.add(btnNewButton_1);
@@ -193,11 +188,7 @@ public class UpdatedCreateOrder extends JFrame {
 		txtTotal.setColumns(10);
 		
 		JButton btnNewButton_1_1 = new JButton("Cancel");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cancelClicked();
-			}
-		});
+		btnNewButton_1_1.addActionListener(e -> {cancelClicked();});
 		panel_5.add(btnNewButton_1_1, BorderLayout.EAST);
 		btnNewButton_1_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
@@ -253,63 +244,4 @@ public class UpdatedCreateOrder extends JFrame {
 		setVisible(false);
 		dispose();
 	}
-
-//	private void searchTableById(String searchId) {
-//		DefaultTableModel model = (DefaultTableModel) table.getModel();
-//		boolean found = false;
-//		for (int i = 0; i < model.getRowCount(); i++) {
-//			String id = model.getValueAt(i, 0).toString();
-//			if (id.equals(searchId)) {
-//				table.setRowSelectionInterval(i, i);
-//				table.scrollRectToVisible(table.getCellRect(i, 0, true));
-//				found = true;
-//				break;
-//			}
-//		}
-//		if (!found) {
-//			JOptionPane.showMessageDialog(this, "Product not found.");
-//		}
-//	}
-//
-//	private void addSelectedProductToList() {
-//		int selectedRow = table.getSelectedRow();
-//		if (selectedRow != -1) {
-//			DefaultTableModel model = (DefaultTableModel) table.getModel();
-//			String productName = model.getValueAt(selectedRow, 1).toString();
-//			String productPrice = model.getValueAt(selectedRow, 2).toString();
-//
-//			String productDetails = String.format("%-20s %10s DK", productName, productPrice);
-//			listModel.addElement(productDetails);
-//
-//			calculateTotalPrice();
-//		} else {
-//			JOptionPane.showMessageDialog(this, "No product selected.");
-//		}
-//	}
-//
-//	private void removeProductFromList() {
-//		int selectedIndex = list.getSelectedIndex();
-//		if (selectedIndex != -1) {
-//			listModel.remove(selectedIndex);
-//			calculateTotalPrice();
-//		} else {
-//			JOptionPane.showMessageDialog(this, "No product selected to remove.");
-//		}
-//	}
-//
-//	private void calculateTotalPrice() {
-//		double totalPrice = 0.0;
-//		for (int i = 0; i < listModel.getSize(); i++) {
-//			String item = listModel.getElementAt(i);
-//			String[] parts = item.split("\\s+");
-//			double price = Double.parseDouble(parts[1]);
-//			totalPrice += price;
-//		}
-//		textField_2.setText(String.format("%.2f DK", totalPrice));
-//	}
-//
-//	public void setEmployeeID(String employeeID) {
-//		textField.setText(employeeID);
-//	}
-
 }

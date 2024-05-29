@@ -92,15 +92,13 @@ public class Menu extends JFrame {
 		panel_1.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("Salgsstatistik");
+		btnNewButton_2.addActionListener( e-> statisticsClicked());
 		btnNewButton_2.setBounds(64, 217, 195, 45);
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("Indstillinger");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnNewButton_3.addActionListener(e -> settingClicked());
 		btnNewButton_3.setBounds(64, 121, 195, 45);
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(btnNewButton_3);
@@ -121,71 +119,61 @@ public class Menu extends JFrame {
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setForeground(Color.WHITE);
 		menuPane.add(panel_2, BorderLayout.SOUTH);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[] { 0, 0, 0 };
-		gbl_panel_2.rowHeights = new int[] { 0, 0 };
-		gbl_panel_2.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel_2.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
-		panel_2.setLayout(gbl_panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("Logged in:");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 0;
-		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		panel_2.add(lblNewLabel_1, BorderLayout.WEST);
 
 		txtEmployee = new JTextField();
-		txtEmployee.setEnabled(false);
 		txtEmployee.setEditable(false);
-		GridBagConstraints gbc_txtEmployee = new GridBagConstraints();
-		gbc_txtEmployee.anchor = GridBagConstraints.WEST;
-		gbc_txtEmployee.gridx = 1;
-		gbc_txtEmployee.gridy = 0;
-		panel_2.add(txtEmployee, gbc_txtEmployee);
+		panel_2.add(txtEmployee, BorderLayout.CENTER);
 		txtEmployee.setColumns(10);
 		
 		init(p);
 	}
 
+
 	private void init(Person p) {
 		setEmployeeID(p);
-		System.out.println(p);
 	}
 
 	private void orderClicked(Person p) throws DataAccessException {
 		ChooseTableWindow ctw = new ChooseTableWindow(p);
 		ctw.setVisible(true);
-		
-		
-//		UpdatedCreateOrder uco = new UpdatedCreateOrder(textField.getText());
-//		uco.setVisible(true);
-//		setVisible(false);
-//		dispose();
-	}
-
-	private void storageClicked() {
-//		setVisible(false);
-//		dispose();
-//		Storage stor = new Storage(null);
-//		stor.setVisible(true);
 	}
 
 	private void backToWelcomePage() {
-		setVisible(false);
-		dispose();
 		WelcomePage welcomePage = new WelcomePage();
 		welcomePage.setVisible(true);
+		cancelClicked();
 	}
 
 	public void setEmployeeID(Person p) {
 		txtEmployee.setText(p.getEmail());
 	}
-
+	
+	private void cancelClicked() {
+		setVisible(false);
+		dispose();
+	}
+	
+	private void storageClicked() {
+		comingSoon();
+	}
+	
 	private void openTableGui() {
-		TableWindow table = new TableWindow(); // Create an instance of Table GUI
-		table.setVisible(true); // Make the Table GUI visible
-		dispose(); // Close the current Menu frame
+		comingSoon();
+	}
+	
+	protected void statisticsClicked() {
+		comingSoon();
+	}
+	
+	protected void settingClicked() {
+		comingSoon();
+	}
+	private void comingSoon() {
+		ComingSoonWindow csw = new ComingSoonWindow();
+		csw.setVisible(true);
 	}
 }

@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -86,7 +88,7 @@ public class WelcomePage extends JFrame {
         textID.setFont(new Font("Times New Roman", Font.PLAIN, 10));
         textID.setColumns(10);
         
-        JLabel lblNewLabel_3 = new JLabel("Medarbejder ID:");
+        JLabel lblNewLabel_3 = new JLabel("Medarbejder eMail:");
         lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         
         txtPassword = new JPasswordField();
@@ -151,8 +153,6 @@ public class WelcomePage extends JFrame {
         );
         panel_1_1.setLayout(gl_panel_1_1);
     }
-    
-
     
     private void logInClicked() throws DataAccessException {
     	SaleOrderController soc = new SaleOrderController();

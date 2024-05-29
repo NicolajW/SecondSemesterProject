@@ -78,15 +78,12 @@ public class ChooseTableWindow extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				okButton.addActionListener(e -> {
 						try {
 							okClicked(p);
 						} catch (DataAccessException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -94,11 +91,7 @@ public class ChooseTableWindow extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						cancelClicked();
-					}
-				});
+				cancelButton.addActionListener(e -> cancelClicked());
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -108,29 +101,24 @@ public class ChooseTableWindow extends JDialog {
 
 
 	private void init(Person p) throws DataAccessException {
-		displayItems();
-		System.out.println(p);
+		displayTables();
 	}
 	
-	protected void cancelClicked() {
-		setVisible(false);
-		dispose();
-	}
 	
 	public void okClicked(Person p) throws DataAccessException {
 		int selectedRowIndex = tblTables.getSelectedRow();
 		if (selectedRowIndex != -1) {
 			Table selectedTable = ttm.getTableAt(selectedRowIndex);
 			int tableNo = selectedTable.getTableNo(); 
-			UpdatedCreateOrder uco = new UpdatedCreateOrder(p, tableNo);
-			uco.setVisible(true);
+			SaleOrderWindow sow = new SaleOrderWindow(p, tableNo);
+			sow.setVisible(true);
 			
 			cancelClicked();
 		}
 	}
 
 
-	private void displayItems() throws DataAccessException {
+	private void displayTables() throws DataAccessException {
 		tdb = new TableDB();
 		ttm = new TableSeatingTableModel(new ArrayList<>());
 		soc = new SaleOrderController();
@@ -138,12 +126,10 @@ public class ChooseTableWindow extends JDialog {
         List<Table> tables = tdb.findAllTables();
         ttm = new TableSeatingTableModel(tables);
         tblTables.setModel(ttm);
-		
-//		List<Table> t = tdb.findAllTables();
-//		ttm.setData(t);
-//		tblTables.setModel(ttm);
 	}
 	
-	
-
+	protected void cancelClicked() {
+		setVisible(false);
+		dispose();
+	}
 }
