@@ -120,7 +120,6 @@ public class SaleOrderController {
 		return saleOrder.getTotalPrice();
 	}
 	
-	
 	public void updateTableStatus(Table table) throws DataAccessException {
 		tc.updateTableStatus(table);
 	}
@@ -167,7 +166,6 @@ public class SaleOrderController {
 	public SaleProduct findByProductById(int id) throws DataAccessException {
 		return spctrl.findByProductById(id);
 	}
-	
 
 	public void checkTable(int tableNo) throws DataAccessException {
 		tc.checkTable(tableNo);
