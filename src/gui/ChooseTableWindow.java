@@ -109,8 +109,7 @@ public class ChooseTableWindow extends JDialog {
 		int selectedRowIndex = tblTables.getSelectedRow();
 		if (selectedRowIndex != -1) {
 			Table selectedTable = ttm.getTableAt(selectedRowIndex);
-			int tableNo = selectedTable.getTableNo(); 
-			SaleOrderWindow sow = new SaleOrderWindow(p, tableNo);
+			SaleOrderWindow sow = new SaleOrderWindow(p, selectedTable);
 			sow.setVisible(true);
 			
 			cancelClicked();

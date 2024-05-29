@@ -31,6 +31,8 @@ import model.Person;
 import model.Product;
 import model.SaleOrder;
 import model.SaleProduct;
+import model.Table;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -51,7 +53,7 @@ public class SaleOrderWindow extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				SaleOrderWindow frame = new SaleOrderWindow(null, 0);
+				SaleOrderWindow frame = new SaleOrderWindow(null, null);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -59,7 +61,7 @@ public class SaleOrderWindow extends JFrame {
 		});
 	}
 
-	public SaleOrderWindow(Person p, int tableNo) throws DataAccessException {
+	public SaleOrderWindow(Person p, Table table) throws DataAccessException {
 		setTitle("Duoro > LogIn > Menu > Kassesystem ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 708, 605);
@@ -192,13 +194,13 @@ public class SaleOrderWindow extends JFrame {
 		panel_5.add(btnNewButton_1_1, BorderLayout.EAST);
 		btnNewButton_1_1.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
-		init(p, tableNo);
+		init(p, table);
 	}
 
 
 
-	private void init(Person p, int tableNo) throws DataAccessException {
-		createOrder(p, tableNo);
+	private void init(Person p, Table table) throws DataAccessException {
+		createOrder(p, table);
 		displayProducts();
 		listBasket.setCellRenderer(new SaleProductRenderer());
 		listBasket.setModel(listModel);
@@ -237,8 +239,8 @@ public class SaleOrderWindow extends JFrame {
 		tblSaleProduct.setModel(sptm);
 	}
 
-	private SaleOrder createOrder(Person p, int tableNo) throws DataAccessException {
-		return soc.createSaleOrder(p.getEmail(), tableNo);
+	private SaleOrder createOrder(Person p, Table table) throws DataAccessException {
+		return soc.createSaleOrder(p.getEmail(), table);
 	}
 	protected void cancelClicked() {
 		setVisible(false);

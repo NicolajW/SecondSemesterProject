@@ -44,11 +44,11 @@ public class SaleOrderController {
 		}
 	}
 
-	public SaleOrder createSaleOrder(String email, int tableNo) throws DataAccessException {
-		PersonDB persdb = new PersonDB();
+	public SaleOrder createSaleOrder(String email, Table table) throws DataAccessException {
+		int tableNo = table.getTableNo();
 		Person employee = findByPersonEmail(email);
 		checkTable(tableNo);
-		saleOrder = new SaleOrder(0, 0d, employee, tableNo);
+		saleOrder = new SaleOrder(0, 0d, employee, table);
 		return saleOrder;
 
 	}
@@ -78,7 +78,7 @@ public class SaleOrderController {
 	}
 
 	public void updateTableForSaveOrder() throws DataAccessException {
-		Table t = new Table(false, saleOrder.getTableNo());
+		Table t = new Table(false, saleOrder.getTable().getTableNo());
 		updateTableStatus(t);
 	}
 

@@ -8,26 +8,26 @@ import java.util.Map;
 public class SaleOrder {
 	private double totalPrice;
 	private int orderNo;
-	private int tableNo;
+	private Table table;
 	private Person person;
 	private List<OrderLine> ol;
 	private Map<Integer, List<OrderLine>> orderLinesMap;
 
-	public SaleOrder(int orderNo, double totalPrice, Person person, int tableNo) {
+	public SaleOrder(int orderNo, double totalPrice, Person person, Table table) {
 		this.totalPrice = totalPrice;
 		this.orderNo = orderNo;
 		this.person = person;
-		this.tableNo = tableNo;
+		this.table = table;
 		this.ol = new ArrayList<>();
 		this.orderLinesMap = new HashMap<>();
 	}
 
-	public int getTableNo() {
-		return tableNo;
+	public Table getTable() {
+		return table;
 	}
 
-	public void setTableNo(int tableNo) {
-		this.tableNo = tableNo;
+	public void setTable(Table table) {
+		this.table = table;
 	}
 
 	public double getTotalPrice() {

@@ -53,8 +53,12 @@ public class SaleOrderDB implements SaleOrderDAO {
 		SaleOrder res = null;
 		try {
 			if (rs.next()) {
-				res = new SaleOrder(rs.getInt("orderNo"), rs.getDouble("totalPrice"),
-						new Person(null, null, rs.getString("email_FK"), null, 0, 0), rs.getInt("tableNo_FK"));
+				res = new SaleOrder(
+						rs.getInt("orderNo"), 
+						rs.getDouble("totalPrice"),
+						new Person(null, null, rs.getString("email_FK"),null, 0, 0),
+						new Table(false, rs.getInt("tableNo_FK"))
+						);
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not build object", e);
@@ -68,7 +72,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 
 			insertSaleOrder.setDouble(1, saleOrder.getTotalPrice());
 			insertSaleOrder.setString(2, saleOrder.getPerson().getEmail());
-			insertSaleOrder.setInt(3, saleOrder.getTableNo());
+			insertSaleOrder.setInt(3, saleOrder.getTable().getTableNo());
 
 			int orderId = dbconnection.executeInsertWithIdentity(insertSaleOrder);
 			for (OrderLine ol : saleOrder.getOl()) {
