@@ -37,7 +37,6 @@ public class SaleOrderDB implements SaleOrderDAO {
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not prepare query", e);
 		}
-
 	}
 
 	/**
@@ -111,17 +110,16 @@ public class SaleOrderDB implements SaleOrderDAO {
 			dbconnection.rollbackTransaction();
 			throw new DataAccessException("save order failed", e);
 		}
-
 	}
 
-	@Override
 	/**
 	 * This method find saleOrder by Order Number. here we use a try catch, where we find the orderNo and execute a query by
-	 * <code>findByOrderPS</code>. res uses the <code>buildObject</code> to build the object, before finding it?
+	 * <code>findByOrderNoPS</code>. res uses the <code>buildObject</code> to build the object, before finding it?
 	 * @param orderNo, fullAssociation
 	 * @return res of the SaleOrder
 	 * @throws DataAccessException
 	 */
+	@Override
 	public SaleOrder findByOrderNo(int orderNo, boolean fullAssociation) throws DataAccessException {
 		SaleOrder res = null;
 		try {
@@ -133,7 +131,4 @@ public class SaleOrderDB implements SaleOrderDAO {
 		}
 		return res;
 	}
-
-
-
 }
