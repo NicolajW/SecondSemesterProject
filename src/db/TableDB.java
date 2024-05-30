@@ -17,6 +17,7 @@ public class TableDB implements TableDAO {
 	private PreparedStatement findByIDPS;
 	private PreparedStatement update;
 
+	//Instantiates the a new TableDB object. 
 	public TableDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -35,7 +36,7 @@ public class TableDB implements TableDAO {
 	 * Then we use the <code>if</code> statement for the next ResultSet that creates the new table, with
 	 * status and number of the <code>Table</code> object. 
 	 * @param rs
-	 * @return res
+	 * @return res for table status and the <code>tableNo</code>
 	 * @throws SQLException
 	 */
 	private Table buildObject(ResultSet rs) throws SQLException {
@@ -70,8 +71,9 @@ public class TableDB implements TableDAO {
 
 	@Override
 	/**
-	 * This method find all the table from the <code>List</code> of all <code>Table</code> objects
+	 * This method find all the table from the <code>List</code> of all <code>Table</code> objects. 
 	 * @return res
+	 * @throws DataAccessException
 	 */
 	public List<Table> findAllTables() throws DataAccessException {
 		try {

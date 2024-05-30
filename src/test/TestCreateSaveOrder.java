@@ -14,6 +14,7 @@ import controller.PersonController;
 import controller.SaleOrderController;
 import controller.TableController;
 import db.DataAccessException;
+import db.TableDB;
 import model.Person;
 import model.SaleOrder;
 import model.Table;
@@ -30,6 +31,9 @@ public class TestCreateSaveOrder {
 		pctrl = new PersonController();
 		soCtrl = new SaleOrderController();
 		tCtrl = new TableController();
+		TableDB tbd = new TableDB();
+	    Table t = new Table(false, 1);
+		tbd.updateTableStatus(t);
 	}
 	
 	@AfterAll
@@ -48,13 +52,12 @@ public class TestCreateSaveOrder {
 	public void CreateSaveOrderSuccess() throws DataAccessException {
 		// Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
-		Table t = new Table(true, 2);
+		Table t = new Table(false, 1);
 		tCtrl.updateTableStatus(t);
 		
 		// Act
 		saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
 		SaleOrder save = soCtrl.saveOrder();
-		
 		
 		// Assert
 		assertNotNull(saleOrder);
@@ -67,7 +70,7 @@ public class TestCreateSaveOrder {
 		
 		//Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
-        Table t = new Table(true, 2);
+        Table t = new Table(true, 3);
         tCtrl.updateTableStatus(t);
 		
 		//Act
@@ -78,6 +81,4 @@ public class TestCreateSaveOrder {
 		assertNotNull(tCtrl);
 		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 	}
-	
-
 }

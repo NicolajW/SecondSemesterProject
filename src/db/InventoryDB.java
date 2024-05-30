@@ -18,8 +18,8 @@ public class InventoryDB implements InventoryDAO {
 	private PreparedStatement update;
 
 	/**
-	 *Instantiates an object for the connection to dataBase with <code>FIND_ALL_Q</code>, <code>FIND_BY_ID_Q</code> and <code>UPDATE_Q</code>
-	 * to instantiate queries. 
+	 *Instantiates prepared statements for <code>FIND_ALL_Q</code>, <code>FIND_BY_ID_Q</code> and <code>UPDATE_Q</code>
+	 * to instantiate the queries using DBConnection class that connects to the database. 
 	 * @throws DataAccessException
 	 */
 	public InventoryDB() throws DataAccessException {

@@ -188,7 +188,8 @@ public class SaleProductDB implements SaleProductDAO {
 	 * 
 	 * This method saves the sale prodcuts and gets the relevant information for sp, w(for wine), and f(for food)
 	 * It then has a try catch to make sure it saves the the information, before assigning it to the <code>if</code> statement
-	 * The <code>if</code> statement determines whether it is a type Wine or type Food and  the saleProduct is saved as Wine or Food
+	 * The <code>if</code> statement determines whether it is a type <code>Wine</code> or type <code>Food</code> and  the saleProduct is saved as Wine or Food
+	 * It uses a try catch, and catches the SQLException in case it cant save the saleProduct. 
 	 * @param sp
 	 * @throws DataAccessException
 	 */

@@ -40,7 +40,6 @@ public class TestEmployeeDontExist {
 		Person p = pCtrl.findByPersonEmail("fakebobby@hotmail.com");
 		// Act
 		
-		
 		// Assert
 		assertNotNull(p);
 		assertEquals(p.getEmail(), "fakebobby@hotmail.com");
@@ -51,12 +50,8 @@ public class TestEmployeeDontExist {
 		// Arrange
 		Person p = pCtrl.findByPersonEmail("bobby@hotmail.com");
 		// Act
-		
-		
 		// Assert
 		assertNotNull(p);
 		assertEquals(p.getEmail(), "bobby@hotmail.com");
-		
-}
-
+	}
 }

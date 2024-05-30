@@ -24,7 +24,6 @@ public class TestTableAvailable {
 	}
 	@AfterAll
 	public static void tearDownAll() throws Exception {
-		
 	}
 	
 	@BeforeEach
@@ -33,7 +32,6 @@ public class TestTableAvailable {
 	
 	@AfterEach
 	public void tearDown() throws Exception {
-		
 	}
 	
 	@Test
@@ -47,8 +45,8 @@ public class TestTableAvailable {
 		//Assert
 		assertNotNull(t);
 		assertEquals(t.isTableStatus(), true);
-		
 	}
+	
 	@Test
 	public void checkIfTableIsFalse() throws DataAccessException {
 		//Arrange
@@ -60,9 +58,5 @@ public class TestTableAvailable {
 		//Assert
 		assertNotNull(t);
 		assertEquals(t.isTableStatus(), false);
-		
 	}
-	
-	
 }
-

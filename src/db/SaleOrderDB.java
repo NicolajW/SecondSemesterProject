@@ -24,7 +24,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 	private PreparedStatement insertOrderLine;
 	private DBConnection dbconnection;
 
-	//Instantiates SaleOrderDB
+	//Instantiates SaleOrderDB and gets the instance of the connection to the dataBase. 
 	public SaleOrderDB() throws DataAccessException {
 		dbconnection = DBConnection.getInstance();
 		Connection con = DBConnection.getInstance().getConnection();

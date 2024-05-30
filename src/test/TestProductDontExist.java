@@ -45,9 +45,10 @@ public class TestProductDontExist {
     @AfterEach
     public void tearDown() throws Exception {
     }
+    
     @Test
     public void productDontExist() throws DataAccessException {
-    	   //Arrange
+    	//Arrange
         Person p = soCtrl.findByPersonEmail("bobby@hotmail.com");
         Table t = new Table(false, 1);
     	soCtrl.updateTableStatus(t);
@@ -61,7 +62,5 @@ public class TestProductDontExist {
         assertNotNull(saleOrder.getOl());
         assertEquals(saleOrder.getOl().get(0).getSaleProduct().getSaleProductID(), 1);
         assertEquals(saleOrder.getOl().get(1).getSaleProduct().getSaleProductID(), 2);
-
     }
 }
-
