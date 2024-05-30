@@ -79,7 +79,7 @@ public class SaleOrder {
 	 * @return orderLinesMap
 	 * 
 	 */
-	public Map<Integer, List<OrderLine>> saleOrderLinesHashMap(OrderLine orderLine) {
+	public Map<Integer, List<OrderLine>> addOrderLineHashMap(OrderLine orderLine) {
 		int saleProductId = orderLine.getSaleProduct().getSaleProductID();
 
 		if (orderLinesMap.containsKey(saleProductId)) {

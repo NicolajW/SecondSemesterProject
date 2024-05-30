@@ -107,11 +107,15 @@ public class ProductDB implements ProductDAO {
 		if (type.equals("batch")) {
 			p = new Batch(rs.getString("barcode"),
 					new Wine(rs.getInt("saleProductID_PKFK"), null, null, null, null, null, null, null, null),
-					rs.getInt("numberOfBatches"), rs.getString("type"));
+					rs.getInt("numberOfBatches"), 
+					rs.getString("type")
+					);
 		} else if (type.equals("ingredients")) {
 			p = new Ingredients(rs.getString("name"), rs.getString("typeOfFood"),
-					new Food(rs.getInt("saleProductID_PKFK"), null, 0.0, null, null, null), rs.getString("barcode"),
-					rs.getString("type"));
+					new Food(rs.getInt("saleProductID_PKFK"), null, 0.0, null, null, null), 
+					rs.getString("barcode"),
+					rs.getString("type")
+					);
 		}
 		return p;
 	}
@@ -161,7 +165,7 @@ public class ProductDB implements ProductDAO {
 				res = rs.getInt("InventoryID_FK");
 			}
 		} catch (SQLException e) {
-			throw new DataAccessException("Could not find by id = " + barcode, e);
+			throw new DataAccessException("Could not find by barcode = " + barcode, e);
 		}
 		return res;
 	}

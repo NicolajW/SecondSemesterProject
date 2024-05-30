@@ -41,7 +41,10 @@ public class TableDB implements TableDAO {
 	private Table buildObject(ResultSet rs) throws SQLException {
 		Table res = null;
 		if (rs.next()) {
-			res = new Table(rs.getBoolean("tableStatus"), rs.getInt("tableNo"));
+			res = new Table(
+					rs.getBoolean("tableStatus"), 
+					rs.getInt("tableNo")
+					);
 		}
 		return res;
 	}
@@ -103,7 +106,7 @@ public class TableDB implements TableDAO {
 
 			update.executeUpdate();
 		} catch (SQLException e) {
-			throw new DataAccessException("Could not save Object", e);
+			throw new DataAccessException("Could not save table status", e);
 		}
 
 	}

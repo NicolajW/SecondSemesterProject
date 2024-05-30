@@ -74,7 +74,7 @@ public class SaleOrderController {
 	public void addProduct(double quantity, int saleProductID) throws DataAccessException {
 		SaleProduct saleProduct = findByProductById(saleProductID);
 		OrderLine orderLine = new OrderLine(quantity, saleProduct, saleOrder);
-		saleOrder.saleOrderLinesHashMap(orderLine);
+		saleOrder.addOrderLineHashMap(orderLine);
 
 		Wine wine = findWineOnSaleProductID(saleProductID);
 		Food food = findFoodOnSaleProductID(saleProductID);

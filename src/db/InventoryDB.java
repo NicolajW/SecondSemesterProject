@@ -43,7 +43,10 @@ public class InventoryDB implements InventoryDAO {
 	private Inventory buildObject(ResultSet rs) throws SQLException {
 		Inventory res = null;
 		if (rs.next()) {
-			res = new Inventory(rs.getInt("quantity"), rs.getInt("id"));
+			res = new Inventory(
+					rs.getInt("quantity"), 
+					rs.getInt("id")
+					);
 		}
 		return res;
 	}
