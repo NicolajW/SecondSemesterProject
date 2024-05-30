@@ -11,8 +11,6 @@ import model.Batch;
 import model.Food;
 import model.Ingredients;
 import model.Product;
-import model.SaleOrder;
-import model.SaleProduct;
 import model.Wine;
 
 public class ProductDB implements ProductDAO {

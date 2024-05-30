@@ -1,7 +1,6 @@
 package db;
 
 import model.Inventory;
-import model.SaleProduct;
 
 public interface InventoryDAO {
 	Inventory findByInventoryNo(int inventoryNo) throws DataAccessException;

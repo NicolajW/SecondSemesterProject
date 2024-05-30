@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.util.List;
+
 import db.DataAccessException;
 import db.SaleProductDAO;
 import model.Food;
@@ -20,6 +22,11 @@ public class SaleProductController {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<SaleProduct> findAll() throws DataAccessException {
+		return pDao.findAll();
+	}
+	
 	public SaleProduct findByProductById(int id) throws DataAccessException {
 		return pDao.findByProductById(id);
 	}

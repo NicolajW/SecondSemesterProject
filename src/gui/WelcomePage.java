@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.event.KeyEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,7 +22,6 @@ import controller.SaleOrderController;
 import db.DataAccessException;
 import model.Person;
 
-import javax.swing.JOptionPane;
 
 public class WelcomePage extends JFrame {
 

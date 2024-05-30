@@ -14,14 +14,11 @@ import controller.SaleOrderController;
 import db.DataAccessException;
 import db.TableDB;
 import model.Person;
-import model.Product;
 import model.Table;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ChooseTableWindow extends JDialog {
 

@@ -1,7 +1,5 @@
 package db;
 
-import java.util.List;
-
 import model.Person;
 
 public interface PersonDAO {

@@ -16,25 +16,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.JList;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
-import controller.ProductController;
 import controller.SaleOrderController;
+import controller.SaleProductController;
 import db.DataAccessException;
-import db.SaleProductDB;
 import model.Person;
-import model.Product;
 import model.SaleOrder;
 import model.SaleProduct;
 import model.Table;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class SaleOrderWindow extends JFrame {
 
@@ -232,9 +226,9 @@ public class SaleOrderWindow extends JFrame {
 	
 	private void displayProducts() throws DataAccessException {
 		sptm = new SaleProductTableModel(new ArrayList<>());
-		SaleProductDB spdb = new SaleProductDB();
+		SaleProductController spc = new SaleProductController();
 
-		List<SaleProduct> sp = spdb.findAll();
+		List<SaleProduct> sp = spc.findAll();
 		sptm.setData(sp);
 		tblSaleProduct.setModel(sptm);
 	}
