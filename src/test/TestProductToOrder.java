@@ -81,7 +81,7 @@ public class TestProductToOrder {
     	
     	//Assert
     	assertNotNull(saleOrder.getOl());
-        assertEquals(3, saleOrder.getOl().get(0).getSaleProduct().getFood().getSaleProductID());
+        assertEquals(f.getSaleProductID(), saleOrder.getOl().get(0).getSaleProduct().getFood().getSaleProductID());
     }
     @Test
     public void WineToOrderSuccess() throws DataAccessException {
@@ -97,7 +97,6 @@ public class TestProductToOrder {
     	
     	//Assert
     	assertNotNull(saleOrder.getOl());
-        assertEquals(4, saleOrder.getOl().get(0).getSaleProduct().getWine().getSaleProductID());
+        assertEquals(w.getSaleProductID(), saleOrder.getOl().get(0).getSaleProduct().getWine().getSaleProductID());
     }
-
 }
