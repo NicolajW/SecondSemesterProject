@@ -65,5 +65,4 @@ public class ProductController {
 	public List<Ingredients> findIngredientsByFoodID(int foodID) throws DataAccessException{
 		return pDao.findIngredientsByFoodID(foodID);
 	}
-
 }

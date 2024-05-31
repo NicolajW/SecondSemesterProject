@@ -35,20 +35,7 @@ public class TestTableAvailable {
 	}
 	
 	@Test
-	public void checkIfTableIsTrue() throws DataAccessException {
-		//Arrange
-		Table t = new Table(false, 2);
-		
-		//Act
-		tCtrl.updateTableStatus(t);		
-		
-		//Assert
-		assertNotNull(t);
-		assertEquals(t.isTableStatus(), true);
-	}
-	
-	@Test
-	public void checkIfTableIsFalse() throws DataAccessException {
+	public void checkTableIsAvailable() throws DataAccessException {
 		//Arrange
 		Table t = new Table(false, 2);
 		
@@ -58,5 +45,18 @@ public class TestTableAvailable {
 		//Assert
 		assertNotNull(t);
 		assertEquals(t.isTableStatus(), false);
+	}
+	
+	@Test
+	public void checkTableIsUnavailable() throws DataAccessException {
+		//Arrange
+		Table t = new Table(false, 2);
+		
+		//Act
+		tCtrl.updateTableStatus(t);		
+		
+		//Assert
+		assertNotNull(t);
+		assertEquals(t.isTableStatus(), true);
 	}
 }

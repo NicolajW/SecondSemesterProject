@@ -37,7 +37,7 @@ public class InventoryDB implements InventoryDAO {
 	/**
 	 * This method instantiates an object of <code> Inventory </code> where it uses an if statement to get quantity and id of products in the Inventory class
 	 * @param rs
-	 * @return res which is an object of Inventory
+	 * @return res
 	 * @throws SQLException
 	 */
 	private Inventory buildObject(ResultSet rs) throws SQLException {
@@ -74,7 +74,7 @@ public class InventoryDB implements InventoryDAO {
 	/**
 	 * This method finds by inventoryNo, with inventoryNo
 	 * @param <code>int</code> inventoryNo
-	 * We use a try catch, to handle the exception to tell if it can find tableNo of e
+	 * We use a try catch block, to handle the exception to tell if it can find tableNo of e
 	 * It uses <code>findByIDPS</code> and executes the query with inventoryNo
 	 * @throws DataAccessException
 	 */
@@ -95,7 +95,7 @@ public class InventoryDB implements InventoryDAO {
 	 * Updates the quantity of products where it then sets the a new quantity, and sets an id of the <code>inventory</code>
 	 * and then executes the update
 	 * @param inventory
-	 * it uses try catch to handle an SQLException
+	 * it uses try catch block, to handle an SQLException
 	 * @exception SQLException 
 	 * @throws DataAccessException
 	 */
@@ -112,5 +112,4 @@ public class InventoryDB implements InventoryDAO {
 			throw new DataAccessException("Could not update inventory", e);
 		}
 	}
-
 }

@@ -44,7 +44,6 @@ public class DBConnection {
 			 e.printStackTrace();
 			throw new DataAccessException(String.format("Could not connect to database %s@%s:%d user %s", dbName,
 					serverAddress, serverPort, userName), e);
-			
 		}
 	}
 

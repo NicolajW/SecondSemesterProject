@@ -39,6 +39,7 @@ public class SaleProductDB implements SaleProductDAO {
 	private PreparedStatement findByProductIDPKFKPS;
 	private PreparedStatement findByFoodIDPS;
 
+	//Instantiates SaleProductDB
 	public SaleProductDB() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -58,7 +59,7 @@ public class SaleProductDB implements SaleProductDAO {
 	
 	/**
 	 * Here it finds all sale products, with a <code>List</code>, and uses the <code>buildObjects</code> method
-	 * it uses a try catch where it executes the query for the <code>List</code> of SaleProducts
+	 * it uses a try catch block, where it executes the query for the <code>List</code> of SaleProducts
 	 * @return res
 	 * @throws DataAccessException
 	 * @throws SQLException
@@ -74,6 +75,13 @@ public class SaleProductDB implements SaleProductDAO {
 		}
 	}
 
+	/**
+	 * This method finds product by its id using <code>saleProductID</code>
+	 * and uses a try catch block, in case it cant find saleProduct ID. 
+	 * @param saleProductID
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	@Override
 	public int findProductIDOnWine(int saleProductID) throws DataAccessException {
 		int res = 0;
@@ -89,6 +97,12 @@ public class SaleProductDB implements SaleProductDAO {
 		return res;
 	}
 
+	/**
+	 * This method finds wine by <code>saleProductID</code>
+	 * @param saleProductID
+	 * @param res
+	 * @throws DataAccessException
+	 */
 	@Override
 	public Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException {
 		Wine res = null;
@@ -104,6 +118,12 @@ public class SaleProductDB implements SaleProductDAO {
 		return res;
 	}
 
+	/**
+	 * This method finds food by <code>saleProductID</code>
+	 * @param saleProductID
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	@Override
 	public Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException {
 		Food res = null;
@@ -119,6 +139,12 @@ public class SaleProductDB implements SaleProductDAO {
 		return res;
 	}
 
+	/**
+	 * This method finds product by <code>saleProductID</code>
+	 * @param saleProductID
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	@Override
 	public SaleProduct findByProductById(int saleProductID) throws DataAccessException {
 		SaleProduct res = null;
@@ -187,10 +213,10 @@ public class SaleProductDB implements SaleProductDAO {
 	/**
 	 * 
 	 * This method saves the sale prodcuts and gets the relevant information for sp, w(for wine), and f(for food)
-	 * It then has a try catch to make sure it saves the the information, before assigning it to the <code>if</code> statement
+	 * It then has a try catch block to make sure it saves the the information, before assigning it to the <code>if</code> statement
 	 * The <code>if</code> statement determines whether it is a type <code>Wine</code> or type <code>Food</code> and  the saleProduct is saved as Wine or Food
-	 * It uses a try catch, and catches the SQLException in case it cant save the saleProduct. 
-	 * @param sp
+	 * It uses a try catch block, and catches the SQLException in case it cant save the saleProduct. 
+	 * @param sp from SaleProduct
 	 * @throws DataAccessException
 	 */
 	public void saveSaleProduct(SaleProduct sp) throws DataAccessException {

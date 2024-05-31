@@ -79,7 +79,5 @@ public class PersonDB implements PersonDAO {
 			p = buildObject(rs);
 		}
 		return res;
-
 	}
-
 }

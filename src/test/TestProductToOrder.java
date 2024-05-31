@@ -49,7 +49,7 @@ public class TestProductToOrder {
     }
     
     @Test
-    public void ProductToOrderSuccess() throws DataAccessException {
+    public void productToOrderSuccess() throws DataAccessException {
         //Arrange
         Person p = soCtrl.findByPersonEmail("bobby@hotmail.com");
         Table t = new Table(false, 1);
@@ -68,7 +68,7 @@ public class TestProductToOrder {
     }
     
     @Test
-    public void FoodToOrderSuccess() throws DataAccessException {
+    public void foodToOrderSuccess() throws DataAccessException {
     	//Arrange
     	Person p2 = soCtrl.findByPersonEmail("bobby@hotmail.com");
     	Food f = spCtrl.findFoodOnSaleProductID(3);
@@ -84,7 +84,7 @@ public class TestProductToOrder {
         assertEquals(f.getSaleProductID(), saleOrder.getOl().get(0).getSaleProduct().getFood().getSaleProductID());
     }
     @Test
-    public void WineToOrderSuccess() throws DataAccessException {
+    public void wineToOrderSuccess() throws DataAccessException {
     	//Arrange
     	Person p2 = soCtrl.findByPersonEmail("bobby@hotmail.com");
     	Wine w = spCtrl.findWineOnSaleProductID(4);
