@@ -34,7 +34,6 @@ public class SaleOrder {
 		double total = 0;
 		for (OrderLine line : ol) {
 			total += line.getSaleProduct().getPrice() * line.getQuantity();
-			System.out.println(line.getSaleProduct().getPrice());
 		}
 		this.totalPrice = total;
 		return total;

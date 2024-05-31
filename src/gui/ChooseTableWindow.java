@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.SaleOrderController;
+import controller.TableController;
 import db.DataAccessException;
 import db.TableDB;
 import model.Person;
@@ -27,7 +28,6 @@ public class ChooseTableWindow extends JDialog {
 	private JTable tblTables;
 	private TableSeatingTableModel ttm;
 	private SaleOrderController soc;
-	private TableDB tdb;
 	
 	
 	/**
@@ -115,11 +115,11 @@ public class ChooseTableWindow extends JDialog {
 
 
 	private void displayTables() throws DataAccessException {
-		tdb = new TableDB();
+		TableController tc = new TableController();
 		ttm = new TableSeatingTableModel(new ArrayList<>());
 		soc = new SaleOrderController();
 		
-        List<Table> tables = tdb.findAllTables();
+        List<Table> tables = tc.findAllTables();
         ttm = new TableSeatingTableModel(tables);
         tblTables.setModel(ttm);
 	}

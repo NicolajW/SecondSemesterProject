@@ -155,7 +155,6 @@ public class WelcomePage extends JFrame {
     private void logInClicked() throws DataAccessException {
     	SaleOrderController soc = new SaleOrderController();
             Person p = soc.findByPersonEmail(textID.getText());
-            System.out.println(p);
             Menu menu = new Menu(p);
             menu.setVisible(true); 
             setVisible(false);
