@@ -19,7 +19,7 @@ import model.Person;
 import model.SaleOrder;
 import model.Table;
 
-public class TestCreateSaveOrder {
+public class TestCreateSaleOrder {
 	
 	private static PersonController pctrl;
 	private static SaleOrderController soCtrl;
@@ -49,7 +49,7 @@ public class TestCreateSaveOrder {
 	}
 	
 	@Test
-	public void createSaveOrderSuccess() throws DataAccessException {
+	public void createSaleOrderSuccess() throws DataAccessException {
 		// Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
 		Table t = new Table(false, 1);
@@ -66,7 +66,7 @@ public class TestCreateSaveOrder {
 	}
 	
 	@Test
-	public void createSaveOrderFailed() throws DataAccessException {
+	public void createSaleOrderFailed() throws DataAccessException {
 		
 		//Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
