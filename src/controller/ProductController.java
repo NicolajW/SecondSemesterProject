@@ -32,9 +32,6 @@ public class ProductController {
 		return pDao.findByProductID(productID);
 	}
 	
-	Product findByProductID2(int productID) throws DataAccessException{
-		return pDao.findByProductID2(productID);
-	}
 
 	/**
 	 * This method finds the inventory id by <code>barcode</code> of the sale products. 
