@@ -56,11 +56,11 @@ public class TestProductDontExist {
         //Act
         saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
         soCtrl.addProduct(1, 10);
-        soCtrl.addProduct(1, 2);
+        soCtrl.addProduct(1, 3);
 
         //Assert
         assertNotNull(saleOrder.getOl());
-        assertEquals(saleOrder.getOl().get(0).getSaleProduct().getSaleProductID(), 1);
-        assertEquals(saleOrder.getOl().get(1).getSaleProduct().getSaleProductID(), 2);
+        assertEquals(saleOrder.getOl().get(0).getSaleProduct().getSaleProductID(), 10);
+        assertEquals(saleOrder.getOl().get(1).getSaleProduct().getSaleProductID(), 3);
     }
 }

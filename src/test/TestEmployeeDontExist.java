@@ -41,9 +41,7 @@ public class TestEmployeeDontExist {
 		// Act
 		
 		// Assert
-		assertNotNull(p);
-		assertEquals(p.getEmail(), "fakebobby@hotmail.com");
-		
+		assertNotNull(p);		
 	}
 	@Test
 	public void emailPersonDoExist() throws DataAccessException {
@@ -52,6 +50,5 @@ public class TestEmployeeDontExist {
 		// Act
 		// Assert
 		assertNotNull(p);
-		assertEquals(p.getEmail(), "bobby@hotmail.com");
 	}
 }

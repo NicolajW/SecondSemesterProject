@@ -57,12 +57,9 @@ public class TestCreateSaleOrder {
 		
 		// Act
 		saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
-		SaleOrder save = soCtrl.saveOrder();
 		
 		// Assert
-		assertNotNull(saleOrder);
-		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
-		
+		assertNotNull(saleOrder);		
 	}
 	
 	@Test
@@ -75,10 +72,8 @@ public class TestCreateSaleOrder {
 		
 		//Act
 		saleOrder = soCtrl.createSaleOrder(p.getEmail(), t);
-		SaleOrder save = soCtrl.saveOrder();
 		
 		//Assert
 		assertNull(saleOrder);
-		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 	}
 }

@@ -21,9 +21,9 @@ class AddSaleProduct {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		pCtrl = new PersonController();
-		proCtrl = new ProductController();
+		proCtrl = new ProductController();	
 	}
-
+	
 	@Test
 	void testAddSaleProductTypeWineSuccess() throws DataAccessException {
 		// Arrange
@@ -33,6 +33,8 @@ class AddSaleProduct {
 		
 		// Act
 		String sp = spCtrl.findByProductById(1).toString();
+		
+		
 		
 		
 		// Assert
