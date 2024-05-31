@@ -70,7 +70,7 @@ public class TestCreateSaveOrder {
 		
 		//Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
-        Table t = new Table(true, 3);
+        Table t = new Table(true, 2);
         tCtrl.updateTableStatus(t);
 		
 		//Act
@@ -78,7 +78,7 @@ public class TestCreateSaveOrder {
 		SaleOrder save = soCtrl.saveOrder();
 		
 		//Assert
-		assertNotNull(tCtrl);
+		assertNull(saleOrder);
 		assertEquals(save.getPerson().getEmail(), saleOrder.getPerson().getEmail());
 	}
 }
