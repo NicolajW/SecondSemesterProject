@@ -85,6 +85,12 @@ public class TableDB implements TableDAO {
 		}
 	}
 
+	/**
+	 * This method finds table by <code>tableNo</code>
+	 * @param tableNo
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	@Override
 	public Table findByTableNo(int tableNo) throws DataAccessException {
 		Table res = null;
@@ -98,6 +104,13 @@ public class TableDB implements TableDAO {
 		return res;
 	}
 
+	/**
+	 * This method updates the status of <code>table</code> whether it is available or not, by finding its <code>tableNo</code>. 
+	 * It uses a try catch block to update it, then executes the update, to make sure that
+	 * status of <code>table</code> is updated correctly. 
+	 * @param table
+	 * @throws DataAccessException
+	 */
 	@Override
 	public void updateTableStatus(Table table) throws DataAccessException {
 		final boolean tableStatus = table.isTableStatus();

@@ -138,13 +138,13 @@ public class ProductDB implements ProductDAO {
 		return res;
 	}
 
-	@Override
 	/**
 	 * This method finds all Products from the <code>List</code>
 	 * Then it joins all in the ResultSet and executes the query
 	 * @return res
 	 * @throws SQLException
 	 */
+	@Override
 	public List<Product> findAll() throws DataAccessException {
 		try {
 			ResultSet rs = joinAllPS.executeQuery();
@@ -155,6 +155,12 @@ public class ProductDB implements ProductDAO {
 		}
 	}
 
+	/**
+	 * This method finds an inventory by its id by using <code>barcode</code>
+	 * @param barcode
+	 * @return res
+	 * @throws DataAccessException
+	 */
 	@Override
 	public int findInventoryIDByBarcode(String barcode) throws DataAccessException {
 		int res = 0;
@@ -170,6 +176,13 @@ public class ProductDB implements ProductDAO {
 		return res;
 	}
 
+	/**
+	 * This method finds the products id. It sets the ResultSet of res. 
+	 * @param productID
+	 * @return res
+	 * @throws DataAccessException
+	 * 
+	 */
 	@Override
 	public Product findByProductID(int productID) throws DataAccessException {
 		Product res = null;

@@ -59,9 +59,7 @@ public class SaleOrderController {
 		checkTable(tableNo);
 		saleOrder = new SaleOrder(0, 0d, employee, table);
 		return saleOrder;
-
 	}
-
 	/**
 	 * This method adds a products with its quantity, and saleProductID. 
 	 * It creates a <code>SaleProduct</code> object, with the productId found.
@@ -157,7 +155,9 @@ public class SaleOrderController {
 	}
 
 	/**
-	 * This method updates the Inventory. 
+	 * This method updates the Inventory. it uses a <code>for</code> loop to get the orderline of <code>saleOrde</code>
+	 * it updates, whenever an order has been issued, and <code>Wine</code> and <code>Food</code> is taken out of inventory, 
+	 * which then updates the inventory using an <code>if</code> statement, for whether it is type win or food that gets taken for Inventory. 
 	 * @throws DataAccessException
 	 */
 	public void updateInventory() throws DataAccessException {
@@ -250,5 +250,4 @@ public class SaleOrderController {
 	public void findAllTables() throws DataAccessException {
 		tc.findAllTables();
 	}
-
 }

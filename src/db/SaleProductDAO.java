@@ -1,11 +1,8 @@
 package db;
 
 import java.util.List;
-import java.util.Map;
-import java.sql.SQLException;
 import model.SaleProduct;
 import model.Food;
-import model.Ingredients;
 import model.Wine;
 
 public interface SaleProductDAO {
@@ -18,6 +15,4 @@ public interface SaleProductDAO {
 	Wine findWineOnSaleProductID(int saleProductID) throws DataAccessException;
 
 	Food findFoodOnSaleProductID(int saleProductID) throws DataAccessException;
-
-
 }

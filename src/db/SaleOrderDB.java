@@ -40,7 +40,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 	}
 
 	/**
-	 * This method creates a <code>List</code> of object of the type <code>SaleOrder</code> using <code>ArrayList</code>
+	 * This method creates a <code>List</code> of the type <code>SaleOrder</code> using <code>ArrayList</code>
 	 * the object <code>SaleOrder</code> o is created, using the buildObject method
 	 * a <code>while</code> loop to add a SaleOrder o to the <code>List</code>
 	 * @param rs
@@ -60,7 +60,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 	/**
 	 * This method creates an object of the SaleOrder
 	 * it needs <code>if</code> statement of the ResultSet rs to create a new SaleOrder
-	 * the try catch throws an SQLException to catch, whether it can create the <code>SaleOrder</code> Object or not. 
+	 * the try catch block throws an SQLException to catch, whether it can create the <code>SaleOrder</code> Object or not. 
 	 * @param rs
 	 * @return res
 	 * @throws DataAccessException
@@ -113,7 +113,7 @@ public class SaleOrderDB implements SaleOrderDAO {
 	}
 
 	/**
-	 * This method find saleOrder by Order Number. here we use a try catch, where we find the orderNo and execute a query by
+	 * This method find saleOrder by Order Number. here we use a try catch block, where we find the orderNo and execute a query by
 	 * <code>findByOrderNoPS</code>. res uses the <code>buildObject</code> to build the object, before finding it?
 	 * @param orderNo, fullAssociation
 	 * @return res of the SaleOrder

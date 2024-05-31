@@ -21,14 +21,13 @@ public class InventoryController {
 	public Inventory findByInventoryNo(int inventoryNo) throws DataAccessException {
 		return iDao.findByInventoryNo(inventoryNo);
 	}
+	
 	/**	
 	 * instantiates <code> updateProductQuantity </code> for inventory
 	 * @param <code> Inventory </code> inventory
 	 * @throws DataAccessException
 	 */
-
 	public void updateProductQuantity(Inventory inventory) throws DataAccessException {
 		iDao.updateProductQuantity(inventory);
 	}
-
 }

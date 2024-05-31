@@ -49,7 +49,7 @@ public class TestCreateSaveOrder {
 	}
 	
 	@Test
-	public void CreateSaveOrderSuccess() throws DataAccessException {
+	public void createSaveOrderSuccess() throws DataAccessException {
 		// Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
 		Table t = new Table(false, 1);
@@ -66,7 +66,7 @@ public class TestCreateSaveOrder {
 	}
 	
 	@Test
-	public void CreateSaveOrderFailed() throws DataAccessException {
+	public void createSaveOrderFailed() throws DataAccessException {
 		
 		//Arrange
 		Person p = pctrl.findByPersonEmail("bobby@hotmail.com");
