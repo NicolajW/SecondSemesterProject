@@ -108,12 +108,14 @@ public class ProductDB implements ProductDAO {
 					rs.getInt("numberOfBatches"), 
 					rs.getString("type")
 					);
+
 		} else if (type.equals("ingredients")) {
 			p = new Ingredients(rs.getString("name"), rs.getString("typeOfFood"),
 					new Food(rs.getInt("saleProductID_PKFK"), null, 0.0, null, null, null), 
 					rs.getString("barcode"),
 					rs.getString("type")
 					);
+			
 		}
 		return p;
 	}
@@ -175,12 +177,12 @@ public class ProductDB implements ProductDAO {
 			findByProductIDPS.setInt(1, productID);
 			ResultSet rs = findByProductIDPS.executeQuery();
 			if (rs.next()) {
-				res = buildObject(rs);
-			}
+				res = buildObject(rs);			}
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not find by id = " + productID, e);
 		}
 		return res;
 	}
+	
 
 }

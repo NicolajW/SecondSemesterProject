@@ -36,6 +36,7 @@ public class SaleOrderController {
 			tc = new TableController();
 			ictrl = new InventoryController();
 			pctrl = new ProductController();
+			this.saleOrder = saleOrder;
 
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -120,15 +121,20 @@ public class SaleOrderController {
 	 * @throws DataAccessException
 	 */
 	private void updateWineInventory() throws DataAccessException {
-		for (int i = 0; i > saleOrder.getOl().size(); i++) {
+		
+		for (int i = 0; i < saleOrder.getOl().size(); i++) {
 			int productID = findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+			
 			Product p = findByProductID(productID);
+
+				
 
 			int inventoryID = findInventoryIDByBarcode(p.getBarcode());
 			Inventory inventory = findByInventoryNo(inventoryID);
 
 			inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
 			updateProductQuantity(inventory);
+			
 		}
 	}
 
@@ -137,7 +143,7 @@ public class SaleOrderController {
 	 * @throws DataAccessException
 	 */
 	private void updateFoodInventory() throws DataAccessException {
-		for (int i = 0; i > saleOrder.getOl().size(); i++) {
+		for (int i = 0; i < saleOrder.getOl().size(); i++) {
 			
 			int ingredientProductID = findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
 			Product ingredientProduct = findByProductID(ingredientProductID);
@@ -155,11 +161,33 @@ public class SaleOrderController {
 	 * @throws DataAccessException
 	 */
 	public void updateInventory() throws DataAccessException {
-		for (int i = 0; i < saleOrder.getOl().size(); i++) {
-			if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
-				updateWineInventory();
-			} else if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
-				updateFoodInventory();				
+
+			for (int i = 0; i < saleOrder.getOl().size(); i++) {
+				if (saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("wine")) {
+					Wine wine = saleOrder.getOl().get(i).getSaleProduct().getWine();
+
+					int productID = spctrl.findProductIDOnWine(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+
+					Product p = pctrl.findByProductID(productID);
+					int inventoryID = pctrl.findInventoryIDByBarcode(p.getBarcode());
+					Inventory inventory = ictrl.findByInventoryNo(inventoryID);
+					inventory.setQuantity(inventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+					ictrl.updateProductQuantity(inventory);
+				}
+				
+				if(saleOrder.getOl().get(i).getSaleProduct().getType().equalsIgnoreCase("food")) {
+					Food food = saleOrder.getOl().get(i).getSaleProduct().getFood();
+					List<Ingredients> ingredients = food.getIngredients();
+					
+					for(int j = 0; j < ingredients.size(); j++) {
+						int ingredientProductID = findProductIDOnIngredient(saleOrder.getOl().get(i).getSaleProduct().getSaleProductID());
+						Product ingredientProduct = findByProductID(ingredientProductID);
+						
+						int ingredientInventoryID = findInventoryIDByBarcode(ingredientProduct.getBarcode());
+						Inventory ingredientInventory = findByInventoryNo(ingredientInventoryID);
+						ingredientInventory.setQuantity(ingredientInventory.getQuantity() - saleOrder.getOl().get(i).getQuantity());
+						updateProductQuantity(ingredientInventory);
+					}
 				}
 			}
 		}

@@ -23,9 +23,16 @@ public class TryMe {
 	public static void main(String[] args) throws DataAccessException {
 //		
 		TableDB tbd = new TableDB();
-		Table t = new Table(false, 3);
+		Table t = new Table(false, 2);
 		tbd.updateTableStatus(t);
-
+		
+		
+		SaleOrderController octrl = new SaleOrderController();
+		octrl.createSaleOrder("bobby@hotmail.com", t);
+		
+		octrl.addProduct(1, 3);
+		octrl.addProduct(10, 4);
+		octrl.saveOrder();
 		
 //		SaleProductDB dosb = new SaleProductDB();
 //		dosb.findAll();
